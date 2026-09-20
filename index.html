@@ -7,7 +7,7 @@
 </style></head><body>
 <header><h1>🗡️ WoW Forever — Rogue + Shaman 1–60</h1><div class="muted">Veteran checkpoint companion • Undead Rogue + Troll Shaman • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div></header>
 <nav id="nav">
-<button class="active" data-tab="dash">⚔️ Command Center</button><button data-tab="route">🧭 Checkpoints</button><button data-tab="rogue">🗡️ Rogue</button><button data-tab="shaman">🌊 Shaman</button><button data-tab="duo">🤝 Duo</button><button data-tab="weapons">🗡️ Weapons</button><button data-tab="dungeons">🏰 Dungeons</button><button data-tab="prof">⛏️ Professions</button><button data-tab="pvp">⚔️ World PvP</button><button data-tab="check">☑ Checklist</button>
+<button class="active" data-tab="dash">⚔️ Command Center</button><button data-tab="route">🧭 Checkpoints</button><button data-tab="rogue">🗡️ Rogue</button><button data-tab="shaman">🌊 Shaman</button><button data-tab="duo">🤝 Duo</button><button data-tab="macros">⌨️ Macros</button><button data-tab="weapons">🗡️ Weapons</button><button data-tab="dungeons">🏰 Dungeons</button><button data-tab="prof">⛏️ Professions</button><button data-tab="pvp">⚔️ World PvP</button><button data-tab="check">☑ Checklist</button>
 </nav><main>
 
 <section id="dash" class="tab active">
@@ -36,7 +36,15 @@
 
 <section id="duo" class="tab"><div class="card"><h2>🤝 What should we do right now?</h2><div id="duoNow" class="mission"></div></div><div class="grid" style="margin-top:14px"><div class="card"><h3>Rogue</h3><p>Stealth, target selection, interrupts, control and burst. Protect the Shaman's tempo; don't turn every pull into an emergency heal.</p></div><div class="card"><h3>Shaman</h3><p>Healing, totems, utility and controlled damage between heals. Maintain momentum instead of playing permanently defensive.</p></div><div class="card"><h3>Mage added</h3><p>Use the third player to accelerate difficult pulls and worthwhile dungeon access. Do not rewrite the whole route around the Mage.</p></div></div></section>
 
-<section id="weapons" class="tab"><div class="card"><h2>🗡️ Weapon & Gear Progression</h2><p>Exact Forever rewards are kept separate from legacy references. ShadowPanther is a research source for Rogue power-leveling and gear progression; Forever verification wins whenever the two differ. <a href="https://www.shadowpanther.net/" target="_blank">ShadowPanther</a></p>
+
+<section id="macros" class="tab">
+<div class="card"><h2>⌨️ Rogue Macro Quick Reference</h2>
+<p class="muted">Copy/paste macros for the things you actually need while leveling, questing, PvP and running dungeons. These are Classic-client / current Forever-beta candidates; test them in beta before making them core binds.</p>
+<div class="note">💡 <b>Auto Loot:</b> Turn on Auto Loot for the Target + Pick Pocket macro. Pick Pocket requires Stealth or Vanish and works on eligible targets.</div>
+<div class="grid" id="macroGrid"></div>
+</div>
+</section>
+\n<section id="weapons" class="tab"><div class="card"><h2>🗡️ Weapon & Gear Progression</h2><p>Exact Forever rewards are kept separate from legacy references. ShadowPanther is a research source for Rogue power-leveling and gear progression; Forever verification wins whenever the two differ. <a href="https://www.shadowpanther.net/" target="_blank">ShadowPanther</a></p>
 <div class="note">🟢 Forever verified = confirmed in current Forever data • 🟡 Forever beta = seen during testing • 🔵 Classic / ShadowPanther = candidate reference • 🔴 Needs verification</div>
 <div style="overflow:auto"><table><thead><tr><th>Level</th><th>Rogue MH</th><th>Rogue OH</th><th>Source / reason</th><th>Priority</th><th>Confidence</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div></section>
 
@@ -90,7 +98,62 @@ const weapons=[
 [55,'Dal’Rend’s Sacred Charge','Barman Shanker','Dal’Rend’s Sacred Charge drops from <a href="https://www.wowhead.com/classic/npc=10429/warchief-rend-blackhand" target="_blank">Warchief Rend Blackhand</a> in Upper Blackrock Spire','55–60 • Major sword window','🔵 Classic / source data'],
 [58,'Dal’Rend’s Sacred Charge','Heartseeker / Felstriker','Heartseeker is crafted by Blacksmith; Felstriker drops from Warchief Rend Blackhand in UBRS','58–60 • Final dagger options','🔵 Classic / source data']
 ];
+
+const macros=[
+['🎒 Pickpocket','Target + Pick Pocket','Best for moving through humanoid areas quickly. Targets the next enemy, pickpockets, then clears the target.','Pick Pocket',`#showtooltip Pick Pocket
+/targetenemy
+/cast Pick Pocket
+/cleartarget`],
+['🪄 Pickpocket','Sap + Pick Pocket','Use on your current target. Useful when questing/dungeoning and you want to pick pockets without a separate key.','Sap / Pick Pocket',`#showtooltip Sap
+/cast Sap
+/cast Pick Pocket`],
+['🗡️ Pickpocket','Opener + Pick Pocket','Pickpockets immediately before your stealth opener. Make one for Cheap Shot, Garrote or Ambush as needed.','Cheap Shot opener',`#showtooltip Cheap Shot
+/cast Pick Pocket
+/cast Cheap Shot`],
+['⚔️ Combat','Sinister Strike + Start Attack','Prevents the common issue where tabbing to a new target leaves auto-attack off.','Sinister Strike',`#showtooltip Sinister Strike
+/cast Sinister Strike
+/startattack`],
+['👁️ Stealth','Spammable Stealth','Prevents repeated presses from immediately cancelling Stealth.','Stealth',`#show Stealth
+/stopcasting
+/stopattack
+/cast !Stealth`],
+['🦶 Control','Mouseover Kick','Interrupt without changing your current target.','Kick',`#showtooltip Kick
+/cast [target=mouseover] Kick`],
+['🦶 Control','Mouseover Blind','Blind a mouseover target without swapping off your current target.','Blind',`#showtooltip Blind
+/cast [target=mouseover] Blind`],
+['🎯 PvP','Sap Stealthed Target','Spammable macro for finding and Sapping nearby stealthed enemy players.','Sap',`#show Sap
+/cleartarget
+/targetenemyplayer
+/cast Sap`],
+['🎯 PvP','Focus Kick','Keep your primary target while interrupting a designated focus target.','Focus Kick',`#showtooltip Kick
+/cast [target=focus] Kick`],
+['🏃 Escape','Vanish','Simple Vanish button. Keep it separate from other cooldowns so it is always available on demand.','Vanish',`#showtooltip Vanish
+/cast Vanish`],
+['🩸 Opener','Stealth Opener','One key for Cheap Shot while stealthed, otherwise Sinister Strike.','Cheap Shot / Sinister Strike',`#showtooltip
+/cast [stealth] Cheap Shot; Sinister Strike
+/startattack`],
+['🎒 Utility','Sap / Pick Pocket','The simple version from the Rogue leveling reference. Useful if you prefer explicit targeting.','Sap',`#showtooltip Sap
+/cast Sap
+/cast Pick Pocket`]
+];
+
 const state={r:+localStorage.getItem('level')||1,s:+localStorage.getItem('shamanLevel')||1,timerStart:+localStorage.getItem('timerStart')||0,timerAccum:+localStorage.getItem('timerAccum')||0};
+
+function renderMacros(){
+  const grid=document.getElementById('macroGrid');
+  if(!grid)return;
+  grid.innerHTML=macros.map((m,i)=>'<div class="card" style="display:flex;flex-direction:column;gap:9px"><div><span class="badge">'+m[0]+'</span> <b>'+m[1]+'</b></div><div class="muted">'+m[2]+'</div><div class="tiny">'+m[3]+'</div><textarea id="macro'+i+'" class="engine-input" rows="6" readonly style="font-family:Consolas,monospace;resize:vertical">'+m[4].replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea><button onclick="copyMacro('+i+')">📋 Copy Macro</button></div>').join('');
+}
+function copyMacro(i){
+  const el=document.getElementById('macro'+i);
+  if(!el)return;
+  navigator.clipboard.writeText(macros[i][4]).then(()=>{
+    const b=el.nextElementSibling;
+    const old=b.textContent;b.textContent='✓ Copied';
+    setTimeout(()=>b.textContent=old,1000);
+  }).catch(()=>{el.select();document.execCommand('copy')});
+}
+
 function band(n){return bands.find(x=>n>=x[0]&&n<=x[1])||bands[bands.length-1]}
 function cp(n){let best=checkpoints[0];for(const x of checkpoints){if(x[0]<=n)best=x;else break}return best}
 function setTab(id){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));window.scrollTo(0,0)}
@@ -116,5 +179,5 @@ document.getElementById('start').onclick=()=>{if(!state.timerStart)state.timerSt
 document.getElementById('stop').onclick=()=>{if(state.timerStart){state.timerAccum+=Math.floor((Date.now()-state.timerStart)/1000);state.timerStart=0}localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',state.timerAccum);clearInterval(window.ti);renderTimer()};
 document.getElementById('reset').onclick=()=>{state.timerStart=0;state.timerAccum=0;localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',0);clearInterval(window.ti);renderTimer()};
 const sections=['1–10 — foundation','10–20 — first dungeon/gear window','20–30 — sustained duo','30–40 — midgame weapon phase','40–50 — transition','50–60 — pre-60 push'];document.getElementById('checks').innerHTML=sections.map((s,i)=>'<div class="card" style="margin-bottom:12px"><h3>'+s+'</h3>'+['Route complete','Weapon checkpoint checked','Dungeon quests stacked','Professions checked','Consumables checked','PvP opportunity considered'].map((x,j)=>'<label class="check"><input type="checkbox" data-k="c'+i+j+'">'+x+'</label>').join('')+'</div>').join('');document.querySelectorAll('[data-k]').forEach(x=>{x.checked=localStorage.getItem(x.dataset.k)==='1';x.onchange=()=>localStorage.setItem(x.dataset.k,x.checked?'1':'0')});
-renderWeapons();render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
+renderWeapons();renderMacros();render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
 </script></body></html>
