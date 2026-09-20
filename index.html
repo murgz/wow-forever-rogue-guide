@@ -100,6 +100,40 @@ const weapons=[
 ];
 
 const macros=[
+['🌊 Heal','Mouseover Lesser Healing Wave','Fast single-target heal without changing your current target. Replace with the exact Forever spell/rank if the beta changes the name.','Lesser Healing Wave',`#showtooltip Lesser Healing Wave
+/cast [@mouseover,help,nodead][] Lesser Healing Wave`],
+['🌊 Heal','Mouseover Healing Wave','Same pattern for the larger heal.','Healing Wave',`#showtooltip Healing Wave
+/cast [@mouseover,help,nodead][] Healing Wave`],
+['🌊 Heal','Mouseover Chain Heal','Start Chain Heal on the mouseover target while keeping your enemy target selected.','Chain Heal',`#showtooltip Chain Heal
+/cast [@mouseover,help,nodead][] Chain Heal`],
+['⚡ Interrupt','Stopcast Earth Shock','Cancel your heal/cast immediately and Earth Shock the target. Useful for emergency interrupts.','Earth Shock',`#showtooltip Earth Shock
+/stopcasting
+/cast Earth Shock`],
+['🧪 Utility','Mouseover Purge','Purge a hostile mouseover without changing your main target.','Purge',`#showtooltip Purge
+/cast [@mouseover,harm,nodead][] Purge`],
+['🤝 Duo','Mouseover Heal-or-Damage','Heal a friendly mouseover; otherwise Lightning Bolt the hostile target. Useful for keeping the Rogue targeted while healing.','Heal / Lightning Bolt',`#showtooltip
+/cast [@mouseover,help,nodead][help,nodead] Lesser Healing Wave; [harm,nodead] Lightning Bolt`],
+['🪨 Totems','Lightning Shield + Windfury Weapon','Two-press self-buff sequence. Verify Forever spell availability/name before using as a permanent macro.','Lightning Shield / Windfury Weapon',`#showtooltip
+/castsequence reset=2 Lightning Shield, Windfury Weapon`],
+['🎯 Tag','Earth Shock Tag','Target a named mob, Earth Shock it instantly, and start attacking.','Earth Shock',`#showtooltip Earth Shock
+/cast Earth Shock
+/startattack`],
+['🛡️ Emergency','Nature’s Swiftness + Healing Wave','Emergency instant large heal if both abilities are available in Forever.','Nature’s Swiftness',`#showtooltip
+/cast Nature's Swiftness
+/cast Healing Wave`],
+['🎯 PvP','Focus Purge','Purge your focus target without dropping the current target.','Purge',`#showtooltip Purge
+/cast [@focus,harm,nodead] Purge`],
+['🦅 PvP','Focus Earth Shock','Interrupt your focus target without changing your current target.','Earth Shock',`#showtooltip Earth Shock
+/stopcasting
+/cast [@focus,harm,nodead] Earth Shock`],
+['🎯 Utility','Mouseover Wind Shear','If Wind Shear exists in the current Forever Shaman kit, use this for a fast mouseover interrupt.','Wind Shear',`#showtooltip Wind Shear
+/stopcasting
+/cast [@mouseover,harm,nodead][] Wind Shear`],
+['🌊 Totems','Grounding Totem','Fast Grounding Totem button. Keep this separate and easy to hit rather than overcomplicating it.','Grounding Totem',`#showtooltip Grounding Totem
+/stopcasting
+/cast Grounding Totem`],
+['🎯 Target','Target + Purge','Useful when you want to target a known enemy and immediately purge.','Purge',`#showtooltip Purge
+/cast Purge`],
 ['🎒 Pickpocket','Target + Pick Pocket','Best for moving through humanoid areas quickly. Targets the next enemy, pickpockets, then clears the target.','Pick Pocket',`#showtooltip Pick Pocket
 /targetenemy
 /cast Pick Pocket
