@@ -1,310 +1,114 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WoW Forever — Rogue + Shaman 1–60 Companion</title><style>
-:root{--bg:#0b0f14;--panel:#151c24;--panel2:#1b2530;--line:#2c3947;--text:#edf2f7;--muted:#9aa8b6;--gold:#d9aa45;--red:#e36b6b;--green:#70cf91;--blue:#68a7df}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Arial,sans-serif}header{padding:28px 5%;background:linear-gradient(135deg,#18212b,#0b0f14);border-bottom:1px solid var(--line)}h1{margin:0 0 5px;font-size:30px}h2{margin-top:0}.muted{color:var(--muted)}nav{position:sticky;top:0;z-index:5;background:#10161d;border-bottom:1px solid var(--line);padding:9px 5%;display:flex;gap:7px;overflow:auto}button{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:7px;cursor:pointer}button.active,button:hover{border-color:var(--gold)}main{max-width:1250px;margin:24px auto;padding:0 18px}.tab{display:none}.tab.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.two{display:grid;grid-template-columns:2fr 1fr;gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}.card h3{margin:0 0 9px}.stat{font-size:30px;color:var(--gold);font-weight:700}.progress{height:10px;background:#28323d;border-radius:10px;overflow:hidden}.bar{height:100%;background:var(--gold);width:0}table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--gold);background:#19222c}.search{width:100%;padding:11px;margin-bottom:12px;background:#090d12;border:1px solid var(--line);border-radius:7px;color:white}.check{display:flex;gap:9px;margin:8px 0}.note{border-left:3px solid var(--gold);padding:11px 14px;background:#171f27;margin:13px 0}.badge{display:inline-block;background:#263341;border-radius:99px;padding:3px 8px;font-size:12px;margin:2px}.high{color:#ff8b8b}.good{color:#7add9a}@media(max-width:800px){.two{grid-template-columns:1fr}}footer{max-width:1250px;margin:35px auto;padding:20px;color:var(--muted);border-top:1px solid var(--line);font-size:13px}a{color:#8fc5ff}
-.engine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.engine-select,.engine-input{width:100%;padding:10px;background:#090d12;border:1px solid var(--line);border-radius:7px;color:var(--text)}.mission{border-left:3px solid var(--blue);padding:12px 14px;background:#121b24;margin-top:12px}.timer{font-size:34px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}.tiny{font-size:12px;color:var(--muted)}.confidence{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-</style><script>
-function showTab(id){
-  document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('active',b.dataset.tab===id);});
-  document.querySelectorAll('.tab').forEach(function(s){s.classList.toggle('active',s.id===id);});
-  window.scrollTo(0,0);
-}
-</script></head><body>
-<header><h1>🗡️ WoW Forever — Undead Rogue 1–60</h1><div class="muted">Personal companion: Undead Rogue + Troll Shaman duo • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div></header>
-<nav><button class="active" data-tab="dash" onclick="showTab(this.dataset.tab)">⚔️ Command Center</button><button onclick="showTab(this.dataset.tab)" data-tab="rogdash">Rogue Dashboard</button><button onclick="showTab(this.dataset.tab)" data-tab="route">🧭 Master 1–60</button><button onclick="showTab(this.dataset.tab)" data-tab="shamdash">Shaman Dashboard</button><button onclick="showTab(this.dataset.tab)" data-tab="shaman">Shaman Role Guide</button><button onclick="showTab(this.dataset.tab)" data-tab="duo">🤝 Duo Route</button><button onclick="showTab(this.dataset.tab)" data-tab="weapons">Weapons</button><button onclick="showTab(this.dataset.tab)" data-tab="dungeons">Dungeons</button><button onclick="showTab(this.dataset.tab)" data-tab="prof">Professions</button><button onclick="showTab(this.dataset.tab)" data-tab="pvp">World PvP</button><button onclick="showTab(this.dataset.tab)" data-tab="check">Checklist</button></nav>
-<main>
-<section id="dash" class="tab active"><div class="card" style="margin-bottom:14px"><h2>⚔️ Your Leveling Command Center</h2><p class="muted">Know what matters <b>right now</b>, what is worth detouring for, and when to regroup.</p><div class="grid"><div><span class="muted">Rogue</span><br><span class="stat" id="cmdRogue">1</span></div><div><span class="muted">Shaman</span><br><span class="stat" id="cmdShaman">1</span></div><div><span class="muted">Sync</span><br><b id="cmdSync">Together</b></div><div><span class="muted">Current phase</span><br><b id="cmdPhase">Starting zones</b></div></div><div class="grid" style="margin-top:12px"><button onclick="syncLevels()">🔗 Set both to lower level</button><button onclick="openTab('route')">📍 Level checkpoints</button><button onclick="openTab('duo')">🤝 Duo plan</button><button onclick="openTab('weapons')">🗡️ Weapon plan</button></div></div>
-<div class="card" style="margin-bottom:14px"><h3>🧭 Tonight's Route Engine</h3><p class="muted">Tell the guide what tonight actually looks like. It will prioritize momentum, group availability, dungeons and PvP without pretending beta quest data is final.</p>
-<div class="engine-grid">
-<div><label class="tiny">Route mode</label><select id="routeMode" class="engine-select"><option value="duo">🤝 Rogue + Shaman</option><option value="solo">🗡️ Rogue solo</option><option value="trio">🧙 Rogue + Shaman + Mage</option><option value="dungeon">🏰 Dungeon-heavy</option><option value="pvp">⚔️ PvP-heavy</option><option value="speed">⚡ Speed-focused</option></select></div>
-<div><label class="tiny">Time available</label><select id="timeAvailable" class="engine-select"><option value="30">30 min</option><option value="60" selected>60 min</option><option value="90">90 min</option><option value="120">2 hours</option><option value="180">3+ hours</option></select></div>
-<div><label class="tiny">Dungeon group?</label><select id="dungeonReady" class="engine-select"><option value="no">No</option><option value="yes">Yes</option></select></div>
-<div><label class="tiny">PvP intensity</label><select id="pvpIntensity" class="engine-select"><option value="low">Low</option><option value="normal" selected>Normal</option><option value="high">High</option></select></div>
-</div>
-<div class="grid" style="margin-top:12px"><button onclick="buildTonight()">🎯 Build tonight's route</button><button onclick="startTimer()">▶ Start session</button><button onclick="stopTimer()">⏹ Stop</button><button onclick="resetTimer()">↺ Reset</button></div>
-<div class="grid" style="margin-top:12px"><div class="card"><span class="muted">Session time</span><div class="timer" id="sessionTimer">00:00:00</div></div><div class="card"><span class="muted">Route progress</span><div id="routeProgress" class="stat">0%</div></div><div class="card"><span class="muted">Session note</span><input id="sessionNote" class="engine-input" placeholder="PvP, dungeon, profession, questing..."></div></div>
-<div id="tonightRoute" class="mission"><b>Ready.</b> Build the route when you know what kind of session you're playing.</div></div><div class="card" style="margin-bottom:14px"><h3>📌 Decision Rules</h3><div class="grid"><div><b>Quest</b><br><span class="muted">Follow the route unless the detour has a real reward.</span></div><div><b>Dungeon</b><br><span class="muted">Stack quests first; run when XP, gear or quests justify it.</span></div><div><b>Weapon</b><br><span class="muted">Never ignore a meaningful weapon upgrade.</span></div><div><b>PvP</b><br><span class="muted">Take favorable fights; don't let one enemy steal the session.</span></div></div></div></section><section id="rogdash" class="tab"><div class="two"><div><div class="card"><h2>Your Character</h2><div class="grid"><div><span class="muted">Race</span><br><b>Undead</b></div><div><span class="muted">Class</span><br><b>Rogue</b></div><div><span class="muted">Level</span><br><span class="stat" id="lvl">1</span></div><div><span class="muted">Build</span><br><b>Combat / PvP</b></div><div><span class="muted">Professions</span><br><b>Mining + Skinning</b></div><div><span class="muted">Later</span><br><b>Mining + Engineering</b></div></div><input id="slider" type="range" min="1" max="60" value="1" style="width:100%;margin-top:16px"></div><div class="card" style="margin-top:14px"><h2>Current Priorities</h2><div id="priority"></div></div></div><div><div class="card"><span class="muted">Progress</span><div class="stat" id="pct">0%</div><div class="progress"><div class="bar" id="bar"></div></div></div><div class="card" style="margin-top:14px"><h3>Run Rules</h3><label class="check"><input type="checkbox" data-save="r1"> Keep weapons current</label><label class="check"><input type="checkbox" data-save="r2"> First Aid current</label><label class="check"><input type="checkbox" data-save="r3"> Carry food/bandages</label><label class="check"><input type="checkbox" data-save="r4"> Take worthwhile PvP fights</label><label class="check"><input type="checkbox" data-save="r5"> Stack dungeon quests</label><label class="check"><input type="checkbox" data-save="r6"> Plan Skinning → Engineering</label></div></div></div><div class="note"><b>Forever is new:</b> Blizzard describes it as a reimagined original Azeroth with a permanent level-60 cap, new quests/dungeons and redesigned classes. Launch is scheduled for November 4, 2026. Exact beta data can still change.</div></section>
-<section id="shamdash" class="tab"><div class="card" style="margin-bottom:14px"><h2>🌊 Shaman — Current Level Mission</h2><div id="scurrent"></div></div><div class="two"><div>
-<div class="card"><h2>🌊 Friend's Character</h2><div class="grid">
-<div><span class="muted">Race</span><br><b>Troll</b></div><div><span class="muted">Class</span><br><b>Shaman</b></div>
-<div><span class="muted">Level</span><br><span class="stat" id="slvl">1</span></div><div><span class="muted">Role</span><br><b>Resto / Healer</b></div>
-<div><span class="muted">Professions</span><br><b>Herbalism + Alchemy</b></div><div><span class="muted">Duo</span><br><b>Undead Rogue</b></div></div>
-<input id="sslider" type="range" min="1" max="60" value="1" style="width:100%;margin-top:16px">
-</div>
-<div class="card" style="margin-top:14px"><h2>Current Shaman Priorities</h2><div id="spriority"></div></div>
-</div><div>
-<div class="card"><span class="muted">Progress</span><div class="stat" id="spct">0%</div><div class="progress"><div class="bar" id="sbar"></div></div></div>
-<div class="card" style="margin-top:14px"><h3>Shaman Run Rules</h3>
-<label class="check"><input type="checkbox" data-save="sr1"> Keep healing gear current</label>
-<label class="check"><input type="checkbox" data-save="sr2"> Keep questing/damage set usable</label>
-<label class="check"><input type="checkbox" data-save="sr3"> Keep Herbalism current</label>
-<label class="check"><input type="checkbox" data-save="sr4"> Keep Alchemy current</label>
-<label class="check"><input type="checkbox" data-save="sr5"> Carry mana/healing consumables</label>
-<label class="check"><input type="checkbox" data-save="sr6"> Stack dungeon quests with Rogue</label>
-</div></div></div>
-<div class="note"><b>Leveling philosophy:</b> this dashboard is built for a Troll Shaman who wants to level efficiently while becoming the reliable healer for the Rogue duo. Forever's itemization supports hybrid gearing more than old Classic: Blizzard says bonus healing also contributes one-third as much bonus damage, and spellcaster weapons can grant both spell damage and healing.</div>
-<div class="grid">
-<div class="card"><h3>🌿 Herb Check</h3><p>Gather herbs naturally on the route. Don't turn leveling into a farming simulator.</p></div>
-<div class="card"><h3>🧪 Alchemy Check</h3><p>Prioritize useful leveling and dungeon consumables. Save materials when a recipe checkpoint is worth waiting for.</p></div>
-<div class="card"><h3>🛡️ Heal Check</h3><p>Before dungeons: healing set equipped, mana supplies ready, weapon/shield current, relevant quests accepted.</p></div>
-<div class="card"><h3>⚔️ Quest Check</h3><p>Keep enough offensive stats to kill normal quest mobs without relying on the Rogue for every objective.</p></div>
-</div></section><section id="shaman" class="tab"><h2>🌊 Friend — Troll Shaman Role Guide</h2>
-<div class="note"><b>Character:</b> Troll Shaman • Herbalism + Alchemy • Level as a practical hybrid, with Restoration as the group's healing role. Blizzard's Forever Deep Dive says bonus healing now also contributes one-third as much bonus damage, while spellcaster-oriented weapons can grant spell damage and healing. That makes a dedicated healing set more useful without making the Shaman helpless while questing. <a href="https://worldofwarcraft.blizzard.com/en-us/news/24303313/world-of-warcraft-forever-deep-dive-panel-recap" target="_blank">Forever Deep Dive</a></div>
-<div class="grid">
-<div class="card"><h3>🌿 Herbalism + ⚗️ Alchemy</h3><p>Keep both professions active from the start. Pick herbs naturally along the quest route, turn useful materials into leveling consumables, and avoid detouring across the map just to chase low-value nodes.</p><span class="badge good">Professions 1–60</span></div>
-<div class="card"><h3>1–20 — Quest first</h3><p>Build the toolkit: totems, shocks, shields and healing. Quest with a damage-oriented set, but save useful Intellect/Spirit/healing pieces instead of vendoring everything. Start collecting herbs for Alchemy.</p><span class="badge">Quest + early dungeons</span></div>
-<div class="card"><h3>20–40 — Duo healer</h3><p>Start leaning harder into Restoration for group play. When questing with the Rogue, you are the safety net: keep the Rogue moving, heal through bad pulls, and damage between healing needs.</p><span class="badge good">Strong duo phase</span></div>
-<div class="card"><h3>40–60 — Resto priority</h3><p>Build a real healing set for dungeons while keeping a functional solo set. Save high-value herbs and use Alchemy to support the duo with potions and other useful consumables.</p><span class="badge">Dungeon-heavy</span></div>
-</div>
-<h3 style="margin-top:22px">🌊 Shaman's Role Across the Master Route</h3>
-<div class="note"><b>Use the Master 1–60 tab for the actual route.</b> This page is intentionally role-focused: it explains what the Shaman should do at each phase without creating a second, conflicting 1–60 path.</div>
-<div class="grid">
-<div class="card"><h3>1–20</h3><p>Quest normally, establish healing tools, gather herbs naturally, and meet the Rogue when the shared route overlaps.</p></div>
-<div class="card"><h3>20–40</h3><p>Become the duo's healing engine while retaining enough offensive power to quest. Stack dungeon quests with the Rogue.</p></div>
-<div class="card"><h3>40–50</h3><p>Use healing strength to accelerate elite/group objectives. Keep both healing and questing sets functional.</p></div>
-<div class="card"><h3>50–60</h3><p>Prioritize healing upgrades, consumables and dungeon quest density while following the same Master 1–60 route as the Rogue.</p></div>
-</div>
-<div class="grid" style="margin-top:14px">
-<div class="card"><h3>🛡️ Healing Set</h3><p>Keep the best practical healing pieces you find. Forever's itemization is changed enough that live item data should decide exact upgrades instead of old Classic lists.</p></div>
-<div class="card"><h3>⚔️ Questing Set</h3><p>Maintain enough offensive gear to quest efficiently. Do not make every gear slot a healer-only slot while solo.</p></div>
-<div class="card"><h3>🧪 Alchemy Rule</h3><p>Use Alchemy to support actual play: healing/mana consumables, useful buffs and duo supplies. Keep some herbs instead of converting everything immediately if a later recipe checkpoint is expected.</p></div>
-<div class="card"><h3>🌿 Gathering Rule</h3><p>Take herbs that are on your route. If a node requires a major detour, keep moving unless the material is specifically needed for an important recipe.</p></div>
-</div>
-<div class="note"><b>Shaman role in the duo:</b> you do not need to heal every second. Heal when required, maintain the Rogue's momentum, use totems intelligently, and add damage when the pull is under control.</div>
-</section><section id="duo" class="tab"><h2>🤝 Undead Rogue + Troll Shaman — Duo Route</h2><div class="card" style="margin-bottom:14px"><h3>🎯 What should we do right now?</h3><div id="duoNow"></div></div>
-<div class="note"><b>Core idea:</b> the Rogue supplies stealth, interrupts, crowd control and burst pressure; the Shaman supplies healing, totems, purge/support and emergency recovery. You can quest together without either character becoming dependent on the other, and you can split briefly when one character has a profession or quest objective to finish.</div>
-<div class="grid">
-<div class="card"><h3>🗡️ Rogue Job</h3><p>Pick targets, open from Stealth, interrupt dangerous casts, use Sap/other control when useful, and keep the Shaman safe. Do not overpull simply because healing is available.</p></div>
-<div class="card"><h3>🌊 Shaman Job</h3><p>Keep the Rogue moving with efficient healing and totems. Contribute damage between healing needs. Use utility to turn difficult pulls into manageable ones.</p></div>
-<div class="card"><h3>👥 Add a Mage</h3><p>A Mage turns the duo into a strong three-player core: extra damage, crowd control and utility. Use the full group when it saves time or unlocks worthwhile dungeon runs.</p></div>
-<div class="card"><h3>⏱️ Don't Wait</h3><p>If one player has a short quest chain, profession trainer trip or gathering objective, the other can advance nearby. Regroup for dungeons, elites and major quest hubs.</p></div>
-</div>
-<h3 style="margin-top:22px">Shared 1–60 Plan</h3>
-<table><thead><tr><th>Level</th><th>Where to focus</th><th>What the duo should do</th><th>Dungeon / PvP note</th></tr></thead><tbody>
-<tr><td>1–10</td><td>Troll starting area / Tirisfal and nearby Horde hubs</td><td>Level independently enough to avoid excessive travel, then meet when routes overlap. Get professions and First Aid/Cooking online.</td><td>Learn class basics; don't chase PvP yet.</td></tr>
-<tr><td>10–20</td><td>Silverpine / Barrens / Hillsbrad</td><td>Start regular duo questing. Rogue controls priority targets; Shaman keeps pulls stable.</td><td>Stack early dungeon quests. Hillsbrad can produce organic PvP.</td></tr>
-<tr><td>20–30</td><td>Hillsbrad / Arathi</td><td>Make this your first strong sustained duo phase. Shaman can heal while Rogue handles interrupts and dangerous targets.</td><td>WC/BFD/Excavation Site when quests line up; take good PvP fights rather than camping.</td></tr>
-<tr><td>30–40</td><td>STV / Arathi / Desolace</td><td>Stay together more often. Rogue weapon upgrades become a major priority; Shaman builds the healing set.</td><td>SM/Drowned City. STV is the major organic Rogue PvP phase.</td></tr>
-<tr><td>40–50</td><td>Badlands / Tanaris / Feralas</td><td>Use the Shaman's healing to push harder elite/group quests efficiently. Keep both characters' profession routes moving.</td><td>ZF/Maraudon. Mounts make split/regroup travel easier.</td></tr>
-<tr><td>50–55</td><td>Un’Goro / Felwood / WPL</td><td>Start deliberately collecting pre-60 gear. Rogue should watch weapons; Shaman should watch healing upgrades.</td><td>BRD is a major quest-stack opportunity.</td></tr>
-<tr><td>55–60</td><td>WPL / EPL / Burning Steppes / Winterspring</td><td>Prioritize efficient dungeon quest chains and final upgrades. Build consumables rather than saving everything for 60.</td><td>LBRS/Scholo/Strat/Blackmaw/Shaper's Terrace as appropriate.</td></tr>
-</tbody></table>
-<h3 style="margin-top:22px">Duo Combat Rules</h3>
-<div class="grid">
-<div class="card"><h3>1. Pull deliberately</h3><p>Rogue starts the fight on the target that matters most. Shaman should not have to rescue every pull.</p></div>
-<div class="card"><h3>2. Interrupt priority</h3><p>Rogue handles dangerous casts whenever practical. Shaman saves healing resources instead of allowing avoidable damage.</p></div>
-<div class="card"><h3>3. Keep momentum</h3><p>When the Shaman is healthy on mana and the Rogue is stable, keep moving. Do not stop after every mob to fully reset.</p></div>
-<div class="card"><h3>4. Know when to split</h3><p>If one player needs a profession trainer, class quest or isolated objective, split for a few minutes instead of dragging both characters through unnecessary travel.</p></div>
-</div>
-<div class="note"><b>Shared checklist:</b> Before a dungeon, both players should have relevant quests, enough food/consumables, current profession skills and a quick repair/vendor plan. The Shaman should enter with a healing set; the Rogue should enter with current weapons and poisons.</div>
-</section><section id="route" class="tab">
-<h2>🧭 Master 1–60 Route</h2>
-<div class="note"><b>One route. Two characters.</b> This is the source of truth for the Rogue + Shaman leveling journey. The Rogue and Shaman do not have separate 1–60 routes anymore. Every checkpoint below describes the shared route first, then each character's job, then what you should do together.</div>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WoW Forever — Rogue + Shaman 1–60 Companion</title>
+<style>
+:root{--bg:#0b0f14;--panel:#151c24;--panel2:#1b2530;--line:#2c3947;--text:#edf2f7;--muted:#9aa8b6;--gold:#d9aa45;--blue:#68a7df;--green:#70cf91;--red:#e36b6b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Arial,sans-serif}header{padding:26px 5%;background:linear-gradient(135deg,#18212b,#0b0f14);border-bottom:1px solid var(--line)}h1{margin:0 0 5px;font-size:29px}h2{margin-top:0}h3{margin-top:0}.muted,.tiny{color:var(--muted)}.tiny{font-size:12px}nav{position:sticky;top:0;z-index:5;background:#10161d;border-bottom:1px solid var(--line);padding:9px 5%;display:flex;gap:7px;overflow:auto}button{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:7px;cursor:pointer}button.active,button:hover{border-color:var(--gold)}main{max-width:1280px;margin:24px auto;padding:0 18px}.tab{display:none}.tab.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.two{display:grid;grid-template-columns:2fr 1fr;gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}.stat{font-size:30px;color:var(--gold);font-weight:700}.progress{height:10px;background:#28323d;border-radius:10px;overflow:hidden}.bar{height:100%;background:var(--gold);width:0}table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--gold);background:#19222c}.search,.engine-input,.engine-select{width:100%;padding:10px;background:#090d12;border:1px solid var(--line);border-radius:7px;color:var(--text)}.check{display:flex;gap:9px;margin:8px 0}.note,.mission{border-left:3px solid var(--gold);padding:11px 14px;background:#171f27;margin:13px 0}.mission{border-color:var(--blue);background:#121b24}.badge{display:inline-block;background:#263341;border-radius:99px;padding:3px 8px;font-size:11px;margin:2px}.good{color:var(--green)}.confidence{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}.engine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.timer{font-size:34px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}.now{outline:2px solid var(--gold);outline-offset:-2px}@media(max-width:800px){.two{grid-template-columns:1fr}table{font-size:13px}}
+</style></head><body>
+<header><h1>🗡️ WoW Forever — Rogue + Shaman 1–60</h1><div class="muted">Veteran checkpoint companion • Undead Rogue + Troll Shaman • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div></header>
+<nav id="nav">
+<button class="active" data-tab="dash">⚔️ Command Center</button><button data-tab="route">🧭 Checkpoints</button><button data-tab="rogue">🗡️ Rogue</button><button data-tab="shaman">🌊 Shaman</button><button data-tab="duo">🤝 Duo</button><button data-tab="weapons">🗡️ Weapons</button><button data-tab="dungeons">🏰 Dungeons</button><button data-tab="prof">⛏️ Professions</button><button data-tab="pvp">⚔️ World PvP</button><button data-tab="check">☑ Checklist</button>
+</nav><main>
 
-<div class="grid" style="margin-bottom:14px">
-  <button onclick="setMasterFilter('all')">👥 Both</button>
-  <button onclick="setMasterFilter('rogue')">🗡️ Rogue</button>
-  <button onclick="setMasterFilter('shaman')">🌊 Shaman</button>
-  <button onclick="setMasterFilter('duo')">🤝 Duo</button>
-</div>
+<section id="dash" class="tab active">
+<div class="card"><h2>Command Center</h2><p class="muted">No beginner tutorial. This is the reminder engine: where to level, what unlocks next, what gear to check, and what the duo should do now.</p>
+<div class="grid"><div><span class="muted">Rogue</span><br><span id="cmdR" class="stat">1</span></div><div><span class="muted">Shaman</span><br><span id="cmdS" class="stat">1</span></div><div><span class="muted">Shared anchor</span><br><b id="cmdAnchor">1</b></div><div><span class="muted">Status</span><br><b id="cmdSync">Together</b></div></div>
+<div class="grid" style="margin-top:14px"><button data-go="route">📍 Current checkpoint</button><button data-go="weapons">🗡️ Next weapon check</button><button data-go="duo">🤝 What do we do?</button><button data-go="dungeons">🏰 Dungeon check</button></div></div>
+<div class="card" style="margin-top:14px"><h3>🎯 Tonight's Route</h3><div class="engine-grid">
+<div><label class="tiny">Mode</label><select id="mode" class="engine-select"><option value="duo">Rogue + Shaman</option><option value="solo">Rogue solo</option><option value="trio">Rogue + Shaman + Mage</option><option value="dungeon">Dungeon-heavy</option><option value="pvp">PvP-heavy</option><option value="speed">Speed-focused</option></select></div>
+<div><label class="tiny">Time</label><select id="time" class="engine-select"><option>30 min</option><option selected>60 min</option><option>90 min</option><option>2 hours</option><option>3+ hours</option></select></div>
+<div><label class="tiny">Dungeon group</label><select id="group" class="engine-select"><option>No</option><option>Yes</option></select></div>
+<div><label class="tiny">PvP intensity</label><select id="pvpIntensity" class="engine-select"><option>Low</option><option selected>Normal</option><option>High</option></select></div>
+</div><button id="build" style="margin-top:12px">🎯 Build route</button><div id="tonight" class="mission"><b>Ready.</b> Choose your mode and build the route.</div></div>
+<div class="card" style="margin-top:14px"><h3>⏱ Session Timer</h3><div class="grid"><div><div id="timer" class="timer">00:00:00</div><button id="start">▶ Start</button> <button id="stop">⏹ Stop</button> <button id="reset">↺ Reset</button></div><div><span class="tiny">Session note</span><input id="note" class="engine-input" placeholder="What actually happened?"></div></div></div>
+</section>
 
-<div class="card" style="margin-bottom:14px">
-  <div class="grid">
-    <div><span class="muted">Rogue level</span><br><b id="masterRogueLevel">1</b></div>
-    <div><span class="muted">Shaman level</span><br><b id="masterShamanLevel">1</b></div>
-    <div><span class="muted">Shared checkpoint</span><br><b id="masterSharedLevel">1</b></div>
-    <div><span class="muted">Route status</span><br><b id="masterStatus">Together</b></div>
-  </div>
-</div>
+<section id="route" class="tab"><div class="card"><h2>🧭 Shared 1–60 Checkpoint Engine</h2><p class="muted">One route. Two character perspectives. The Rogue and Shaman do not get competing leveling guides.</p>
+<div class="grid"><div>Rogue <span id="rLevel" class="stat">1</span></div><div>Shaman <span id="sLevel" class="stat">1</span></div><div>Shared anchor <span id="sharedLevel" class="stat">1</span></div></div>
+<div class="two" style="margin-top:14px"><div><label class="tiny">Rogue level</label><input id="rSlider" type="range" min="1" max="60" value="1" style="width:100%"></div><div><label class="tiny">Shaman level</label><input id="sSlider" type="range" min="1" max="60" value="1" style="width:100%"></div></div>
+<div id="current" class="mission" style="margin-top:14px"></div></div>
+<div class="card" style="margin-top:14px"><input id="filter" class="search" placeholder="Search zone, weapon, dungeon, profession, milestone..."><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Where</th><th>🗡️ Rogue</th><th>🌊 Shaman</th><th>🤝 Together</th><th>Next big checkpoint</th><th>Confidence</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+</section>
 
-<div class="card" style="margin-bottom:14px">
-  <h3>📍 Current Shared Checkpoint</h3>
-  <div id="masterCurrent"></div>
-</div>
+<section id="rogue" class="tab"><div class="card"><h2>🗡️ Rogue Dashboard</h2><div class="grid"><div>Level <span id="rogueDashLevel" class="stat">1</span></div><div>Build <b>Combat / PvP</b></div><div>Professions <b>Mining + Skinning</b></div><div>Later <b>Mining + Engineering</b></div></div><p class="muted" style="margin-top:14px">Use the shared Checkpoints and Weapons tabs. This page is deliberately a dashboard, not a Rogue 101 guide.</p><div id="rogueNow" class="mission"></div></div></section>
 
-<input id="masterFilterText" class="search" placeholder="Search zone, objective, dungeon, PvP, profession...">
+<section id="shaman" class="tab"><div class="card"><h2>🌊 Shaman Dashboard</h2><div class="grid"><div>Level <span id="shamanDashLevel" class="stat">1</span></div><div>Role <b>Resto / Healer</b></div><div>Professions <b>Herbalism + Alchemy</b></div><div>Duo <b>Undead Rogue</b></div></div><p class="muted" style="margin-top:14px">Use the shared Checkpoints. Keep a healing set and a functional questing set; no separate Shaman route.</p><div id="shamanNow" class="mission"></div></div></section>
 
-<div style="overflow:auto">
-<table>
-<thead><tr>
-<th>Lvl</th><th>📍 Shared route</th><th>🗡️ Rogue</th><th>🌊 Shaman</th><th>🤝 Together</th><th>🏰 Dungeon / PvP</th><th>🔎 Status</th>
-</tr></thead>
-<tbody id="masterRows"></tbody>
-</table>
-</div>
+<section id="duo" class="tab"><div class="card"><h2>🤝 What should we do right now?</h2><div id="duoNow" class="mission"></div></div><div class="grid" style="margin-top:14px"><div class="card"><h3>Rogue</h3><p>Stealth, target selection, interrupts, control and burst. Protect the Shaman's tempo; don't turn every pull into an emergency heal.</p></div><div class="card"><h3>Shaman</h3><p>Healing, totems, utility and controlled damage between heals. Maintain momentum instead of playing permanently defensive.</p></div><div class="card"><h3>Mage added</h3><p>Use the third player to accelerate difficult pulls and worthwhile dungeon access. Do not rewrite the whole route around the Mage.</p></div></div></section>
 
-<h3 style="margin-top:22px">🧭 Route Engine Checkpoint</h3>
-<div class="card" style="margin-bottom:14px"><div id="routeEngineCheckpoint"></div></div>
+<section id="weapons" class="tab"><div class="card"><h2>🗡️ Weapon & Gear Progression</h2><p>Exact Forever rewards are kept separate from legacy references. ShadowPanther is a research source for Rogue power-leveling and gear progression; Forever verification wins whenever the two differ. <a href="https://www.shadowpanther.net/" target="_blank">ShadowPanther</a></p>
+<div class="note">🟢 Forever verified = confirmed in current Forever data • 🟡 Forever beta = seen during testing • 🔵 Classic / ShadowPanther = candidate reference • 🔴 Needs verification</div>
+<div style="overflow:auto"><table><thead><tr><th>Level</th><th>Rogue MH</th><th>Rogue OH</th><th>Source / reason</th><th>Priority</th><th>Confidence</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div></section>
 
-<div class="note">
-<b>Confidence system:</b>
-<span class="badge">🟡 Planning</span>
-This route intentionally separates confirmed Forever information from planning assumptions. Blizzard has confirmed that Forever adds more than 1,000 new quests across the level 1–60 journey, so exact quest order, rewards and item checkpoints should be filled from verified Forever data rather than copied blindly from Classic. citeturn0search0
-</div>
-</section><section id="weapons" class="tab"><h2>Weapon Upgrade Plan</h2><p class="muted">Weapon checkpoints are more important than generic gear while leveling. Forever's itemization is being reworked, so this version tracks when to look for upgrades rather than pretending every Classic reward is unchanged.</p><table><thead><tr><th>Level</th><th>Goal</th><th>Where to look</th><th>Done</th></tr></thead><tbody><tr><td>1–9</td><td>Use the strongest reasonable weapon.</td><td>Quests / vendors / drops</td><td>⬜</td></tr><tr><td>10</td><td>Dual wield; train weapon types you plan to use.</td><td>Weapon trainer</td><td>⬜</td></tr><tr><td>10–20</td><td>Actively hunt a meaningful MH upgrade.</td><td>Rogue class quest + early dungeons</td><td>⬜</td></tr><tr><td>20–30</td><td>Check SFK/WC/BFD/Excavation Site and quest rewards.</td><td>Dungeons + quests</td><td>⬜</td></tr><tr><td>30–40</td><td>Major weapon checkpoint around STV/SM.</td><td>Scarlet Monastery + quests</td><td>⬜</td></tr><tr><td>40–50</td><td>Replace stale weapons; don't overpay for temporary gear.</td><td>ZF/Maraudon + quests</td><td>⬜</td></tr><tr><td>50–60</td><td>Begin deliberate pre-60 weapon planning.</td><td>BRD/LBRS/Scholo/Strat + Forever dungeons</td><td>⬜</td></tr></tbody></table><div class="grid" style="margin-top:14px"><div class="card"><h3>Main Hand</h3><p>For leveling, a meaningful damage/DPS improvement is usually worth more than a small stat gain. Check the next dungeon/quest before buying.</p></div><div class="card"><h3>Off Hand</h3><p>Keep it current too. Don't let an ancient off-hand drag down your damage for many levels.</p></div><div class="card"><h3>Forever Rule</h3><p>Exact weapon names should be verified against the live Forever item database as the beta/launch itemization settles.</p></div></div></section>
-<section id="dungeons" class="tab"><h2>Dungeon Planner</h2><table><thead><tr><th>Dungeon</th><th>Approx. level</th><th>Use it for</th><th>Run</th></tr></thead><tbody><tr><td>Ragefire Chasm</td><td>13–18+</td><td>Early Horde dungeon + quest stack</td><td>⬜</td></tr><tr><td>Hall of Thanes</td><td>13–18</td><td>New Forever dungeon</td><td>⬜</td></tr><tr><td>Ruins of Lordaeron</td><td>15–20</td><td>New Forever dungeon; early quest/gear checkpoint</td><td>⬜</td></tr><tr><td>Wailing Caverns</td><td>17+</td><td>Run when Barrens quests line up</td><td>⬜</td></tr><tr><td>Shadowfang Keep</td><td>18+</td><td>Natural Undead/Silverpine dungeon</td><td>⬜</td></tr><tr><td>Blackfathom Deeps</td><td>22+</td><td>Quest stack + gear</td><td>⬜</td></tr><tr><td>Excavation Site</td><td>24–29</td><td>New Forever dungeon</td><td>⬜</td></tr><tr><td>Scarlet Monastery</td><td>30s</td><td>Major leveling/dungeon phase</td><td>⬜</td></tr><tr><td>The Drowned City</td><td>35–40</td><td>New Forever dungeon</td><td>⬜</td></tr><tr><td>Zul'Farrak</td><td>40s</td><td>XP + quests + gear</td><td>⬜</td></tr><tr><td>Maraudon</td><td>40s–50</td><td>Gear/weapon checkpoint</td><td>⬜</td></tr><tr><td>Blackrock Depths</td><td>50s</td><td>Quest density + pre-60 gear</td><td>⬜</td></tr><tr><td>LBRS / Scholomance / Stratholme</td><td>55–60</td><td>Late leveling + pre-60 gear</td><td>⬜</td></tr><tr><td>Blackmaw Hold</td><td>55–60</td><td>New Forever late-leveling dungeon</td><td>⬜</td></tr><tr><td>Shaper's Terrace</td><td>58–60</td><td>New Forever late-leveling dungeon</td><td>⬜</td></tr></tbody></table><div class="note"><b>Dungeon rule:</b> gather quests first, then run. Avoid turning the character into a dungeon-spam project unless your group is having fun and the XP/loot is actually good.</div></section>
-<section id="prof" class="tab"><h2>Professions</h2><div class="grid"><div class="card"><h3>⛏ Mining</h3><p>Keep it 1–60. Mine naturally while travelling and save useful ore for Engineering.</p></div><div class="card"><h3>🦌 Skinning</h3><p>Early gold/material profession. Skin while questing without detouring constantly.</p></div><div class="card"><h3>⚙ Engineering</h3><p>Planned PvP-focused swap. Drop Skinning once your gold/material stockpile and leveling stage make the switch worthwhile.</p></div><div class="card"><h3>🩹 First Aid</h3><p>Keep current. It reduces Rogue downtime while solo.</p></div><div class="card"><h3>🍖 Cooking</h3><p>Keep useful and always carry food.</p></div><div class="card"><h3>🎣 Fishing</h3><p>Optional downtime activity. Fish while waiting/travelling; never let it slow 1–60.</p></div></div><div class="note"><b>Recommended Rogue:</b> Mining + Skinning early → Skinning → Engineering later → Mining + Engineering for PvP/endgame.<br><b>Recommended Shaman:</b> Herbalism + Alchemy 1–60, with gathering tied to the normal leveling route.</div></section>
-<section id="pvp" class="tab"><h2>World PvP Plan</h2><div class="grid"><div class="card"><h3>10–20 — Hillsbrad</h3><p>Take organic fights. Don't spend 30 minutes chasing one player.</p><span class="badge high">High potential</span></div><div class="card"><h3>20–30 — Hillsbrad / Arathi</h3><p>Use Stealth to choose favorable engagements and disengage from bad ones.</p><span class="badge high">High</span></div><div class="card"><h3>30–40 — STV</h3><p>Prime Rogue territory. Quest normally and embrace good opportunities.</p><span class="badge high">High</span></div><div class="card"><h3>40–50</h3><p>Tanaris / Feralas / Hinterlands. Fight when it naturally intersects your route.</p><span class="badge">Moderate</span></div><div class="card"><h3>50–60</h3><p>Plaguelands / Burning Steppes / Blackrock travel can be contested.</p><span class="badge high">High</span></div><div class="card"><h3>Rogue PvP mindset</h3><p>Stealth is choice. Favor good engagements. Engineering becomes especially attractive for this playstyle.</p></div></div></section>
-<section id="check" class="tab"><h2>Master Checklist</h2><div id="checks"></div></section>
-</main><footer>Sources: <a href="https://news.blizzard.com/en-us/article/24302093/carve-a-new-path-with-world-of-warcraft-forever" target="_blank">Blizzard Forever announcement</a> • <a href="https://worldofwarcraft.blizzard.com/en-us/news/24304160/the-world-of-warcraft-forever-beta-now-live" target="_blank">Blizzard beta announcement</a>. Community databases are useful for planning but may be incomplete or change during beta.</footer>
+<section id="dungeons" class="tab"><div class="card"><h2>🏰 Dungeon Quest Stacking</h2><p class="muted">Run dungeons because the quest stack, XP, reward or route timing makes sense—not because the guide says you have to.</p><div style="overflow:auto"><table><thead><tr><th>Window</th><th>Dungeon</th><th>Why check it</th><th>Duo action</th><th>Confidence</th></tr></thead><tbody>
+<tr><td>13–18</td><td>Hall of Thanes</td><td>New Forever dungeon; check quests/rewards as testing opens content.</td><td>Stack quests before queue/group.</td><td>🟢 Blizzard range</td></tr>
+<tr><td>15–20</td><td>Ruins of Lordaeron</td><td>New Forever dungeon; check quest density and rewards.</td><td>Run when both are in range and quests line up.</td><td>🟢 Blizzard range</td></tr>
+<tr><td>20–30</td><td>WC / BFD / Excavation Site</td><td>Use only when quest density or gear makes the run efficient.</td><td>Quest-stack first.</td><td>🟡 Verify rewards</td></tr>
+<tr><td>30–40</td><td>Scarlet Monastery / Drowned City</td><td>Strong midgame dungeon window.</td><td>Plan a dedicated stack if nearby.</td><td>🟡 Verify Forever data</td></tr>
+<tr><td>40–50</td><td>ZF / Maraudon</td><td>Good for quest/gear overlap.</td><td>Do not force if travel is bad.</td><td>🟡 Verify Forever data</td></tr>
+<tr><td>50–60</td><td>BRD / LBRS / Scholo / Strat / Blackmaw / Shaper’s Terrace</td><td>Quest density and late gear become increasingly important.</td><td>Build deliberate quest stacks.</td><td>🟡 Verify Forever data</td></tr>
+</tbody></table></div></div></section>
+
+<section id="prof" class="tab"><div class="grid"><div class="card"><h3>🗡️ Rogue — Mining + Skinning</h3><p>Gather naturally while moving. Keep Mining. Later transition Skinning → Engineering when the exact Forever recipe/trainer path is confirmed.</p></div><div class="card"><h3>🌊 Shaman — Herbalism + Alchemy</h3><p>Pick herbs on-route. Alchemy should support actual leveling and dungeon needs; avoid farming detours unless a recipe checkpoint is worth it.</p></div></div></section>
+
+<section id="pvp" class="tab"><div class="card"><h2>⚔️ World PvP Notes</h2><div class="grid"><div><b>10–20</b><p>Hillsbrad becomes a natural contested window. Don't chase fights that destroy travel efficiency.</p></div><div><b>20–40</b><p>Use Rogue stealth and Shaman sustain to choose favorable encounters.</p></div><div><b>40–60</b><p>Take fights that intersect the route; protect dungeon and quest momentum.</p></div></div><div class="note">PvP is a route modifier, not a separate leveling path. High-intensity sessions can use the same checkpoint engine with a PvP-heavy mode.</div></div></section>
+
+<section id="check" class="tab"><div class="card"><h2>☑ Master Checklist</h2><div id="checks"></div></div></section>
+</main><footer>Built as a personal WoW: Forever companion. Blizzard describes Forever as a reimagined original Azeroth and says additional quests/content will continue to be added through the 1–60 journey. Exact item and quest data should be rechecked as beta changes. <a href="https://www.shadowpanther.net/" target="_blank">ShadowPanther</a> is used as a legacy Rogue gear reference.</footer>
+
 <script>
-const route=[['1–6','Tirisfal Glades','—','Train Skinning/Mining/First Aid/Cooking; establish food/bags.','Low'],['6–10','Tirisfal Glades','—','Keep weapons current; learn Rogue basics.','Low'],['10–14','Silverpine','—','Dual wield; weapon training; class quest progression.','Moderate'],['13–18','Tirisfal/Silverpine','Ragefire / Hall of Thanes','Stack dungeon quests before running.','Moderate'],['15–20','Tirisfal','Ruins of Lordaeron','Check new dungeon gear and quests.','Moderate'],['18–26','Silverpine/Hillsbrad','Shadowfang Keep','Excellent Undead/Rogue phase; keep weapons current.','HIGH'],['20–30','Hillsbrad/Arathi','WC / BFD / Excavation Site','Poisons + First Aid; take useful PvP.','HIGH'],['30–40','STV/Arathi/Desolace','Scarlet Monastery / Drowned City','Major weapon checkpoint; stack dungeon quests.','HIGH'],['40–50','Badlands/Tanaris/Feralas','ZF / Maraudon','Mount; evaluate Skinning→Engineering.','Moderate'],['50–55','Un’Goro/Felwood/WPL','BRD','Start deliberate pre-60 gear planning.','Moderate'],['55–58','WPL/EPL/Burning Steppes','LBRS / Scholo / Strat / Blackmaw','Engineering + late weapon planning.','HIGH'],['58–60','EPL/Burning Steppes/Winterspring','Shaper’s Terrace + final dungeons','Finish dungeon quests and establish level-60 baseline.','HIGH']];
-function drawLegacyRoute(){/* Legacy route table removed; Master 1–60 is now the single route source. */}
-function priorities(n){if(n<10)return ['Finish Tirisfal','Get all starter professions/First Aid/Cooking online','Replace weak weapons'];if(n<20)return ['Silverpine + Hillsbrad','Complete Rogue class milestones','Stack an early dungeon'];if(n<30)return ['Hillsbrad / Arathi','Poisons + First Aid','Look for a meaningful weapon upgrade'];if(n<40)return ['STV / Scarlet Monastery phase','Stack dungeon quests','Prioritize weapon upgrades'];if(n<50)return ['Badlands / Tanaris / Feralas','Mount + profession planning','Consider Skinning → Engineering'];if(n<55)return ['Un’Goro / Felwood','Begin pre-60 planning','Keep Mining active'];return ['Plaguelands / Burning Steppes','Late dungeon quest/gear phase','Engineering + weapon optimization']}
-const detail=[];
+const checkpoints=[
+[1,'Tirisfal / Troll starting routes','Starter zone; get professions online; replace weak weapons quickly.','Starter route; Herbalism + Alchemy online; retain useful healing pieces.','Level independently until travel naturally overlaps.','10 — major class/training checkpoint','🟡 Planning'],
+[7,'Tirisfal / Barrens transition','Keep pushing toward 10; check weapon types/training; First Aid current.','Questing set usable; herbs on route; establish healing toolkit.','Meet when practical; no long detour just to stay together.','10 — Rogue/Shaman milestone review','🟡 Planning'],
+[9,'Tirisfal / nearby Horde hubs','Last pre-10 gear check; look for an efficient weapon upgrade before committing to long travel.','Finish early toolkit and prepare for next healing/questing gear check.','Regroup for the next shared hub if routes align.','10 — class milestone + next route','🟡 Planning'],
+[10,'Silverpine / Barrens / nearby Horde hubs','Post-10 trainer check; dual-wield/class milestone; reassess MH/OH.','Post-10 trainer/talent check; keep healing and questing sets usable.','Start regular duo play when both can meet without wasted travel.','15 — early dungeon window','🟡 Planning'],
+[15,'Tirisfal / Silverpine / Hillsbrad','Weapon checkpoint; poisons; prioritize meaningful upgrades.','Healing-set check; mana efficiency; Alchemy supplies.','Stack early dungeon quests before committing to a run.','20 — dungeon/gear checkpoint','🟡 Planning'],
+[20,'Hillsbrad / Arathi','Major weapon checkpoint; trainer/talent review.','Healing gear review; keep offensive set functional.','Make duo questing the default when routes overlap.','30 — sustained duo + dungeon phase','🟡 Planning'],
+[25,'Hillsbrad / Arathi','Check MH first; do not carry stale weapons through a full zone band.','Check healing weapon and key Intellect/Spirit/healing pieces.','Push shared quests; split only for isolated objectives.','30 — weapon + dungeon review','🟡 Planning'],
+[30,'STV / Arathi / Desolace','Major midgame weapon review; PvP toolkit and travel.','Healing set upgrade review; keep questing gear viable.','Stay together more often; harder quests become efficient.','40 — mount/travel + gear transition','🟡 Planning'],
+[40,'Badlands / Tanaris / Feralas','Replace stale weapons; begin Engineering transition planning.','Build stronger dungeon healing set; Alchemy supports actual needs.','Use healing to accelerate elite/group objectives.','50 — pre-60 gear/profession planning','🟡 Planning'],
+[50,'Un’Goro / Felwood / WPL','Pre-60 weapon plan; Mining stays active; Engineering value check.','Pre-60 healing upgrades; stock useful consumables.','Prioritize shared objectives and dungeon quest density.','55 — late-game dungeon stack','🟡 Planning'],
+[55,'WPL / EPL / Burning Steppes','Final leveling weapons; Engineering online if planned; PvP toolkit.','Final healing-set review; Alchemy stockpile.','Build deliberate late dungeon quest stacks.','60 — final gear/profession review','🟡 Planning'],
+[60,'EPL / endgame hubs','Review final weapons and Engineering setup.','Review healing and questing sets; Alchemy baseline.','Finish shared objectives and move into endgame plan.','Endgame','🟡 Planning']
+];
 const bands=[
-[1,6,'Tirisfal foundation','Troll starting area / Horde foundation','Meet when routes overlap; train professions and basic class skills','Get bags, food, First Aid and profession skills online'],
-[7,10,'Tirisfal','Barrens / Troll-Horde route','Regroup for nearby quests and trainer trips','Rogue prepares for dual wield at 10; Shaman establishes healing toolkit'],
-[11,14,'Silverpine','Barrens / Silverpine as practical','Start regular duo pulls; Rogue controls dangerous targets','Check weapons, poisons and Shaman healing pieces'],
-[15,18,'Tirisfal / Silverpine','Barrens / Silverpine','Stack early dungeon quests before a run','Hall of Thanes / Ragefire opportunities as appropriate'],
-[19,22,'Hillsbrad / Silverpine','Hillsbrad / Barrens','Duo questing becomes more consistent','Check dungeon quest overlap and healing mana efficiency'],
-[23,26,'Hillsbrad / Arathi','Hillsbrad / Arathi','Push harder pulls with Shaman healing','BFD / Excavation Site opportunities'],
-[27,30,'Hillsbrad / Arathi','Hillsbrad / Arathi','Regroup for elites and dungeon chains','Weapon checkpoint; keep both professions moving'],
-[31,34,'STV / Arathi / Desolace','STV / Arathi / Desolace','Quest together more often','Scarlet Monastery quest stack'],
-[35,38,'STV / Desolace','STV / Desolace','Use CC + healing to maintain pace','SM / Drowned City as appropriate'],
-[39,42,'STV / Tanaris / Badlands','STV / Tanaris / Badlands','Plan mount/travel and dungeon runs','Major Rogue weapon check; Shaman healing-set check'],
-[43,46,'Tanaris / Feralas / Badlands','Tanaris / Feralas / Badlands','Push elite/group quests together','ZF / Maraudon opportunities'],
-[47,50,'Feralas / Tanaris / Un’Goro','Feralas / Tanaris / Un’Goro','Keep duo momentum; avoid unnecessary farming','Replace stale weapons and healing pieces'],
-[51,54,'Un’Goro / Felwood / WPL','Un’Goro / Felwood / WPL','Start deliberate pre-60 preparation','BRD quest stack; consumable stockpile'],
-[55,57,'WPL / EPL / Burning Steppes','WPL / EPL / Burning Steppes','Late leveling + dungeon progression','LBRS / Scholo / Strat / Blackmaw as appropriate'],
-[58,60,'EPL / Burning Steppes / Winterspring','EPL / Burning Steppes / Winterspring','Finish shared objectives and final dungeon chains','Shaper’s Terrace / late Forever content; prepare level-60 baseline']
+[1,6,'Tirisfal / Troll starting routes'],[7,10,'Tirisfal / Barrens transition'],[11,19,'Silverpine / Barrens / Hillsbrad'],[20,29,'Hillsbrad / Arathi'],[30,39,'STV / Arathi / Desolace'],[40,49,'Badlands / Tanaris / Feralas'],[50,54,'Un’Goro / Felwood / WPL'],[55,60,'WPL / EPL / Burning Steppes / Winterspring']
 ];
-for(const b of bands){for(let n=b[0];n<=b[1];n++){detail.push([n,b[2],b[3],b[4],b[5]])}}
-function drawDetail(){const el=document.getElementById('detailRows');if(!el)return;el.innerHTML=detail.map(r=>'<tr>'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')}
-drawDetail();
-function shamanPriorities(n){
-if(n<10)return ['Finish Troll starting route','Train Herbalism + Alchemy','Keep a simple questing set and learn core healing tools'];
-if(n<20)return ['Barrens / Silverpine progression','Save Intellect/Spirit/healing upgrades','Stack early dungeon quests with the Rogue'];
-if(n<30)return ['Hillsbrad / Arathi','Maintain healing + questing sets','Gather herbs naturally and craft useful consumables'];
-if(n<40)return ['STV / Arathi / Desolace','Lean harder into group healing','Check healing gear after dungeon runs'];
-if(n<50)return ['Badlands / Tanaris / Feralas','Run ZF/Maraudon when quests stack','Keep Alchemy supplies ahead of the duo'];
-if(n<55)return ['Un’Goro / Felwood / WPL','Start pre-60 healing gear planning','Build a useful consumable stockpile'];
-return ['WPL / EPL / Burning Steppes / Winterspring','Prioritize dungeon healing and final upgrades','Keep Herbalism active and prepare level-60 consumables']
-}
-function phase(n){if(n<10)return 'Starting zones';if(n<20)return 'Early Horde hubs';if(n<30)return 'Hillsbrad / Arathi';if(n<40)return 'STV / Desolace / SM';if(n<50)return 'Tanaris / Feralas / Maraudon';if(n<55)return 'Un’Goro / Felwood / WPL';return 'Late-game push'}
-function checkpoint(n){return detail.find(x=>x[0]===n)||detail[detail.length-1]}
-function renderCommand(){const r=+(localStorage.getItem('level')||1),sh=+(localStorage.getItem('shamanLevel')||1);const a=document.getElementById('cmdRogue'),b=document.getElementById('cmdShaman'),s=document.getElementById('cmdSync'),p=document.getElementById('cmdPhase');if(a)a.textContent=r;if(b)b.textContent=sh;if(s)s.textContent=r===sh?'Together':(Math.abs(r-sh)<=2?'Close enough':'Catch up before long duo session');if(p)p.textContent=phase(Math.min(r,sh))}
-function renderCurrent(n){const r=checkpoint(n),rc=document.getElementById('currentCheckpoint'),dn=document.getElementById('duoNow');if(rc)rc.innerHTML='<div class="grid"><div><b>Level '+r[0]+'</b><br><span class="muted">Rogue route</span><br>'+r[1]+'</div><div><b>Shaman route</b><br>'+r[2]+'</div><div><b>Duo action</b><br>'+r[3]+'</div><div><b>Checkpoint</b><br>'+r[4]+'</div></div>';if(dn)dn.innerHTML='<b>Level '+r[0]+' — '+phase(r[0])+'</b><div class="grid" style="margin-top:10px"><div>🗡️ <b>Rogue:</b> '+r[1]+'</div><div>🌊 <b>Shaman:</b> '+r[2]+'</div><div>🤝 <b>Together:</b> '+r[3]+'</div><div>✅ <b>Do now:</b> '+r[4]+'</div></div>'}
-function renderShamanCurrent(n){const el=document.getElementById('scurrent');if(!el)return;el.innerHTML='<div class="grid">'+shamanPriorities(n).map((x,i)=>'<div><span class="badge">'+(i+1)+'</span> '+x+'</div>').join('')+'</div><p class="muted" style="margin-bottom:0">Phase: <b>'+phase(n)+'</b>. Keep healing gear current while retaining enough offensive power to quest.</p>'}
-
-const routeData=[
-{a:1,b:6,zone:'Tirisfal foundation',objective:'Build the character correctly: starter quests, bags, food, First Aid, Mining + Skinning.',rogue:['Replace weak weapons quickly','Train core Rogue skills','Start Skinning/Mining naturally'],shaman:['Finish Troll foundation','Train Herbalism + Alchemy','Learn core healing tools'],duo:'Quest separately until your routes overlap; regroup for shared hubs and trainer trips.',dungeon:'No need to force a dungeon.',pvp:'Ignore PvP unless it happens naturally.',profession:'Get gathering online immediately.',leave:['Enough food','First Aid trained','Both gathering professions trained'],priority:'must'},
-{a:7,b:10,zone:'Tirisfal / Barrens transition',objective:'Reach 10 cleanly and unlock the next Rogue/Shaman toolkit.',rogue:['Prepare for dual wield at 10','Check weapon types/training','Keep First Aid current'],shaman:['Keep a simple questing set','Establish healing toolkit','Gather herbs while travelling'],duo:'Regroup when practical; do not create a long travel detour just to stay together.',dungeon:'Only if a useful quest stack appears.',pvp:'Low priority.',profession:'Keep gathering tied to the route.',leave:['Level 10 class milestones','Current weapons','Useful consumables'],priority:'must'},
-{a:11,b:14,zone:'Silverpine / Barrens',objective:'Build efficient duo fundamentals and start watching dungeon overlap.',rogue:['Weapon checkpoint','Poisons and interrupts','Choose favorable pulls'],shaman:['Healing gear check','Mana efficiency','Keep questing damage usable'],duo:'Start regular duo pulls when both players are in the same region.',dungeon:'Stack early dungeon quests before committing.',pvp:'Silverpine/Hillsbrad travel can produce organic fights.',profession:'Gather without detours.',leave:['Weapon check','Healing-set check','Dungeon quests checked'],priority:'high'},
-{a:15,b:20,zone:'Tirisfal / Silverpine / Hillsbrad',objective:'Exploit the first strong group window without turning the run into dungeon spam.',rogue:['Hunt meaningful weapon upgrades','Use Sap/interrupts intelligently','Keep poisons stocked'],shaman:['Heal efficiently','Keep healing + questing sets','Maintain Alchemy supplies'],duo:'Quest together and use the Shaman to safely accelerate difficult pulls.',dungeon:'Hall of Thanes / Ragefire / Ruins of Lordaeron when quests and levels line up.',pvp:'Hillsbrad is a natural contested phase.',profession:'Gather while travelling.',leave:['Dungeon quest stack resolved','Weapons checked','Healing set checked'],priority:'high'},
-{a:21,b:30,zone:'Hillsbrad / Arathi',objective:'Make the duo your default engine while preserving solo momentum.',rogue:['Prioritize main-hand upgrades','Keep First Aid current','Use Stealth to choose fights'],shaman:['Maintain healing set','Damage between heals','Keep Alchemy consumables useful'],duo:'Push quest chains together; split briefly for isolated objectives instead of waiting.',dungeon:'WC/BFD/Excavation Site when quest density justifies it.',pvp:'Good PvP opportunities are worth taking; do not chase.',profession:'Route gathering beats farming.',leave:['Weapon checkpoint','Dungeon rewards reviewed','Professions current'],priority:'high'},
-{a:31,b:40,zone:'STV / Arathi / Desolace / Scarlet Monastery',objective:'Major midgame acceleration: quests, weapons and dungeon stacking.',rogue:['Major weapon checkpoint','Optimize pulls with CC','Prepare for contested zones'],shaman:['Strengthen healing set','Maintain offensive gear','Support longer pulls efficiently'],duo:'Stay together more often; your toolkit is now strong enough to solve harder quests quickly.',dungeon:'Scarlet Monastery / Drowned City when available and stacked.',pvp:'STV is a major organic PvP window.',profession:'Do not stop route momentum for low-value nodes.',leave:['Weapon upgrade considered','Dungeon quests completed','PvP detours logged if any'],priority:'high'},
-{a:41,b:50,zone:'Badlands / Tanaris / Feralas',objective:'Keep leveling speed high while preparing the profession and gear transition.',rogue:['Replace stale weapons','Plan Skinning → Engineering','Keep mobility/travel efficient'],shaman:['Build stronger healing set','Keep questing set usable','Alchemy for actual consumable needs'],duo:'Use healing to push elite/group objectives efficiently.',dungeon:'ZF / Maraudon when the quest stack is worthwhile.',pvp:'Take fights that intersect the route.',profession:'Gather naturally; avoid farming loops.',leave:['Mount/travel needs handled','Weapon check','Engineering transition plan'],priority:'high'},
-{a:51,b:55,zone:'Un’Goro / Felwood / Western Plaguelands',objective:'Stop thinking only about XP; start deliberately building the level-60 baseline.',rogue:['Pre-60 weapon planning','Keep Mining active','Begin Engineering value checks'],shaman:['Pre-60 healing upgrades','Stock useful consumables','Keep Herbalism active'],duo:'Prioritize shared objectives and efficient dungeon quest chains.',dungeon:'BRD is a major quest-stack opportunity.',pvp:'Plaguelands/Blackrock travel can be contested.',profession:'Stock materials only when useful.',leave:['BRD quest stack checked','Consumables stocked','Gear gaps identified'],priority:'must'},
-{a:56,b:60,zone:'WPL / EPL / Burning Steppes / Winterspring',objective:'Finish efficiently and enter 60 with a coherent gear, profession and consumable baseline.',rogue:['Final weapon checks','Engineering online if planned','Prepare PvP toolkit'],shaman:['Final healing upgrades','Maintain functional damage set','Alchemy stockpile for group play'],duo:'Finish shared chains; do not split unnecessarily unless one objective is much faster solo.',dungeon:'LBRS / Scholomance / Stratholme / Blackmaw / Shaper’s Terrace as appropriate.',pvp:'Late contested travel can be valuable but never mandatory.',profession:'Finish Mining + Engineering / Herbalism + Alchemy transition cleanly.',leave:['Level 60','Final weapon/healing review','Professions trained','Consumables ready'],priority:'must'}
+const weapons=[
+[7,'Best practical quest/vendor weapon available','—','Check route rewards and vendors; replace weak starter weapon','Upgrade if available','🔵 Candidate'],
+[10,'Dual-wield setup: prioritize strongest MH','Best usable OH','Trainer/quest/vendor check at the level-10 milestone','Major','🟡 Forever beta / verify'],
+[15,'Look for a meaningful MH upgrade','Usable fast OH if available','Dungeon/quest/vendor review','High','🔵 Candidate'],
+[20,'MH checkpoint','OH checkpoint','Quest/dungeon/vendor review; verify Forever rewards','Major','🔵 Candidate'],
+[30,'Major midgame weapon review','OH review','Dungeon/quest progression; verify exact Forever itemization','Major','🟡 Verify'],
+[40,'Replace stale MH','Replace stale OH','Quest/dungeon progression','High','🟡 Verify'],
+[50,'Pre-60 MH plan','Pre-60 OH plan','BRD/late dungeon/quest progression','Major','🟡 Verify'],
+[55,'Final leveling MH check','Final leveling OH check','Late dungeon/quest progression','Major','🟡 Verify']
 ];
-
-let masterFilter='all';
-function setMasterFilter(mode){
-  masterFilter=mode;
-  drawMaster();
-}
-function masterRowsFor(filterText=''){
-  const r=+(localStorage.getItem('level')||1);
-  const sh=+(localStorage.getItem('shamanLevel')||1);
-  const shared=Math.min(r,sh);
-  const text=filterText.toLowerCase();
-  return detail.filter(row=>{
-    const levelMatch=true;
-    const band=engineBand(row[0]);
-    const searchable=[row[0],row[1],row[2],row[3],row[4],band.objective,band.dungeon,band.pvp,band.profession].join(' ').toLowerCase();
-    if(text && !searchable.includes(text)) return false;
-    if(masterFilter==='rogue' && !row[1]) return false;
-    if(masterFilter==='shaman' && !row[2]) return false;
-    if(masterFilter==='duo' && !row[3]) return false;
-    return levelMatch;
-  }).map(row=>({row,active:row[0]===shared}));
-}
-function drawMaster(){
-  const el=document.getElementById('masterRows');
-  if(!el)return;
-  const text=document.getElementById('masterFilterText')?.value||'';
-  const r=+(localStorage.getItem('level')||1), sh=+(localStorage.getItem('shamanLevel')||1);
-  const shared=Math.min(r,sh);
-  const rows=masterRowsFor(text);
-  el.innerHTML=rows.map(({row,active})=>{
-    const b=engineBand(row[0]);
-    return '<tr style="'+(active?'outline:2px solid var(--gold);outline-offset:-2px':'')+'">'+
-      '<td><b>'+row[0]+'</b>'+(active?' <span class="badge">NOW</span>':'')+'</td>'+
-      '<td><b>'+row[1]+'</b><br><span class="muted">'+b.objective+'</span></td>'+
-      '<td>'+row[1]+'<br><span class="muted">'+b.rogue.join(' • ')+'</span></td>'+
-      '<td>'+row[2]+'<br><span class="muted">'+b.shaman.join(' • ')+'</span></td>'+
-      '<td>'+row[3]+'</td>'+
-      '<td><b>'+b.dungeon+'</b><br><span class="muted">PvP: '+b.pvp+'</span></td>'+
-      '<td><span class="badge">🟡 Planning</span></td>'+
-      '</tr>';
-  }).join('');
-  const ml=document.getElementById('masterRogueLevel'), ms=document.getElementById('masterShamanLevel'),
-        mv=document.getElementById('masterSharedLevel'), st=document.getElementById('masterStatus');
-  if(ml)ml.textContent=r;
-  if(ms)ms.textContent=sh;
-  if(mv)mv.textContent=shared;
-  if(st)st.textContent=r===sh?'Together':(Math.abs(r-sh)<=2?'Close — use lower level as anchor':'Levels split — regroup at the lower checkpoint');
-  renderMasterCurrent(shared);
-}
-function renderMasterCurrent(n){
-  const el=document.getElementById('masterCurrent');
-  if(!el)return;
-  const b=engineBand(n), row=detail.find(x=>x[0]===n)||detail[0];
-  el.innerHTML='<div class="grid">'+
-    '<div><span class="muted">Shared route</span><br><b>Level '+n+' — '+b.zone+'</b><br>'+b.objective+'</div>'+
-    '<div><span class="muted">🗡️ Rogue job</span><br>'+b.rogue.join(' • ')+'</div>'+
-    '<div><span class="muted">🌊 Shaman job</span><br>'+b.shaman.join(' • ')+'</div>'+
-    '<div><span class="muted">🤝 Do together</span><br>'+row[3]+'</div>'+
-  '</div><div class="mission"><b>Before leaving:</b> '+b.leave.join(' • ')+'</div>';
-}
-document.getElementById('masterFilterText')?.addEventListener('input',drawMaster);
-function engineBand(n){return routeData.find(x=>n>=x.a&&n<=x.b)||routeData[routeData.length-1]}
-function getEngineMode(){return document.getElementById('routeMode')?.value||localStorage.getItem('routeMode')||'duo'}
-function modeLabel(m){return ({duo:'Rogue + Shaman',solo:'Rogue solo',trio:'Rogue + Shaman + Mage',dungeon:'Dungeon-heavy',pvp:'PvP-heavy',speed:'Speed-focused'})[m]||m}
-function buildTonight(){
- const r=+(localStorage.getItem('level')||1), sh=+(localStorage.getItem('shamanLevel')||1), m=getEngineMode(), mins=+(document.getElementById('timeAvailable')?.value||60), dg=document.getElementById('dungeonReady')?.value==='yes', pv=document.getElementById('pvpIntensity')?.value||'normal';
- localStorage.setItem('routeMode',m);
- const b=engineBand(r), sync=Math.abs(r-sh)<=2, items=[];
- if(m==='solo'){items.push(...b.rogue)}
- else if(m==='trio'){items.push('Use Mage control/utility to accelerate difficult pulls and dungeon access.',...b.rogue.slice(0,2),...b.shaman.slice(0,1))}
- else {items.push(...b.rogue.slice(0,2),...b.shaman.slice(0,2),b.duo)}
- if(m==='dungeon' || dg){items.push('Dungeon check: '+b.dungeon)}
- if(m==='pvp' || pv==='high'){items.push('PvP check: '+b.pvp)}
- if(m==='speed'){items.push('Speed rule: skip low-value detours and keep moving toward the next quest hub.')}
- const timeLine=mins<=30?'Pick one objective and finish it; no major travel detours.':mins<=60?'Pick the main checkpoint plus one nearby side objective.':mins<=120?'Complete the checkpoint, then take the best nearby dungeon/PvP opportunity.':'Run the checkpoint as normal and allow a worthwhile dungeon or PvP detour.';
- const syncLine=sync?'Rogue and Shaman are close enough for a shared route.':'Levels are '+Math.abs(r-sh)+' apart; use the lower-level character as the duo anchor or let the higher level advance nearby.';
- document.getElementById('tonightRoute').innerHTML='<b>🎯 '+modeLabel(m)+' — Level '+r+' — '+b.zone+'</b><p>'+b.objective+'</p><div class="grid">'+items.map((x,i)=>'<div><span class="badge">'+(i+1)+'</span> '+x+'</div>').join('')+'</div><div class="note"><b>Time plan:</b> '+timeLine+'<br><b>Sync:</b> '+syncLine+'<br><b>Before leaving:</b> '+b.leave.join(' • ')+'</div><div class="confidence">Planning confidence: '+(b.priority==='must'?'high':'medium')+' • Exact Forever quest/item data is still subject to beta changes.</div>';
- renderEngineCheckpoint(r);
-}
-function renderEngineCheckpoint(n){
- const el=document.getElementById('routeEngineCheckpoint'); if(!el)return;
- const b=engineBand(n),m=getEngineMode();
- el.innerHTML='<div class="grid"><div><span class="muted">Level '+n+'</span><br><b>'+b.zone+'</b></div><div><span class="muted">Mode</span><br><b>'+modeLabel(m)+'</b></div><div><span class="muted">Objective</span><br>'+b.objective+'</div><div><span class="muted">Priority</span><br><b>'+b.priority.toUpperCase()+'</b></div></div><div class="mission"><b>Before you leave:</b> '+b.leave.join(' • ')+'</div>';
-}
-let timerStart=+(localStorage.getItem('timerStart')||0),timerAccum=+(localStorage.getItem('timerAccum')||0),timerInterval=null;
-function timerSeconds(){return timerAccum+(timerStart?Math.max(0,Math.floor((Date.now()-timerStart)/1000)):0)}
-function formatTime(s){s=Math.max(0,s);return [Math.floor(s/3600),Math.floor(s/60)%60,s%60].map(x=>String(x).padStart(2,'0')).join(':')}
-function renderTimer(){const el=document.getElementById('sessionTimer');if(el)el.textContent=formatTime(timerSeconds())}
-function startTimer(){if(!timerStart)timerStart=Date.now();localStorage.setItem('timerStart',timerStart);clearInterval(timerInterval);timerInterval=setInterval(renderTimer,1000);renderTimer()}
-function stopTimer(){if(timerStart){timerAccum=timerSeconds();timerStart=0}localStorage.setItem('timerStart','0');localStorage.setItem('timerAccum',timerAccum);clearInterval(timerInterval);renderTimer();saveSessionLog()}
-function resetTimer(){timerStart=0;timerAccum=0;localStorage.setItem('timerStart','0');localStorage.setItem('timerAccum','0');clearInterval(timerInterval);renderTimer()}
-function saveSessionLog(){
- const note=document.getElementById('sessionNote')?.value||'', logs=JSON.parse(localStorage.getItem('routeLogs')||'[]');
- logs.push({date:new Date().toLocaleString(),level:+(localStorage.getItem('level')||1),shaman:+(localStorage.getItem('shamanLevel')||1),mode:getEngineMode(),seconds:timerAccum,note});
- localStorage.setItem('routeLogs',JSON.stringify(logs.slice(-50)));
-}
-function initEngine(){
- const m=localStorage.getItem('routeMode');if(m&&document.getElementById('routeMode'))document.getElementById('routeMode').value=m;
- renderTimer();renderEngineCheckpoint(+(localStorage.getItem('level')||1));
- if(timerStart){timerInterval=setInterval(renderTimer,1000)}
- buildTonight();
-}
-
-function syncLevels(){const n=Math.min(+(localStorage.getItem('level')||1),+(localStorage.getItem('shamanLevel')||1));document.getElementById('slider').value=n;setLevel(n);document.getElementById('sslider').value=n;setShamanLevel(n)}
-function openTab(id){const b=[...document.querySelectorAll('nav button')].find(x=>x.dataset.tab===id);if(b)b.click()}
-function setShamanLevel(n){const l=document.getElementById('slvl');if(!l)return;l.textContent=n;const p=Math.round((n-1)/59*100);document.getElementById('spct').textContent=p+'%';document.getElementById('sbar').style.width=p+'%';document.getElementById('spriority').innerHTML=shamanPriorities(n).map(x=>'<div class="check">◆ '+x+'</div>').join('');localStorage.setItem('shamanLevel',n);renderCommand();renderShamanCurrent(n);renderCurrent(+(localStorage.getItem('level')||1));renderEngineCheckpoint(+(localStorage.getItem('level')||1));drawMaster();if(document.getElementById('tonightRoute'))buildTonight()}
-const ss=document.getElementById('sslider');if(ss){const saved=+(localStorage.getItem('shamanLevel')||1);ss.value=saved;setShamanLevel(saved);ss.oninput=()=>setShamanLevel(+ss.value)}
-function setLevel(n){document.getElementById('lvl').textContent=n;let pct=Math.round((n-1)/59*100);document.getElementById('pct').textContent=pct+'%';document.getElementById('bar').style.width=pct+'%';document.getElementById('priority').innerHTML=priorities(n).map(x=>'<div class="check">◆ '+x+'</div>').join('');localStorage.setItem('level',n);renderCommand();renderCurrent(n);renderShamanCurrent(+(localStorage.getItem('shamanLevel')||1));renderEngineCheckpoint(n);drawMaster();if(document.getElementById('tonightRoute'))buildTonight()};const s=document.getElementById('slider');s.oninput=()=>setLevel(+s.value);setLevel(+(localStorage.getItem('level')||1));s.value=+(localStorage.getItem('level')||1);initEngine();
-document.querySelectorAll('[data-save]').forEach(x=>{let k=x.dataset.save;x.checked=localStorage.getItem(k)==='1';x.onchange=()=>localStorage.setItem(k,x.checked?'1':'0')});
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')});
-const sections=[['1–10','Tirisfal foundation'],['10–20','Silverpine / Hillsbrad'],['20–30','Hillsbrad / Arathi'],['30–40','STV / Scarlet Monastery'],['40–50','Badlands / Tanaris / Feralas'],['50–60','Un’Goro / Plaguelands / Burning Steppes']];document.getElementById('checks').innerHTML=sections.map((s,i)=>'<div class="card" style="margin-bottom:12px"><h3>'+s[0]+' — '+s[1]+'</h3>'+['Quest route complete','Dungeon quests stacked','Weapon checkpoint checked','Profession checkpoint checked','First Aid/Cooking checked','PvP opportunity considered'].map((x,j)=>{let k='m'+i+j;return '<label class="check"><input type="checkbox" data-save="'+k+'">'+x+'</label>'}).join('')+'</div>').join('');document.querySelectorAll('#checks [data-save]').forEach(x=>{let k=x.dataset.save;x.checked=localStorage.getItem(k)==='1';x.onchange=()=>localStorage.setItem(k,x.checked?'1':'0')});
+const state={r:+localStorage.getItem('level')||1,s:+localStorage.getItem('shamanLevel')||1,timerStart:+localStorage.getItem('timerStart')||0,timerAccum:+localStorage.getItem('timerAccum')||0};
+function band(n){return bands.find(x=>n>=x[0]&&n<=x[1])||bands[bands.length-1]}
+function cp(n){let best=checkpoints[0];for(const x of checkpoints){if(x[0]<=n)best=x;else break}return best}
+function setTab(id){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));window.scrollTo(0,0)}
+function render(){const shared=Math.min(state.r,state.s),c=cp(shared),b=band(shared);
+document.getElementById('cmdR').textContent=state.r;document.getElementById('cmdS').textContent=state.s;document.getElementById('cmdAnchor').textContent=shared;document.getElementById('cmdSync').textContent=state.r===state.s?'Together':Math.abs(state.r-state.s)<=2?'Close — anchor to lower level':'Split — use lower level as duo anchor';
+document.getElementById('rLevel').textContent=state.r;document.getElementById('sLevel').textContent=state.s;document.getElementById('sharedLevel').textContent=shared;
+document.getElementById('rogueDashLevel').textContent=state.r;document.getElementById('shamanDashLevel').textContent=state.s;
+document.getElementById('rSlider').value=state.r;document.getElementById('sSlider').value=state.s;
+const next=checkpoints.find(x=>x[0]>shared)||checkpoints[checkpoints.length-1];
+document.getElementById('current').innerHTML='<div class="grid"><div><span class="muted">NOW — Level '+shared+'</span><br><b>'+b[2]+'</b><br>'+c[1]+'</div><div><span class="muted">🗡️ Rogue</span><br>'+c[2]+'</div><div><span class="muted">🌊 Shaman</span><br>'+c[3]+'</div><div><span class="muted">🤝 Together</span><br>'+c[4]+'</div></div><div class="note"><b>Next big checkpoint — Level '+next[0]+'</b><br>'+next[5]+'</div>';
+document.getElementById('rogueNow').innerHTML='<b>Level '+state.r+' — '+band(state.r)[2]+'</b><p>'+cp(state.r)[2]+'</p><span class="confidence">'+cp(state.r)[6]+'</span>';
+document.getElementById('shamanNow').innerHTML='<b>Level '+state.s+' — '+band(state.s)[2]+'</b><p>'+cp(state.s)[3]+'</p><span class="confidence">'+cp(state.s)[6]+'</span>';
+document.getElementById('duoNow').innerHTML='<b>Level '+shared+' — '+b[2]+'</b><p>'+c[4]+'</p><p><b>Next:</b> '+next[5]+'</p><span class="confidence">'+c[6]+'</span>';
+renderRows();renderTonight();renderTimer()}
+function renderRows(){const q=(document.getElementById('filter').value||'').toLowerCase();const shared=Math.min(state.r,state.s);document.getElementById('rows').innerHTML=checkpoints.filter(x=>(x.join(' ').toLowerCase().includes(q))).map(x=>'<tr class="'+(x[0]===shared?'now':'')+'"><td><b>'+x[0]+'</b>'+(x[0]===shared?' <span class="badge">NOW</span>':'')+'</td><td><b>'+x[1]+'</b><br><span class="muted">'+band(x[0])[2]+'</span></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td><td>'+x[6]+'</td></tr>').join('')}
+function renderTonight(){const n=state.r,sh=state.s,m=document.getElementById('mode').value,b=band(n),c=cp(Math.min(n,sh));let items=[];if(m==='solo')items=[c[2],'Use the next practical weapon checkpoint as the gear filter.'];else if(m==='trio')items=['Use Mage control to accelerate difficult pulls.',c[2],c[3]];else items=[c[2],c[3],c[4]];if(m==='dungeon'||document.getElementById('group').value==='Yes')items.push('Dungeon check: stack quests before committing.');if(m==='pvp'||document.getElementById('pvpIntensity').value==='High')items.push('PvP: take fights that intersect the route; do not chase.');if(m==='speed')items.push('Speed: skip low-value detours and move to the next hub.');document.getElementById('tonight').innerHTML='<b>🎯 '+m+' — Level '+n+' — '+b[2]+'</b><div class="grid" style="margin-top:10px">'+items.map((x,i)=>'<div><span class="badge">'+(i+1)+'</span> '+x+'</div>').join('')+'</div><div class="note"><b>Next big checkpoint:</b> '+(checkpoints.find(x=>x[0]>Math.min(n,sh))||checkpoints[checkpoints.length-1])[5]+'</div>'}
+function renderWeapons(){document.getElementById('weaponRows').innerHTML=weapons.map(x=>'<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td></tr>').join('')}
+function save(){localStorage.setItem('level',state.r);localStorage.setItem('shamanLevel',state.s)}
+function renderTimer(){let s=state.timerAccum+(state.timerStart?Math.floor((Date.now()-state.timerStart)/1000):0);document.getElementById('timer').textContent=[Math.floor(s/3600),Math.floor(s/60)%60,s%60].map(x=>String(x).padStart(2,'0')).join(':')}
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>setTab(b.dataset.go));
+document.getElementById('rSlider').oninput=e=>{state.r=+e.target.value;save();render()};document.getElementById('sSlider').oninput=e=>{state.s=+e.target.value;save();render()};document.getElementById('filter').oninput=renderRows;document.getElementById('build').onclick=renderTonight;['mode','time','group','pvpIntensity'].forEach(id=>document.getElementById(id).onchange=renderTonight);
+document.getElementById('start').onclick=()=>{if(!state.timerStart)state.timerStart=Date.now();localStorage.setItem('timerStart',state.timerStart);clearInterval(window.ti);window.ti=setInterval(renderTimer,1000);renderTimer()};
+document.getElementById('stop').onclick=()=>{if(state.timerStart){state.timerAccum+=Math.floor((Date.now()-state.timerStart)/1000);state.timerStart=0}localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',state.timerAccum);clearInterval(window.ti);renderTimer()};
+document.getElementById('reset').onclick=()=>{state.timerStart=0;state.timerAccum=0;localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',0);clearInterval(window.ti);renderTimer()};
+const sections=['1–10 — foundation','10–20 — first dungeon/gear window','20–30 — sustained duo','30–40 — midgame weapon phase','40–50 — transition','50–60 — pre-60 push'];document.getElementById('checks').innerHTML=sections.map((s,i)=>'<div class="card" style="margin-bottom:12px"><h3>'+s+'</h3>'+['Route complete','Weapon checkpoint checked','Dungeon quests stacked','Professions checked','Consumables checked','PvP opportunity considered'].map((x,j)=>'<label class="check"><input type="checkbox" data-k="c'+i+j+'">'+x+'</label>').join('')+'</div>').join('');document.querySelectorAll('[data-k]').forEach(x=>{x.checked=localStorage.getItem(x.dataset.k)==='1';x.onchange=()=>localStorage.setItem(x.dataset.k,x.checked?'1':'0')});
+renderWeapons();render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
 </script></body></html>
