@@ -177,11 +177,13 @@ const state={r:+localStorage.getItem('level')||1,s:+localStorage.getItem('shaman
 function renderMacroGroup(gridId, group){
   const grid=document.getElementById(gridId);
   if(!grid)return;
-  grid.innerHTML=group.map(m=>'<div class="card" style="display:flex;flex-direction:column;gap:9px"><div><span class="badge">'+m[0]+'</span> <b>'+m[1]+'</b></div><div class="muted">'+m[2]+'</div><div class="tiny">'+m[3]+'</div><textarea id="macro'+m[5]+'" class="engine-input" rows="6" readonly style="font-family:Consolas,monospace;resize:vertical">'+m[4].replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea><button onclick="copyMacro('+m[5]+')">📋 Copy Macro</button></div>').join('');
+  grid.innerHTML=group.map(([m,i])=>'<div class="card" style="display:flex;flex-direction:column;gap:9px"><div><span class="badge">'+m[0]+'</span> <b>'+m[1]+'</b></div><div class="muted">'+m[2]+'</div><div class="tiny">'+m[3]+'</div><textarea id="macro'+i+'" class="engine-input" rows="6" readonly style="font-family:Consolas,monospace;resize:vertical">'+m[4].replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea><button onclick="copyMacro('+i+')">📋 Copy Macro</button></div>').join('');
 }
 function renderMacros(){
-  renderMacroGroup('rogueMacroGrid', macros.filter(m=>m[6]==='rogue'));
-  renderMacroGroup('shamanMacroGrid', macros.filter(m=>m[6]==='shaman'));
+  const shaman=macros.slice(0,14).map((m,i)=>[m,i]);
+  const rogue=macros.slice(14).map((m,i)=>[m,i+14]);
+  renderMacroGroup('rogueMacroGrid', rogue);
+  renderMacroGroup('shamanMacroGrid', shaman);
 }
 function copyMacro(i){
   const el=document.getElementById('macro'+i);
