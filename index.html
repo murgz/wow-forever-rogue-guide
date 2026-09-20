@@ -30,9 +30,39 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div class="card" style="margin-top:14px"><input id="filter" class="search" placeholder="Search zone, weapon, dungeon, profession, milestone..."><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Where</th><th>🗡️ Rogue</th><th>🌊 Shaman</th><th>🤝 Together</th><th>Next big checkpoint</th><th>Confidence</th></tr></thead><tbody id="rows"></tbody></table></div></div>
 </section>
 
-<section id="rogue" class="tab"><div class="card"><h2>🗡️ Rogue Command Board</h2><div class="grid"><div>Current level<br><span id="rogueDashLevel" class="stat">1</span></div><div>Build<br><b>Combat / PvP</b></div><div>Gathering<br><b>Mining + Skinning</b></div><div>Later<br><b>Mining + Engineering</b></div></div><div id="rogueNow" class="mission"></div></div><div class="grid" style="margin-top:14px"><div class="card"><h3>🗡️ Immediate checks</h3><p>Check the <b>Weapons</b> tab for the next candidate across sword, dagger, axe, mace and fist weapons.</p><p>Keep poisons, First Aid and Lockpicking current.</p></div><div class="card"><h3>🎯 Use the route engine</h3><p>Your level is controlled from <b>Checkpoints</b>. The Rogue card here updates automatically and is intentionally a reminder board, not a Rogue 101 guide.</p></div></div></section>
+<section id="rogue" class="tab">
+<div class="card"><h2>🗡️ Rogue Command Board</h2>
+<p class="muted">Your actual leveling dashboard: what you have now, what unlocks next, what to train, and what matters for Combat/PvP.</p>
+<div class="grid"><div>Current level<br><span id="rogueDashLevel" class="stat">1</span></div><div>Build<br><b>Combat / PvP</b></div><div>Gathering<br><b>Mining + Skinning</b></div><div>Later<br><b>Mining + Engineering</b></div></div>
+<div id="rogueNow" class="mission"></div>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="card"><h3>📖 Skills right now</h3><div id="rogueCurrentSkills"></div></div>
+<div class="card"><h3>⬆️ Next level</h3><div id="rogueNextSkills"></div></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>🎯 Rogue level-up checklist</h3><div id="rogueSkillAdvice" class="mission"></div>
+<p class="tiny">Beta spellbook data is current as of the recorded Forever beta client snapshot and can still change before launch.</p></div>
+<div class="grid" style="margin-top:14px">
+<div class="card"><h3>🗡️ Weapon check</h3><p>At every major upgrade, check <b>Weapons</b>. Forever Rogues can use daggers, fist weapons, swords, axes, maces, bows, crossbows, guns and thrown weapons; Dual Wield is available at 10.</p></div>
+<div class="card"><h3>🧪 Rogue maintenance</h3><p>Keep poisons, First Aid and Lockpicking moving. Pickpocket humanoids while questing. Train weapon skills on the route instead of letting a new weapon sit unused.</p></div>
+</div></section>
 
-<section id="shaman" class="tab"><div class="card"><h2>🌊 Shaman Command Board</h2><div class="grid"><div>Current level<br><span id="shamanDashLevel" class="stat">1</span></div><div>Role<br><b>Resto / Healer</b></div><div>Professions<br><b>Herbalism + Alchemy</b></div><div>Duo partner<br><b>Undead Rogue</b></div></div><div id="shamanNow" class="mission"></div></div><div class="grid" style="margin-top:14px"><div class="card"><h3>🌊 Immediate checks</h3><p>Maintain a healing set and a functional questing set. Pick herbs naturally and keep useful Alchemy consumables available.</p></div><div class="card"><h3>🤝 Duo role</h3><p>Use the shared <b>Checkpoints</b> engine for the route. This board is for current-level reminders, not a beginner Shaman tutorial.</p></div></div></section>
+<section id="shaman" class="tab">
+<div class="card"><h2>🌊 Shaman Command Board</h2>
+<p class="muted">Resto-first, but still built for actually leveling with the Rogue. See the skills you should have trained and the next meaningful unlock.</p>
+<div class="grid"><div>Current level<br><span id="shamanDashLevel" class="stat">1</span></div><div>Role<br><b>Resto / Healer</b></div><div>Professions<br><b>Herbalism + Alchemy</b></div><div>Duo partner<br><b>Undead Rogue</b></div></div>
+<div id="shamanNow" class="mission"></div>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="card"><h3>📖 Skills right now</h3><div id="shamanCurrentSkills"></div></div>
+<div class="card"><h3>⬆️ Next level</h3><div id="shamanNextSkills"></div></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>🌊 Shaman level-up checklist</h3><div id="shamanSkillAdvice" class="mission"></div>
+<p class="tiny">The displayed spell progression is based on the Forever beta spellbook snapshot; ranks and tuning remain subject to beta changes.</p></div>
+<div class="grid" style="margin-top:14px">
+<div class="card"><h3>🩹 Resto priority</h3><p>Keep Healing Wave current, pick up Lesser Healing Wave at 20, Healing Stream Totem at 20, then Chain Heal at 40. Keep utility totems current even when the rank itself is not a healing upgrade.</p></div>
+<div class="card"><h3>🤝 Duo priority</h3><p>Heal the Rogue without chasing overheal. Use Earth Shock for interrupts, Earthbind for control, and the appropriate totem package for the pull.</p></div>
+</div></section>
 
 <section id="duo" class="tab"><div class="card"><h2>🤝 Duo Command Center</h2><div class="grid"><div>Rogue<br><span id="duoRogueLevel" class="stat">1</span></div><div>Shaman<br><span id="duoShamanLevel" class="stat">1</span></div><div>Shared anchor<br><span id="duoAnchorLevel" class="stat">1</span></div><div>Status<br><b id="duoStatus">Together</b></div></div><div id="duoNow" class="mission"></div></div><div class="grid" style="margin-top:14px"><div class="card"><h3>🗡️ Rogue</h3><p>Control the pull, interrupt priority casts, and avoid unnecessary downtime. Scout before committing when PvP is active.</p></div><div class="card"><h3>🌊 Shaman</h3><p>Keep the Rogue moving with efficient healing, totems and controlled damage. Maintain a separate healing and questing gear mindset.</p></div><div class="card"><h3>🏰 Dungeon rule</h3><p>Stack quests first. Run when the dungeon overlaps the current route, reward, XP or gear opportunity.</p></div></div></section>
 
@@ -50,7 +80,8 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div style="overflow:auto"><table><thead><tr><th>Level</th><th>Rogue MH</th><th>Rogue OH</th><th>Source / reason</th><th>Priority</th><th>Confidence</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div></section>
 
 <section id="dungeons" class="tab"><div class="card"><h2>🏰 Dungeon Quest Stacking</h2><p class="muted">Run dungeons because the quest stack, XP, reward or route timing makes sense—not because the guide says you have to.</p><div style="overflow:auto"><table><thead><tr><th>Window</th><th>Dungeon</th><th>Why check it</th><th>Duo action</th><th>Confidence</th></tr></thead><tbody>
-<tr><td>13–18</td><td>Hall of Thanes</td><td>New Forever dungeon; check quests/rewards as testing opens content.</td><td>Stack quests before queue/group.</td><td>🟢 Blizzard range</td></tr>
+<tr><td>13–18</td><td>Ragefire Chasm</td><td><b>First Horde dungeon check.</b> Forever beta data shows 6 quests, with several chains/rewards tied to the run. Do not enter empty.</td><td><b>Stack the RFC quests first.</b> Check Thunder Bluff, Orgrimmar and Undercity chains; loot the Lost Satchel inside for its follow-up.</td><td>🟢 Beta quest data</td></tr>
+<tr><td>13–18</td><td>Hall of Thanes</td><td>New Forever Alliance dungeon; check quests/rewards as testing opens content.</td><td>Stack quests before queue/group.</td><td>🟢 Beta range</td></tr>
 <tr><td>15–20</td><td>Ruins of Lordaeron</td><td>New Forever dungeon; check quest density and rewards.</td><td>Run when both are in range and quests line up.</td><td>🟢 Blizzard range</td></tr>
 <tr><td>20–30</td><td>WC / BFD / Excavation Site</td><td>Use only when quest density or gear makes the run efficient.</td><td>Quest-stack first.</td><td>🟡 Verify rewards</td></tr>
 <tr><td>30–40</td><td>Scarlet Monastery / Drowned City</td><td>Strong midgame dungeon window.</td><td>Plan a dedicated stack if nearby.</td><td>🟡 Verify Forever data</td></tr>
@@ -165,6 +196,88 @@ const weapons=[
 [55,'Dal’Rend’s Sacred Charge','Barman Shanker','Dal’Rend’s Sacred Charge drops from <a href="https://www.wowhead.com/classic/npc=10429/warchief-rend-blackhand" target="_blank">Warchief Rend Blackhand</a> in Upper Blackrock Spire','55–60 • Major sword window','🔵 Classic / source data'],
 [58,'Dal’Rend’s Sacred Charge','Heartseeker / Felstriker','Heartseeker is crafted by Blacksmith; Felstriker drops from Warchief Rend Blackhand in UBRS','58–60 • Final dagger options','🔵 Classic / source data']
 ];
+
+const rogueSkillMilestones=[
+[1,'Eviscerate • Sinister Strike • Stealth • Pick Lock','Core builder/finisher, stealth and lockpicking are online.','—'],
+[4,'Backstab • Pick Pocket','Backstab requires a dagger in the main hand; Pick Pocket starts the Rogue loot loop.','6 — Gouge'],
+[6,'Gouge','Use for control, energy reset and emergency peel.','8 — Evasion'],
+[8,'Evasion','Major defensive cooldown; bind it now.','10 — Sprint • Sap • Slice and Dice • Dual Wield'],
+[10,'Sprint • Sap • Slice and Dice • Dual Wield','Major Rogue breakpoint. Buy the new skills, take your first Combat talent point, and learn your second weapon skill if needed.','12 — Kick'],
+[12,'Kick','Interrupt is now part of the core pull plan.','14 — Expose Armor • Garrote'],
+[14,'Expose Armor • Garrote','Garrote becomes a real stealth opener; Expose Armor is situational.','16 — Feint'],
+[16,'Feint','Low priority while leveling, but train it if gold allows.','18 — Ambush'],
+[18,'Ambush','Dagger-only opener; useful for dagger swaps/PvP.','20 — Rupture • Poisons • Instant Poison • Crippling Poison'],
+[20,'Rupture • Poisons • Instant Poison • Crippling Poison','Huge Rogue checkpoint: complete the poison milestone and start keeping your poison kit current.','22 — Distract • Vanish'],
+[22,'Distract • Vanish','Vanish is a major PvP/escape button.','24 — Mind-numbing Poison • Detect Traps'],
+[24,'Mind-numbing Poison • Detect Traps','Add casting-control poison when useful; Detect Traps is utility.','26 — Cheap Shot'],
+[26,'Cheap Shot','Major control opener; strong for PvP and dangerous quest mobs.','28 — Vanish rank / poison ranks'],
+[28,'Vanish / poison rank upgrades','Train the current ranks even if no flashy new button appears.','30 — Deadly Poison • Kidney Shot • Disarm Trap'],
+[30,'Deadly Poison • Kidney Shot • Disarm Trap','Major control/poison checkpoint. Pair with Blade Flurry talent timing.','32 — Wound Poison'],
+[32,'Wound Poison','Useful anti-heal option for PvP; keep it available.','34 — Blind • Blinding Powder'],
+[34,'Blind • Blinding Powder','Major CC breakpoint. Carry Blinding Powder.','36 — core rank upgrades'],
+[36,'Core rank upgrades','Train current ranks for Sinister Strike/Garrote/Eviscerate/poisons as offered.','38 — core rank upgrades'],
+[38,'Core rank upgrades','Do the trainer trip; poison and damage ranks matter more than utility.','40 — Mutilate • Safe Fall'],
+[40,'Mutilate • Safe Fall','Forever adds Mutilate as a trainable Assassination ability; keep it in the toolbox even on Combat.','42 — core rank upgrades'],
+[42,'Core rank upgrades','Train damage/utility ranks; check talents and weapon upgrades together.','44 — core rank upgrades'],
+[44,'Core rank upgrades','Do not skip rank purchases that materially affect your rotation.','46 — core ranks / Hemorrhage is removed'],
+[46,'Core rank upgrades','Forever beta removes Hemorrhage from the recorded trainer spellbook.','48 — Eviscerate / poison ranks'],
+[48,'Core rank upgrades','Refresh your trainer ranks before the next dungeon/PvP block.','50 — Kidney Shot rank / Ambush rank'],
+[50,'Core rank upgrades','Check poison ranks and control tools.','52 — core rank upgrades'],
+[52,'Core rank upgrades','Keep your main rotation ranks current.','54 — Occult Poison'],
+[54,'Occult Poison','New Forever poison; it counts as Deadly Poison and adds magical-damage vulnerability.','56 — Eviscerate / Wound Poison ranks'],
+[56,'Core rank upgrades','Late-game rank refresh.','58 — Ambush / Vanish / poison ranks'],
+[58,'Core rank upgrades','Final trainer pass before 60.','60 — Atrophic Poison • Numbing Poison • Sebacious Poison'],
+[60,'Atrophic Poison • Numbing Poison • Sebacious Poison','Final poison toolkit; review PvP and endgame applications.','—']
+];
+
+const shamanSkillMilestones=[
+[1,'Healing Wave R1 • Lightning Bolt R1 • Rockbiter Weapon R1','Core heal, ranged damage and weapon imbue are online.','4 — Stoneskin Totem • Earth Shock'],
+[4,'Stoneskin Totem • Earth Shock R1','First meaningful utility/interrupt package.','6 — Healing Wave R2 • Earthbind Totem'],
+[6,'Healing Wave R2 • Earthbind Totem','Better heal plus movement control.','8 — Lightning Shield R1 • Stoneclaw Totem • Lightning Bolt R2 • Earth Shock R2'],
+[8,'Lightning Shield R1 • Stoneclaw Totem • Lightning Bolt R2 • Earth Shock R2','Good solo/duo toolkit.','10 — Flametongue Weapon • Strength of Earth Totem • Flame Shock • Searing Totem'],
+[10,'Flametongue Weapon • Strength of Earth Totem • Flame Shock • Searing Totem','Big offensive/totem checkpoint.','12 — Healing Wave R3 • Ancestral Spirit'],
+[12,'Healing Wave R3 • Ancestral Spirit','Upgrade healing and gain resurrection utility.','14 — Stoneskin R2 • Lightning Bolt R3 • Earth Shock R3'],
+[14,'Stoneskin Totem R2 • Lightning Bolt R3 • Earth Shock R3','Refresh both healing and shock ranks.','16 — Rockbiter R3 • Lightning Shield R2 • Cure Poison'],
+[16,'Rockbiter R3 • Lightning Shield R2 • Cure Poison','First important Resto cleanse.','18 — Healing Wave R4 • Tremor Totem • Stoneclaw R2 • Flametongue R2'],
+[18,'Healing Wave R4 • Tremor Totem • Stoneclaw R2 • Flametongue R2','Tremor is a major PvP/dungeon utility button.','20 — Ghost Wolf • Frostbrand • Healing Stream Totem • Lesser Healing Wave • Call of the Elements • Totemic Recall'],
+[20,'Ghost Wolf • Frostbrand • Healing Stream Totem • Lesser Healing Wave • Call of the Elements • Totemic Recall','Huge Shaman breakpoint. For the duo, Healing Stream + LHW become core healing tools.','22 — Totemic Projection • Water Breathing • Cure Disease • Poison Cleansing Totem'],
+[22,'Totemic Projection • Water Breathing • Cure Disease • Poison Cleansing Totem','More totem control and cleanse utility.','24 — Healing Wave R5 • Rockbiter R4 • Stoneskin R3 • Lightning Shield R3 • Strength of Earth R2'],
+[24,'Healing Wave R5 • Rockbiter R4 • Stoneskin R3 • Lightning Shield R3 • Strength of Earth R2','Trainer refresh with several important ranks.','26 — Far Sight • Mana Spring Totem • Lightning Bolt R5'],
+[26,'Far Sight • Mana Spring Totem • Lightning Bolt R5','Mana support starts becoming more relevant for sustained healing.','28 — Frostbrand R2 • Fire Resistance Totem • Flametongue Totem • Water Walking • Stoneclaw R3'],
+[28,'Frostbrand R2 • Fire Resistance Totem • Flametongue Totem • Water Walking • Stoneclaw R3','More group utility and travel tools.','30 — Astral Recall • Grounding Totem • Windfury Weapon • Nature Resistance Totem • Reincarnation'],
+[30,'Astral Recall • Grounding Totem • Windfury Weapon • Nature Resistance Totem • Reincarnation','Major utility/PvP checkpoint. Reincarnation is now part of the death plan.','32 — Healing Wave R6 • Lightning Shield R4 • Windfury Totem • Chain Lightning'],
+[32,'Healing Wave R6 • Lightning Shield R4 • Windfury Totem • Chain Lightning','Windfury Totem changes the Rogue/Shaman duo dynamic; coordinate weapon imbues carefully.','34 — Sentry Totem • Rockbiter R5'],
+[34,'Sentry Totem • Rockbiter R5','Mostly utility; train the rank refresh.','36 — Healing Wave R7 • Mana Spring R2 • Windwall R1 • Earth Shock R5 • Lesser Healing Wave R3'],
+[36,'Healing Wave R7 • Mana Spring R2 • Windwall R1 • Earth Shock R5 • Lesser Healing Wave R3','Strong healer refresh and better shock.','38 — Disease Cleansing Totem • Flametongue Totem R2 • Frost Resistance R2'],
+[38,'Disease Cleansing Totem • Flametongue Totem R2 • Frost Resistance R2','Disease/raid utility becomes relevant.','40 — Chain Heal • Healing Stream R3 • Windfury Weapon R2 • Call of the Spirits'],
+[40,'Chain Heal • Healing Stream R3 • Windfury Weapon R2 • Call of the Spirits','Major Resto breakpoint: Chain Heal is now part of the dungeon healing kit.','42 — Windfury Totem R2 • Grace of Air R1'],
+[42,'Windfury Totem R2 • Grace of Air R1','Excellent group melee support for the Rogue.','44 — Healing Wave R8 • Rockbiter R6 • Nature Resistance R2 • Windfury Weapon R2'],
+[44,'Healing Wave R8 • Rockbiter R6 • Nature Resistance R2','Keep the healer ranks current.','46 — Chain Heal R2 • Mana Spring R3 • Flametongue Weapon R5'],
+[46,'Chain Heal R2 • Mana Spring R3 • Flametongue Weapon R5','Dungeon healing improves substantially here.','48 — Healing Wave R8 • Lightning Shield R6 • Chain Heal R2 • Mana Tide Totem'],
+[48,'Lightning Shield R6 • Mana Tide Totem','Major mana-management checkpoint.','50 — Riptide • Lightning Bolt R9 • Windfury Weapon R3'],
+[50,'Riptide • Windfury Weapon R3','Forever adds Riptide to the Resto toolkit.','52 — Lesser Healing Wave R5 • Strength of Earth R4 • Windfury Totem R3'],
+[52,'Lesser Healing Wave R5 • Strength of Earth R4 • Windfury Totem R3','Strong group-support refresh.','54 — Healing Wave R9 • Stoneclaw R6 • Rockbiter R7 • Frost Resistance R3'],
+[54,'Healing Wave R9 • Stoneclaw R6 • Rockbiter R7 • Frost Resistance R3','Late-game healing/utility ranks.','56 — Chain Heal R3 • Mana Spring R4 • Lightning Bolt R10 • Grace of Air R2'],
+[56,'Chain Heal R3 • Mana Spring R4 • Lightning Bolt R10 • Grace of Air R2','Keep dungeon healing and group utility current.','58 — Flametongue Totem R4 • Fire Resistance R3'],
+[58,'Flametongue Totem R4 • Fire Resistance R3','Final utility checkpoint before 60.','60 — Healing Wave R10 • Chain Heal R3 • Riptide R3 • Windfury Weapon R4 • Strength of Earth R5'],
+[60,'Healing Wave R10 • Riptide R3 • Windfury Weapon R4 • Strength of Earth R5','Final trainer review for healing, group buffs and PvP utility.','—']
+];
+
+function skillMilestone(levels,n){
+  let cur=levels[0];
+  for(const x of levels){if(x[0]<=n)cur=x;else break}
+  const next=levels.find(x=>x[0]>n);
+  return {cur,next};
+}
+function renderSkillCard(currentId,nextId,adviceId,levels,n,label){
+  const {cur,next}=skillMilestone(levels,n);
+  const curEl=document.getElementById(currentId), nextEl=document.getElementById(nextId), adv=document.getElementById(adviceId);
+  if(!curEl||!nextEl||!adv)return;
+  curEl.innerHTML='<b>Level '+cur[0]+'</b><p>'+cur[1].replaceAll(' • ','<br>• ')+'</p>';
+  if(next) nextEl.innerHTML='<b>Level '+next[0]+'</b><p>'+next[1].replaceAll(' • ','<br>• ')+'</p><p class="tiny">Next after this: '+(levels.find(x=>x[0]>next[0])?.[0]||'60')+'</p>';
+  else nextEl.innerHTML='<b>60</b><p>Endgame trainer review.</p>';
+  adv.innerHTML='<b>'+label+' — Level '+n+'</b><br>Train the current milestone before leaving town. <b>Next:</b> '+(next?('Level '+next[0]+' — '+next[1]):'Endgame review');
+}
 
 const macros=[
 ['🌊 Heal','Mouseover Lesser Healing Wave','Fast single-target heal without changing your current target. Replace with the exact Forever spell/rank if the beta changes the name.','Lesser Healing Wave',`#showtooltip Lesser Healing Wave
@@ -286,5 +399,5 @@ document.getElementById('start').onclick=()=>{if(!state.timerStart)state.timerSt
 document.getElementById('stop').onclick=()=>{if(state.timerStart){state.timerAccum+=Math.floor((Date.now()-state.timerStart)/1000);state.timerStart=0}localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',state.timerAccum);clearInterval(window.ti);renderTimer()};
 document.getElementById('reset').onclick=()=>{state.timerStart=0;state.timerAccum=0;localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',0);clearInterval(window.ti);renderTimer()};
 const sections=['1–10 — foundation','10–20 — first dungeon/gear window','20–30 — sustained duo','30–40 — midgame weapon phase','40–50 — transition','50–60 — pre-60 push'];document.getElementById('checks').innerHTML=sections.map((s,i)=>'<div class="card" style="margin-bottom:12px"><h3>'+s+'</h3>'+['Route complete','Weapon checkpoint checked','Dungeon quests stacked','Professions checked','Consumables checked','PvP opportunity considered'].map((x,j)=>'<label class="check"><input type="checkbox" data-k="c'+i+j+'">'+x+'</label>').join('')+'</div>').join('');document.querySelectorAll('[data-k]').forEach(x=>{x.checked=localStorage.getItem(x.dataset.k)==='1';x.onchange=()=>localStorage.setItem(x.dataset.k,x.checked?'1':'0')});
-renderWeapons();renderMacros();render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
+renderWeapons();renderMacros();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
 </script></body></html>
