@@ -163,7 +163,7 @@ const bands=[
 ];
 for(const b of bands){for(let n=b[0];n<=b[1];n++){detail.push([n,b[2],b[3],b[4],b[5]])}}
 function drawDetail(){const el=document.getElementById('detailRows');if(!el)return;el.innerHTML=detail.map(r=>'<tr>'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')}
-drawDetail();drawMaster();
+drawDetail();
 function shamanPriorities(n){
 if(n<10)return ['Finish Troll starting route','Train Herbalism + Alchemy','Keep a simple questing set and learn core healing tools'];
 if(n<20)return ['Barrens / Silverpine progression','Save Intellect/Spirit/healing upgrades','Stack early dungeon quests with the Rogue'];
