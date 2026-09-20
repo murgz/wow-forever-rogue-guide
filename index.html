@@ -75,14 +75,20 @@ const bands=[
 [1,6,'Tirisfal / Troll starting routes'],[7,10,'Tirisfal / Barrens transition'],[11,19,'Silverpine / Barrens / Hillsbrad'],[20,29,'Hillsbrad / Arathi'],[30,39,'STV / Arathi / Desolace'],[40,49,'Badlands / Tanaris / Feralas'],[50,54,'Un’Goro / Felwood / WPL'],[55,60,'WPL / EPL / Burning Steppes / Winterspring']
 ];
 const weapons=[
-[7,'Best practical quest/vendor weapon available','—','Check route rewards and vendors; replace weak starter weapon','Upgrade if available','🔵 Candidate'],
-[10,'Dual-wield setup: prioritize strongest MH','Best usable OH','Trainer/quest/vendor check at the level-10 milestone','Major','🟡 Forever beta / verify'],
-[15,'Look for a meaningful MH upgrade','Usable fast OH if available','Dungeon/quest/vendor review','High','🔵 Candidate'],
-[20,'MH checkpoint','OH checkpoint','Quest/dungeon/vendor review; verify Forever rewards','Major','🔵 Candidate'],
-[30,'Major midgame weapon review','OH review','Dungeon/quest progression; verify exact Forever itemization','Major','🟡 Verify'],
-[40,'Replace stale MH','Replace stale OH','Quest/dungeon progression','High','🟡 Verify'],
-[50,'Pre-60 MH plan','Pre-60 OH plan','BRD/late dungeon/quest progression','Major','🟡 Verify'],
-[55,'Final leveling MH check','Final leveling OH check','Late dungeon/quest progression','Major','🟡 Verify']
+[10,'Wingblade','—','<a href="https://www.wowhead.com/classic/quest=914/leaders-of-the-fang" target="_blank">Leaders of the Fang</a> in Wailing Caverns','10–18 • Sword','🔵 Classic / source data'],
+[10,'Blade of Cunning','—','Rogue class quest from trainer','Level 10 dagger checkpoint','🔵 Classic / source data'],
+[17,'Wingblade','Tail Spike','<a href="https://www.wowhead.com/classic/item=6448/tail-spike" target="_blank">Skum</a> in Wailing Caverns for Tail Spike','17–22 • Dagger option','🔵 Classic / source data'],
+[21,'Outlaw Sabre','Cruel Barb','<a href="https://www.wowhead.com/classic/quest=909/baron-aquanis" target="_blank">Baron Aquanis</a> quest in Ashenvale; Cruel Barb drops from <a href="https://www.wowhead.com/classic/npc=639/edwin-vancleef" target="_blank">Edwin VanCleef</a> in Deadmines','21–26 • Major sword window','🔵 Classic / source data'],
+[21,'Outlaw Sabre','Prison Shank','Outlaw Sabre from Baron Aquanis; Prison Shank drops from <a href="https://www.wowhead.com/classic/npc=1720/bruegal-ironknuckle" target="_blank">Bruegal Ironknuckle</a> in The Stockades','21–26 • Dagger option','🔵 Classic / source data'],
+[24,'Outlaw Sabre','Meteor Shard','Meteor Shard drops from <a href="https://www.wowhead.com/classic/npc=4275/archmage-arugal" target="_blank">Archmage Arugal</a> in Shadowfang Keep','24–28 • Dagger option','🔵 Classic / source data'],
+[30,'Swinetusk Shank','Swinetusk Shank','Drops from <a href="https://www.wowhead.com/classic/npc=4422/agathelos-the-raging" target="_blank">Agathelos the Raging</a> in Razorfen Kraul','30–36 • Dagger','🔵 Classic / source data'],
+[35,'Sword of Serenity','Sword of Omen','<a href="https://www.wowhead.com/classic/quest=1053/in-the-name-of-the-light" target="_blank">In the Name of the Light</a> or <a href="https://www.wowhead.com/classic/quest=1048/into-the-scarlet-monastery" target="_blank">Into the Scarlet Monastery</a> quest rewards','35–40 • Major sword window','🔵 Classic / source data'],
+[40,'Vanquisher’s Sword','Gut Ripper','<a href="https://www.wowhead.com/classic/quest=3636/bring-the-light" target="_blank">Bring the Light</a> quest in Razorfen Downs; Gut Ripper is a world-drop BoE','40–46 • Weapon window','🔵 Classic / source data'],
+[46,'Thrash Blade','Gut Ripper','<a href="https://www.wowhead.com/classic/quest=7065/corruption-of-earth-and-seed" target="_blank">Corruption of Earth and Seed</a> in Maraudon; Gut Ripper remains a world-drop BoE option','46–50 • Major sword window','🔵 Classic / source data'],
+[50,'Thrash Blade','Barman Shanker','Barman Shanker drops from <a href="https://www.wowhead.com/classic/npc=9499/plugger-spazzring" target="_blank">Plugger Spazzring</a> in Blackrock Depths','50–58 • Dagger window','🔵 Classic / source data'],
+[51,'Krol Blade','Barman Shanker','Krol Blade is a world-drop BoE; Barman Shanker from Plugger Spazzring in BRD','51–60 • Sword / dagger options','🔵 Classic / source data'],
+[55,'Dal’Rend’s Sacred Charge','Barman Shanker','Dal’Rend’s Sacred Charge drops from <a href="https://www.wowhead.com/classic/npc=10429/warchief-rend-blackhand" target="_blank">Warchief Rend Blackhand</a> in Upper Blackrock Spire','55–60 • Major sword window','🔵 Classic / source data'],
+[58,'Dal’Rend’s Sacred Charge','Heartseeker / Felstriker','Heartseeker is crafted by Blacksmith; Felstriker drops from Warchief Rend Blackhand in UBRS','58–60 • Final dagger options','🔵 Classic / source data']
 ];
 const state={r:+localStorage.getItem('level')||1,s:+localStorage.getItem('shamanLevel')||1,timerStart:+localStorage.getItem('timerStart')||0,timerAccum:+localStorage.getItem('timerAccum')||0};
 function band(n){return bands.find(x=>n>=x[0]&&n<=x[1])||bands[bands.length-1]}
