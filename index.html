@@ -38,11 +38,12 @@
 
 
 <section id="macros" class="tab">
-<div class="card"><h2>⌨️ Rogue Macro Quick Reference</h2>
-<p class="muted">Copy/paste macros for the things you actually need while leveling, questing, PvP and running dungeons. These are Classic-client / current Forever-beta candidates; test them in beta before making them core binds.</p>
-<div class="note">💡 <b>Auto Loot:</b> Turn on Auto Loot for the Target + Pick Pocket macro. Pick Pocket requires Stealth or Vanish and works on eligible targets.</div>
-<div class="grid" id="macroGrid"></div>
+<div class="card"><h2>⌨️ Macro Quick Reference</h2>
+<p class="muted">Separated by character so you can find the button you need immediately. These are Classic-client / current Forever-beta candidates; test them in beta before making them core binds.</p>
+<div class="note">💡 <b>Rogue:</b> Auto Loot should be enabled for the Target + Pick Pocket macro. <b>Shaman:</b> mouseover healing keeps the Rogue targeted while you heal. Forever spell names/mechanics can change during beta.</div>
 </div>
+<div class="card" style="margin-top:14px"><h2>🗡️ Rogue Macros</h2><div class="grid" id="rogueMacroGrid"></div></div>
+<div class="card" style="margin-top:14px"><h2>🌊 Shaman Macros</h2><div class="grid" id="shamanMacroGrid"></div></div>
 </section>
 \n<section id="weapons" class="tab"><div class="card"><h2>🗡️ Weapon & Gear Progression</h2><p>Exact Forever rewards are kept separate from legacy references. ShadowPanther is a research source for Rogue power-leveling and gear progression; Forever verification wins whenever the two differ. <a href="https://www.shadowpanther.net/" target="_blank">ShadowPanther</a></p>
 <div class="note">🟢 Forever verified = confirmed in current Forever data • 🟡 Forever beta = seen during testing • 🔵 Classic / ShadowPanther = candidate reference • 🔴 Needs verification</div>
@@ -173,10 +174,14 @@ const macros=[
 
 const state={r:+localStorage.getItem('level')||1,s:+localStorage.getItem('shamanLevel')||1,timerStart:+localStorage.getItem('timerStart')||0,timerAccum:+localStorage.getItem('timerAccum')||0};
 
-function renderMacros(){
-  const grid=document.getElementById('macroGrid');
+function renderMacroGroup(gridId, group){
+  const grid=document.getElementById(gridId);
   if(!grid)return;
-  grid.innerHTML=macros.map((m,i)=>'<div class="card" style="display:flex;flex-direction:column;gap:9px"><div><span class="badge">'+m[0]+'</span> <b>'+m[1]+'</b></div><div class="muted">'+m[2]+'</div><div class="tiny">'+m[3]+'</div><textarea id="macro'+i+'" class="engine-input" rows="6" readonly style="font-family:Consolas,monospace;resize:vertical">'+m[4].replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea><button onclick="copyMacro('+i+')">📋 Copy Macro</button></div>').join('');
+  grid.innerHTML=group.map(m=>'<div class="card" style="display:flex;flex-direction:column;gap:9px"><div><span class="badge">'+m[0]+'</span> <b>'+m[1]+'</b></div><div class="muted">'+m[2]+'</div><div class="tiny">'+m[3]+'</div><textarea id="macro'+m[5]+'" class="engine-input" rows="6" readonly style="font-family:Consolas,monospace;resize:vertical">'+m[4].replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea><button onclick="copyMacro('+m[5]+')">📋 Copy Macro</button></div>').join('');
+}
+function renderMacros(){
+  renderMacroGroup('rogueMacroGrid', macros.filter(m=>m[6]==='rogue'));
+  renderMacroGroup('shamanMacroGrid', macros.filter(m=>m[6]==='shaman'));
 }
 function copyMacro(i){
   const el=document.getElementById('macro'+i);
