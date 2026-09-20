@@ -7,7 +7,7 @@
 a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><body>
 <header><h1>🗡️ WoW Forever — Rogue + Shaman 1–60</h1><div class="muted">Veteran checkpoint companion • Undead Rogue + Troll Shaman • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div></header>
 <nav id="nav">
-<button type="button" class="tab-button active" data-tab="dash" onclick="setTab('dash');return false">⚔️ Command Center</button><button type="button" class="tab-button" data-tab="route" onclick="setTab('route');return false">🧭 Checkpoints</button><button type="button" class="tab-button" data-tab="rogue" onclick="setTab('rogue');return false">🗡️ Rogue</button><button type="button" class="tab-button" data-tab="shaman" onclick="setTab('shaman');return false">🌊 Shaman</button><button type="button" class="tab-button" data-tab="duo" onclick="setTab('duo');return false">🤝 Duo</button><button type="button" class="tab-button" data-tab="macros" onclick="setTab('macros');return false">⌨️ Macros</button><button type="button" class="tab-button" data-tab="weapons" onclick="setTab('weapons');return false">🗡️ Weapons</button><button type="button" class="tab-button" data-tab="dungeons" onclick="setTab('dungeons');return false">🏰 Dungeons</button><button type="button" class="tab-button" data-tab="prof" onclick="setTab('prof');return false">⛏️ Professions</button><button type="button" class="tab-button" data-tab="pvp" onclick="setTab('pvp');return false">⚔️ World PvP</button><button type="button" class="tab-button" data-tab="check" onclick="setTab('check');return false">☑ Checklist</button>
+<button type="button" class="tab-button active" data-tab="dash" onclick="setTab('dash');return false">⚔️ Command Center</button><button type="button" class="tab-button" data-tab="route" onclick="setTab('route');return false">🧭 Checkpoints</button><button type="button" class="tab-button" data-tab="rogue" onclick="setTab('rogue');return false">🗡️ Rogue</button><button type="button" class="tab-button" data-tab="shaman" onclick="setTab('shaman');return false">🌊 Shaman</button><button type="button" class="tab-button" data-tab="duo" onclick="setTab('duo');return false">🤝 Duo</button><button type="button" class="tab-button" data-tab="macros" onclick="setTab('macros');return false">⌨️ Macros</button><button type="button" class="tab-button" data-tab="weapons" onclick="setTab('weapons');return false">🗡️ Weapons</button><button type="button" class="tab-button" data-tab="dungeons" onclick="setTab('dungeons');return false">🏰 Dungeons</button><button type="button" class="tab-button" data-tab="prof" onclick="setTab('prof');return false">⛏️ Professions</button><button type="button" class="tab-button" data-tab="pvp" onclick="setTab('pvp');return false">⚔️ World PvP</button><button type="button" class="tab-button" data-tab="gold" onclick="setTab('gold');return false">💰 Gold Farms</button><button type="button" class="tab-button" data-tab="check" onclick="setTab('check');return false">☑ Checklist</button>
 </nav><main>
 
 <section id="dash" class="tab active">
@@ -88,6 +88,42 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <tr><td>40–50</td><td>ZF / Maraudon</td><td>Good for quest/gear overlap.</td><td>Do not force if travel is bad.</td><td>🟡 Verify Forever data</td></tr>
 <tr><td>50–60</td><td>BRD / LBRS / Scholo / Strat / Blackmaw / Shaper’s Terrace</td><td>Quest density and late gear become increasingly important.</td><td>Build deliberate quest stacks.</td><td>🟡 Verify Forever data</td></tr>
 </tbody></table></div></div></section>
+
+<section id="gold" class="tab">
+<div class="card"><h2>💰 Gold Farms</h2>
+<p class="muted">The money tab. Farm where the mobs, materials, vendor trash and rare-drop upside actually make sense for your current level. The goal is not “best farm at 60” — it is <b>best money opportunity you can exploit right now</b>.</p>
+<div class="grid">
+<div><span class="muted">Current Rogue</span><br><span id="goldRogueLevel" class="stat">1</span></div>
+<div><span class="muted">Current Shaman</span><br><span id="goldShamanLevel" class="stat">1</span></div>
+<div><span class="muted">Farm window</span><br><b id="goldWindow">1–10</b></div>
+<div><span class="muted">Priority</span><br><b id="goldPriority">Route-synced</b></div>
+</div>
+<div id="goldNow" class="mission"></div>
+</div>
+
+<div class="grid" style="margin-top:14px">
+<div class="card"><h3>🔥 Farm radar</h3><div id="goldRadar"></div></div>
+<div class="card"><h3>💎 Rare-drop watch</h3><div id="goldRareWatch"></div></div>
+</div>
+
+<div class="card" style="margin-top:14px"><h3>🧭 Gold Farm Database</h3>
+<p class="tiny">Use this as a living database. <b>🟢 Verified</b> means confirmed in Forever data; <b>🟡 Beta/candidate</b> means worth testing; <b>🔵 Classic reference</b> means the farm is a known Classic-style money route but Forever loot/economy may differ. Rare recipes, schematics and BoEs should only be marked high-value after a Forever drop is confirmed.</p>
+<div class="grid" style="margin-bottom:12px">
+<input id="goldSearch" class="search" placeholder="Search zone, mob, material, recipe, drop...">
+<select id="goldFilter" class="engine-select"><option value="all">All farm types</option><option value="humanoid">Humanoids / cloth</option><option value="beast">Beasts / leather</option><option value="elemental">Elementals / reagents</option><option value="mining">Mining / nodes</option><option value="rare">Rare drops / recipes</option><option value="dungeon">Dungeon / boss</option></select>
+</div>
+<div style="overflow:auto"><table><thead><tr><th>Level</th><th>Area</th><th>Mob / target</th><th>What you farm</th><th>Why it can pay</th><th>Rare-drop / recipe watch</th><th>Class fit</th><th>Confidence</th></tr></thead><tbody id="goldRows"></tbody></table></div>
+</div>
+
+<div class="card" style="margin-top:14px"><h3>🧠 Gold rules for this Rogue + Shaman</h3>
+<div class="grid">
+<div><b>🗡️ Rogue</b><p>Pick Pocket humanoids, skin beasts, mine nodes and use Stealth to check rare spawns without wasting travel time. If a farm is cloth-heavy, Pick Pocket adds extra value.</p></div>
+<div><b>🌊 Shaman</b><p>Herbalism turns travel into money. Alchemy should convert high-demand herbs into useful consumables rather than automatically selling every herb raw.</p></div>
+<div><b>🤝 Duo</b><p>Do not split into two weak farms. If both characters can gather from the same route, the shared farm usually beats a theoretical solo gold-per-hour number.</p></div>
+<div><b>⚠️ Forever rule</b><p>Do not assume a Classic drop is still rare, valuable or even present. Forever has reworked itemization and added new recipes/loot, so the database needs live beta confirmation before calling something “BIS” or “jackpot.”</p></div>
+</div>
+</div>
+</section>
 
 <section id="prof" class="tab">
 <div class="card"><h2>⛏️ Professions & Rogue Lockpicking</h2>
@@ -387,17 +423,60 @@ document.getElementById('current').innerHTML='<div class="grid"><div><span class
 document.getElementById('rogueNow').innerHTML='<b>Level '+state.r+' — '+band(state.r)[2]+'</b><p>'+cp(state.r)[2]+'</p><span class="confidence">'+cp(state.r)[6]+'</span>';
 document.getElementById('shamanNow').innerHTML='<b>Level '+state.s+' — '+band(state.s)[2]+'</b><p>'+cp(state.s)[3]+'</p><span class="confidence">'+cp(state.s)[6]+'</span>';
 document.getElementById('duoNow').innerHTML='<b>Level '+shared+' — '+b[2]+'</b><p>'+c[4]+'</p><p><b>Next:</b> '+next[5]+'</p><span class="confidence">'+c[6]+'</span>';
-renderRows();renderTonight();renderTimer()}
+renderRows();renderTonight();renderGold();renderTimer()}
 function renderRows(){const q=(document.getElementById('filter').value||'').toLowerCase();const shared=Math.min(state.r,state.s);document.getElementById('rows').innerHTML=checkpoints.filter(x=>(x.join(' ').toLowerCase().includes(q))).map(x=>'<tr class="'+(x[0]===shared?'now':'')+'"><td><b>'+x[0]+'</b>'+(x[0]===shared?' <span class="badge">NOW</span>':'')+'</td><td><b>'+x[1]+'</b><br><span class="muted">'+band(x[0])[2]+'</span></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td><td>'+x[6]+'</td></tr>').join('')}
 function renderTonight(){const n=state.r,sh=state.s,m=document.getElementById('mode').value,b=band(n),c=cp(Math.min(n,sh));let items=[];if(m==='solo')items=[c[2],'Use the next practical weapon checkpoint as the gear filter.'];else if(m==='trio')items=['Use Mage control to accelerate difficult pulls.',c[2],c[3]];else items=[c[2],c[3],c[4]];if(m==='dungeon'||document.getElementById('group').value==='Yes')items.push('Dungeon check: stack quests before committing.');if(m==='pvp'||document.getElementById('pvpIntensity').value==='High')items.push('PvP: take fights that intersect the route; do not chase.');if(m==='speed')items.push('Speed: skip low-value detours and move to the next hub.');document.getElementById('tonight').innerHTML='<b>🎯 '+m+' — Level '+n+' — '+b[2]+'</b><div class="grid" style="margin-top:10px">'+items.map((x,i)=>'<div><span class="badge">'+(i+1)+'</span> '+x+'</div>').join('')+'</div><div class="note"><b>Next big checkpoint:</b> '+(checkpoints.find(x=>x[0]>Math.min(n,sh))||checkpoints[checkpoints.length-1])[5]+'</div>'}
 function renderWeapons(){document.getElementById('weaponRows').innerHTML=weapons.map(x=>'<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td></tr>').join('')}
+const goldFarms=[
+[1,10,'Tirisfal Glades','Scarlet / nearby humanoids','humanoid','Cloth, vendor trash, greens, Pick Pocket','Good early cash while leveling; no dedicated travel.','No specific Forever jackpot confirmed yet.','Rogue + Shaman','🔵 Classic route'],
+[8,14,'The Barrens','Kolkar / Razormane humanoids','humanoid','Cloth, greens, coin, humanoid loot','Strong because the Rogue can Pick Pocket while the Shaman gathers nearby herbs.','Watch for any Forever recipe/world-drop reports before camping a rare.','Rogue + Shaman','🔵 Classic route'],
+[10,16,'The Barrens','Savannah / plains beasts','beast','Leather, hides, vendor trash','Skinning turns normal quest kills into extra gold without changing route.','Rare world drops should be recorded only after Forever confirmation.','Rogue + Shaman','🔵 Classic route'],
+[10,20,'The Barrens','Copper / Tin routes','mining','Ore and stone','Mining can beat mob grinding when nodes overlap the leveling route.','Track any Forever ore recipe demand in the AH.','Rogue','🟡 Forever economy check'],
+[12,18,'The Barrens','Harpies / humanoids','humanoid','Cloth, coin, greens, vendor loot','Dense packs make a good short-session farm and support Pick Pocket.','Recipe/pattern watch — verify exact Forever drops.','Rogue + Shaman','🔵 Classic reference'],
+[15,22,'Silverpine Forest','Humanoids around the quest hubs','humanoid','Cloth, coin, greens, Pick Pocket','Easy to combine with Horde leveling and first dungeon prep.','Watch for rare BoE/recipe drops reported by beta players.','Rogue + Shaman','🔵 Classic reference'],
+[18,26,'Hillsbrad Foothills','Humanoids / farmers / syndicate-style camps','humanoid','Cloth, coin, greens','Humanoid density is ideal for Rogue Pick Pocket plus normal kills.','High-value world-drop watch; confirm exact Forever item sources.','Rogue + Shaman','🟡 Candidate'],
+[20,28,'Wetlands','Raptors / crocolisks','beast','Medium leather, vendor loot, meat','Good Skinning route with relatively simple pulls.','Rare leatherworking/pattern drops are a watch item, not confirmed here.','Rogue + Shaman','🔵 Classic reference'],
+[20,30,'Ashenvale','Satyrs / humanoid camps','humanoid','Cloth, coin, greens','Humanoids can produce both normal loot and Pick Pocket value.','Recipe/pattern watch; exact Forever drop tables need confirmation.','Rogue + Shaman','🟡 Candidate'],
+[24,30,'Wetlands','Excavation Site / nearby mobs','dungeon','Quest loot, boss loot, new Forever items','Dungeon farming can be worthwhile when a drop is also an upgrade or a rare market item.','Forever new loot exists here; do not label a specific jackpot without a confirmed drop.','Rogue + Shaman','🟡 Beta'],
+[28,36,'Thousand Needles','Elementals / beasts / mining route','elemental','Elemental reagents, leather, ore','Multiple gathering streams can stack on one route.','Watch for profession recipes that consume the local reagents.','Rogue + Shaman','🟡 Candidate'],
+[30,40,'Stranglethorn Vale','Tigers / Panthers / Raptors','beast','Leather, hides, meat, greens','Excellent Skinning density and naturally fits Rogue leveling.','Rare BOE/recipe watch; confirm Forever changes before calling BIS.','Rogue + Shaman','🔵 Classic reference'],
+[32,40,'Stranglethorn Vale','Humanoid camps','humanoid','Cloth, coin, greens, Pick Pocket','Dense humanoid packs give the Rogue several ways to monetize each kill.','Recipe/pattern/BOE watch.','Rogue + Shaman','🟡 Candidate'],
+[35,45,'Badlands','Elementals / beasts / mining circuit','elemental','Elemental materials, ore, leather','Good hybrid farm because Mining + Skinning both have targets nearby.','Profession demand may be stronger than raw mob gold.','Rogue + Shaman','🟡 Candidate'],
+[40,50,'Tanaris','Wastewander humanoids','humanoid','Cloth, coin, greens, Pick Pocket','Classic-style humanoid farm with strong Rogue synergy.','Recipe/BOE watch; verify Forever loot table.','Rogue + Shaman','🔵 Classic reference'],
+[40,50,'Feralas','Yetis / beasts','beast','Thick leather, hides, vendor loot','Skinning-focused farm with useful vendor/material income.','Leatherworking recipe demand can change the value dramatically.','Rogue + Shaman','🔵 Classic reference'],
+[45,55,'The Hinterlands','Beasts / trolls / gathering circuit','beast','Leather, cloth, herbs, greens','Good mixed farm for a duo that wants both mobs and gathering.','Watch rare recipe and BOE reports.','Rogue + Shaman','🟡 Candidate'],
+[50,60,'Eastern Plaguelands','Undead / humanoids','humanoid','Runecloth, coin, greens, vendor trash','Late-game humanoid density plus Rogue utility.','High-level world-drop/recipe watch; verify exact Forever sources.','Rogue + Shaman','🔵 Classic reference'],
+[50,60,'Burning Steppes','Blackrock humanoids','humanoid','Runecloth, coin, greens, Pick Pocket','Classic-style Rogue farm: humanoids plus stealth utility.','Recipe/BOE jackpot potential should be tied to confirmed Forever data.','Rogue + Shaman','🔵 Classic reference'],
+[55,60,'Blackrock Depths','Dungeon humanoids / bosses','dungeon','Dungeon loot, Dark Iron-style materials, coin, recipes','Excellent when the farm also produces upgrades, quests or profession value.','Forever Blueprint drops are tied to specific dungeon bosses, but exact boss mappings are still being established.','Rogue + Shaman','🟡 Beta'],
+[55,60,'Late-game gathering circuit','Thorium / high-level herbs','mining','Ore, stone, high-demand profession materials','Mining remains useful all the way to 60 and can outperform pure mob grinding when material demand spikes.','Watch new Forever recipes and profession systems for demand spikes.','Rogue','🟡 Beta']
+];
+function goldFit(x,n){return n>=x[0]&&n<=x[1]}
+function renderGold(){
+  const n=Math.min(state.r,state.s);
+  const q=(document.getElementById('goldSearch').value||'').toLowerCase();
+  const type=document.getElementById('goldFilter').value;
+  const active=goldFarms.filter(x=>goldFit(x,n)||n>=x[0]-2&&n<=x[1]+2);
+  const filtered=active.filter(x=>(type==='all'||x[4]===type)&&x.join(' ').toLowerCase().includes(q));
+  document.getElementById('goldRogueLevel').textContent=state.r;
+  document.getElementById('goldShamanLevel').textContent=state.s;
+  const best=active.find(x=>x[4]==='mining'||x[4]==='humanoid'||x[4]==='beast')||active[0];
+  document.getElementById('goldWindow').textContent=best?(best[0]+'–'+best[1]):'No indexed farm';
+  document.getElementById('goldPriority').textContent=best?'Farm only if it overlaps the route':'Gather naturally';
+  document.getElementById('goldNow').innerHTML=best?'<b>💰 At level '+n+': '+best[2]+'</b><p><b>'+best[3]+'</b> — '+best[6]+'</p><p><b>Watch:</b> '+best[7]+'</p><span class="confidence">'+best[8]+'</span>':'No current farm indexed yet.';
+  const radar=active.slice(0,4).map((x,i)=>'<div style="margin:8px 0"><span class="badge">'+(i+1)+'</span> <b>'+x[2]+'</b> — '+x[1]+'<br><span class="muted">'+x[5]+'</span></div>').join('');
+  document.getElementById('goldRadar').innerHTML=radar||'<span class="muted">No matching farm in the current level window.</span>';
+  const rare=active.filter(x=>x[4]==='rare'||x[7].toLowerCase().includes('recipe')||x[7].toLowerCase().includes('boe')||x[7].toLowerCase().includes('jackpot')).slice(0,5);
+  document.getElementById('goldRareWatch').innerHTML=rare.length?rare.map(x=>'<div style="margin:8px 0"><b>'+x[2]+'</b> — '+x[7]+'<br><span class="tiny">'+x[1]+' • '+x[8]+'</span></div>').join(''):'<span class="muted">No specific jackpot is verified for this level yet. Keep an eye on rare BoEs, recipes and Forever-only drops.</span>';
+  document.getElementById('goldRows').innerHTML=filtered.map(x=>'<tr><td><b>'+x[0]+'–'+x[1]+'</b></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[5]+'</td><td>'+x[6]+'</td><td>'+x[7]+'</td><td>'+x[8]+'</td><td>'+x[9]+'</td></tr>').join('')||'<tr><td colspan="8">No farms match the current filter.</td></tr>';
+}
+
 function save(){localStorage.setItem('level',state.r);localStorage.setItem('shamanLevel',state.s)}
 function renderTimer(){let s=state.timerAccum+(state.timerStart?Math.floor((Date.now()-state.timerStart)/1000):0);document.getElementById('timer').textContent=[Math.floor(s/3600),Math.floor(s/60)%60,s%60].map(x=>String(x).padStart(2,'0')).join(':')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){e.preventDefault();setTab(b.dataset.go)}});
-document.getElementById('rSlider').addEventListener('input',e=>{state.r=e.target.valueAsNumber;save();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');render()});document.getElementById('rSlider').addEventListener('change',e=>{state.r=e.target.valueAsNumber;save();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');render()});document.getElementById('sSlider').addEventListener('input',e=>{state.s=e.target.valueAsNumber;save();renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');render()});document.getElementById('sSlider').addEventListener('change',e=>{state.s=e.target.valueAsNumber;save();renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');render()});document.getElementById('filter').oninput=renderRows;document.getElementById('build').onclick=renderTonight;['mode','time','group','pvpIntensity'].forEach(id=>document.getElementById(id).onchange=renderTonight);
+document.getElementById('rSlider').addEventListener('input',e=>{state.r=e.target.valueAsNumber;save();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');render()});document.getElementById('rSlider').addEventListener('change',e=>{state.r=e.target.valueAsNumber;save();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');render()});document.getElementById('sSlider').addEventListener('input',e=>{state.s=e.target.valueAsNumber;save();renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');render()});document.getElementById('sSlider').addEventListener('change',e=>{state.s=e.target.valueAsNumber;save();renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');render()});document.getElementById('filter').oninput=renderRows;document.getElementById('goldSearch').oninput=renderGold;document.getElementById('goldFilter').onchange=renderGold;document.getElementById('build').onclick=renderTonight;['mode','time','group','pvpIntensity'].forEach(id=>document.getElementById(id).onchange=renderTonight);
 document.getElementById('start').onclick=()=>{if(!state.timerStart)state.timerStart=Date.now();localStorage.setItem('timerStart',state.timerStart);clearInterval(window.ti);window.ti=setInterval(renderTimer,1000);renderTimer()};
 document.getElementById('stop').onclick=()=>{if(state.timerStart){state.timerAccum+=Math.floor((Date.now()-state.timerStart)/1000);state.timerStart=0}localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',state.timerAccum);clearInterval(window.ti);renderTimer()};
 document.getElementById('reset').onclick=()=>{state.timerStart=0;state.timerAccum=0;localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',0);clearInterval(window.ti);renderTimer()};
 const sections=['1–10 — foundation','10–20 — first dungeon/gear window','20–30 — sustained duo','30–40 — midgame weapon phase','40–50 — transition','50–60 — pre-60 push'];document.getElementById('checks').innerHTML=sections.map((s,i)=>'<div class="card" style="margin-bottom:12px"><h3>'+s+'</h3>'+['Route complete','Weapon checkpoint checked','Dungeon quests stacked','Professions checked','Consumables checked','PvP opportunity considered'].map((x,j)=>'<label class="check"><input type="checkbox" data-k="c'+i+j+'">'+x+'</label>').join('')+'</div>').join('');document.querySelectorAll('[data-k]').forEach(x=>{x.checked=localStorage.getItem(x.dataset.k)==='1';x.onchange=()=>localStorage.setItem(x.dataset.k,x.checked?'1':'0')});
-renderWeapons();renderMacros();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
+renderWeapons();renderMacros();renderGold();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
 </script></body></html>
