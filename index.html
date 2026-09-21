@@ -100,9 +100,7 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div class="card" style="margin-top:14px"><h2>🗡️ Rogue Macros</h2><div class="grid" id="rogueMacroGrid"></div></div>
 <div class="card" style="margin-top:14px"><h2>🌊 Shaman Macros</h2><div class="grid" id="shamanMacroGrid"></div></div>
 </section>
-<section id="weapons" class="tab"><div class="card"><h2>🗡️ Weapon & Gear Progression</h2><p>Weapon progression is organized around practical leveling checkpoints across the available Rogue weapon types.</p>
-<div class="note">🟢 Forever verified = confirmed in current Forever data • 🟡 Forever beta = seen during testing • 🔵 Classic / ShadowPanther = candidate reference • 🔴 Needs verification</div>
-<div style="overflow:auto"><table><thead><tr><th>Level</th><th>Rogue MH</th><th>Rogue OH</th><th>Source / reason</th><th>Priority</th><th>Confidence</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div></section>
+<section id="weapons" class="tab"><div class="card"><h2>🗡️ Rogue Weapon Checkpoints</h2><p class="muted">Same checkpoint style as Shaman Gear: show only what matters <b>right now</b>, then the <b>next</b> and <b>next-next</b> weapon windows. No giant item list.</p><div class="grid"><div><span class="muted">Rogue level</span><br><span id="weaponRogueLevel" class="stat">1</span></div><div><span class="muted">Build</span><br><b>Combat / PvP</b></div><div><span class="muted">Current focus</span><br><b>Main-hand damage + useful off-hand</b></div><div><span class="muted">Weapon types</span><br><b>Daggers • Fists • Swords • Axes • Maces</b></div></div><div id="weaponNow" class="mission"></div></div><div class="card"><h3>🗡️ Current → Next → Next Next</h3><p class="tiny">“Current” means the latest checkpoint at or below your Rogue level. Future rows are the next two checkpoints worth watching. These are candidate references until the exact Forever loot table is verified.</p><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Priority</th><th>Weapon options</th><th>Where it comes from</th><th>Why it matters</th><th>Status</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div><div class="card"><h3>⚠️ Weapon Rules</h3><div class="grid"><div><b>Do not wait on the perfect drop</b><p>Use a real upgrade when it appears. The checkpoint is the reminder to check, not a requirement to farm.</p></div><div><b>Main hand first</b><p>For Combat, compare main-hand damage first, then make the off-hand useful. Keep a dagger available if your build uses Backstab/Mutilate.</p></div><div><b>Forever changed the weapon pool</b><p>Rogues can use One-Handed Axes in Forever, and weapon-family effects are consolidated into Hack and Slash rather than the old separate specialization talents.</p></div><div><b>Source confidence matters</b><p>Forever is re-itemized, so Classic item names and sources are shown as candidates rather than guaranteed Forever drops.</p></div></div></div></section>
 
 <section id="dungeons" class="tab"><div class="card"><h2>🏰 Dungeon Quest Stacking</h2><p class="muted">Stack the quests before you commit. Check them off as the duo picks them up; the tracker survives refreshes.</p><div class="quest-stacker" style="margin-top:14px;padding:15px;background:#1a1a1a;border-radius:8px;border:1px solid #333"><h3 style="margin-top:0">🌋 Ragefire Chasm Stack</h3><p class="tiny">Forever beta data currently records <b>6 RFC quests</b>. The exact quest levels differ from the old Classic presentation, so use the tracker below as the current beta checklist.</p><div id="rfcQuestList"></div><div style="margin-top:15px"><span class="tiny">Dungeon Readiness: </span><progress id="rfc-progress" value="0" max="6" style="width:100%;height:8px"></progress><div id="rfcProgressText" class="tiny" style="margin-top:5px"></div></div></div><div style="overflow:auto;margin-top:14px"><table><thead><tr><th>Window</th><th>Dungeon</th><th>Why check it</th><th>Duo action</th><th>Confidence</th></tr></thead><tbody>
 <tr class="beta-content"><td>13–18</td><td>Ragefire Chasm</td><td><b>First Horde dungeon check.</b> Forever beta data shows 6 quests, including the Lost Satchel chain, Testing an Enemy’s Strength and boss/objective quests.</td><td><b>Stack RFC first.</b> Check Thunder Bluff, Orgrimmar and Undercity chains; loot the Lost Satchel inside for its follow-up.</td><td>🟢 Beta quest data</td></tr>
@@ -502,7 +500,32 @@ document.getElementById('duoNow').innerHTML='<b>Level '+shared+' — '+b[2]+'</b
 renderRows();renderTonight();renderGold();renderProf();renderTimer()}
 function renderRows(){const q=(document.getElementById('filter').value||'').toLowerCase();const shared=Math.min(state.r,state.s);document.getElementById('rows').innerHTML=checkpoints.filter(x=>(x.join(' ').toLowerCase().includes(q))).map(x=>'<tr class="'+(x[0]===shared?'now':'')+'"><td><b>'+x[0]+'</b>'+(x[0]===shared?' <span class="badge">NOW</span>':'')+'</td><td><b>'+x[1]+'</b><br><span class="muted">'+band(x[0])[2]+'</span></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td><td>'+x[6]+'</td></tr>').join('')}
 function renderTonight(){const n=state.r,sh=state.s,m=document.getElementById('mode').value,b=band(n),c=cp(Math.min(n,sh));let items=[];if(m==='solo')items=[c[2],'Use the next practical weapon checkpoint as the gear filter.'];else if(m==='trio')items=['Use Mage control to accelerate difficult pulls.',c[2],c[3]];else items=[c[2],c[3],c[4]];if(m==='dungeon'||document.getElementById('group').value==='Yes')items.push('Dungeon check: stack quests before committing.');if(m==='pvp'||document.getElementById('pvpIntensity').value==='High')items.push('PvP: take fights that intersect the route; do not chase.');if(m==='speed')items.push('Speed: skip low-value detours and move to the next hub.');document.getElementById('tonight').innerHTML='<b>🎯 '+m+' — Level '+n+' — '+b[2]+'</b><div class="grid" style="margin-top:10px">'+items.map((x,i)=>'<div><span class="badge">'+(i+1)+'</span> '+x+'</div>').join('')+'</div><div class="note"><b>Next big checkpoint:</b> '+(checkpoints.find(x=>x[0]>Math.min(n,sh))||checkpoints[checkpoints.length-1])[5]+'</div>'}
-function renderWeapons(){document.getElementById('weaponRows').innerHTML=weapons.map(x=>'<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td></tr>').join('')}
+function renderWeapons(){
+ const n=state.r;
+ const byLevel={};
+ weapons.forEach(x=>{(byLevel[x[0]]||(byLevel[x[0]]=[])).push(x)});
+ const levels=Object.keys(byLevel).map(Number).sort((a,b)=>a-b);
+ const currentLevels=levels.filter(x=>x<=n).slice(-1);
+ const futureLevels=levels.filter(x=>x>n).slice(0,2);
+ const selected=[...currentLevels,...futureLevels];
+ const labels=currentLevels.length?['CURRENT','NEXT','NEXT NEXT']:['NEXT','NEXT NEXT','FUTURE'];
+ document.getElementById('weaponRogueLevel').textContent=n;
+ const cur=currentLevels[0];
+ document.getElementById('weaponNow').innerHTML=cur
+  ? '<b>RIGHT NOW — Level '+n+'</b><p>Check the <b>'+byLevel[cur].map(x=>x[1]+' / '+x[2]).join(' • ')+'</b> checkpoint if you do not already have a comparable weapon. Your next planned checks are <b>'+futureLevels.map(x=>'level '+x).join(' and ')+'</b>.</p>'
+  : '<b>RIGHT NOW — Level '+n+'</b><p>Your first Rogue weapon checkpoint is level '+levels[0]+'. Do not worry about the full list; just watch the next three checkpoints.</p>';
+ document.getElementById('weaponRows').innerHTML=selected.map((lvl,i)=>{
+   const items=byLevel[lvl];
+   const mh=items.map(x=>x[1]).join(' / ');
+   const oh=[...new Set(items.map(x=>x[2]).filter(x=>x&&x!=='—'))].join(' / ')||'—';
+   const sources=[...new Set(items.map(x=>x[3]))].join('<br>');
+   const reasons=[...new Set(items.map(x=>x[4]))].join('<br>');
+   const status=labels[i]||'FUTURE';
+   const cls=status==='CURRENT'?'good':'';
+   return '<tr class="'+(status==='CURRENT'?'now':'')+'"><td><b>'+lvl+'</b></td><td><b class="'+cls+'">'+status+'</b></td><td><b>MH:</b> '+mh+'<br><b>OH:</b> '+oh+'</td><td>'+sources+'</td><td>'+reasons+'</td><td>🔵 Classic / candidate — verify Forever loot</td></tr>';
+ }).join('');
+}
+
 const professionRoute=[
 [1,9,'Tirisfal / starter zones','Train Mining + Skinning + First Aid + Cooking. Mine Copper and Stone; skin every quest beast. Keep Linen, Light Leather and early meat.','Buy/learn current trainer recipes. Do not spend gold chasing rare recipes yet.','Linen Cloth • Light Leather • Copper Ore • Rough Stone • early meats'],
 [10,14,'Silverpine / Barrens','Start building profession stock while leveling. Mine Tin/Copper; skin Light/Medium Leather; keep Wool/Linen.','Check the Horde Commerce Authority camp outside Crossroads when your route passes it.','Wool Cloth • Light/Medium Leather • Tin • Stone • cooking meat'],
