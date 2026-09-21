@@ -7,7 +7,7 @@
 a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><body>
 <header><h1>🗡️ WoW Forever — Rogue + Shaman 1–60</h1><div class="muted">Veteran checkpoint companion • Undead Rogue + Troll Shaman • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div><label style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 12px;background:#2d2d2d;border:1px solid var(--line);border-radius:7px;cursor:pointer"><input type="checkbox" id="beta-toggle" checked> Show Unverified Beta Data</label></header>
 <nav id="nav">
-<button type="button" class="tab-button active" data-tab="dash" onclick="setTab('dash');return false">⚔️ Command Center</button><button type="button" class="tab-button" data-tab="route" onclick="setTab('route');return false">🧭 Checkpoints</button><button type="button" class="tab-button" data-tab="rogue" onclick="setTab('rogue');return false">🗡️ Rogue</button><button type="button" class="tab-button" data-tab="shaman" onclick="setTab('shaman');return false">🌊 Shaman</button><button type="button" class="tab-button" data-tab="duo" onclick="setTab('duo');return false">🤝 Duo</button><button type="button" class="tab-button" data-tab="macros" onclick="setTab('macros');return false">⌨️ Macros</button><button type="button" class="tab-button" data-tab="weapons" onclick="setTab('weapons');return false">🗡️ Weapons</button><button type="button" class="tab-button" data-tab="dungeons" onclick="setTab('dungeons');return false">🏰 Dungeons</button><button type="button" class="tab-button" data-tab="prof" onclick="setTab('prof');return false">⛏️ Professions</button><button type="button" class="tab-button" data-tab="pvp" onclick="setTab('pvp');return false">⚔️ World PvP</button><button type="button" class="tab-button" data-tab="gold" onclick="setTab('gold');return false">💰 Gold Farms</button><button type="button" class="tab-button" data-tab="check" onclick="setTab('check');return false">☑ Checklist</button>
+<button type="button" class="tab-button active" data-tab="dash" onclick="setTab('dash');return false">⚔️ Command Center</button><button type="button" class="tab-button" data-tab="route" onclick="setTab('route');return false">🧭 Checkpoints</button><button type="button" class="tab-button" data-tab="rogue" onclick="setTab('rogue');return false">🗡️ Rogue</button><button type="button" class="tab-button" data-tab="shaman" onclick="setTab('shaman');return false">🌊 Shaman</button><button type="button" class="tab-button" data-tab="shamanGear" onclick="setTab('shamanGear');return false">🛡️ Shaman Gear</button><button type="button" class="tab-button" data-tab="duo" onclick="setTab('duo');return false">🤝 Duo</button><button type="button" class="tab-button" data-tab="macros" onclick="setTab('macros');return false">⌨️ Macros</button><button type="button" class="tab-button" data-tab="weapons" onclick="setTab('weapons');return false">🗡️ Weapons</button><button type="button" class="tab-button" data-tab="dungeons" onclick="setTab('dungeons');return false">🏰 Dungeons</button><button type="button" class="tab-button" data-tab="prof" onclick="setTab('prof');return false">⛏️ Professions</button><button type="button" class="tab-button" data-tab="pvp" onclick="setTab('pvp');return false">⚔️ World PvP</button><button type="button" class="tab-button" data-tab="gold" onclick="setTab('gold');return false">💰 Gold Farms</button><button type="button" class="tab-button" data-tab="check" onclick="setTab('check');return false">☑ Checklist</button>
 </nav><main>
 
 <section id="dash" class="tab active">
@@ -62,7 +62,30 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div class="grid" style="margin-top:14px">
 <div class="card"><h3>🩹 Resto priority</h3><p>Keep Healing Wave current, pick up Lesser Healing Wave at 20, Healing Stream Totem at 20, then Chain Heal at 40. Keep utility totems current even when the rank itself is not a healing upgrade.</p></div>
 <div class="card"><h3>🤝 Duo priority</h3><p>Heal the Rogue without chasing overheal. Use Earth Shock for interrupts, Earthbind for control, and the appropriate totem package for the pull.</p></div>
-</div></section>
+</div>
+<section id="shamanGear" class="tab">
+<div class="card"><h2>🛡️ Shaman Gear & Weapon Route</h2>
+<p class="muted">Resto-first gearing for the duo, with Enhancement and Elemental context. This is a checkpoint tool, not a generic BIS list.</p>
+<div class="grid">
+<div><span class="muted">Current level</span><br><span id="shamanGearLevel" class="stat">1</span></div>
+<div><span class="muted">Role</span><br><select id="shamanGearRole" class="engine-select"><option value="resto">Resto / Healer</option><option value="enh">Enhancement</option><option value="ele">Elemental</option></select></div>
+<div><span class="muted">Armor</span><br><b>Cloth / Leather from 1 • Mail at 40 • Shield from 1</b></div>
+<div><span class="muted">Weapons</span><br><b>Daggers • Fists • Axes • Maces • Staves • 2H Axes • 2H Maces</b></div>
+</div><div id="shamanGearNow" class="mission"></div></div>
+<div class="grid">
+<div class="card"><h3>🌊 Resto</h3><p><b>+Healing → Intellect → mana/regen → survivability.</b> Keep 1H + shield available for dungeon healing.</p></div>
+<div class="card"><h3>🪓 Enhancement</h3><p><b>Weapon damage first.</b> Forever has Two-Handed Mastery, making 2H checkpoints relevant.</p></div>
+<div class="card"><h3>⚡ Elemental</h3><p><b>Spell damage → Intellect → mana.</b> Healing/caster crossover is useful while Resto remains the duo role.</p></div>
+</div>
+<div class="card"><h3>🗡️ Weapon Checkpoints</h3><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Weapon / checkpoint</th><th>Resto</th><th>Enhancement</th><th>Status</th></tr></thead><tbody id="shamanGearRows"></tbody></table></div></div>
+<div class="card"><h3>🏰 Dungeon Gear Checks</h3><div id="shamanDungeonGear" class="grid"></div></div>
+<div class="card"><h3>⚠️ Gear Rules</h3><div class="grid">
+<div><b>Don't chase marginal upgrades</b><p>Use the next dungeon/zone checkpoint instead of repeatedly farming a low-level item.</p></div>
+<div><b>Separate sets when needed</b><p>Once dungeon healing is regular, keep a healing set and a melee/questing set.</p></div>
+<div><b>2H is real in Forever</b><p>Current Forever data lists Two-Handed Axes and Two-Handed Maces plus Two-Handed Mastery.</p></div>
+<div><b>Dual Wield stays unconfirmed</b><p>The current client table contains a Dual Wield row, but the Forever source explicitly says it is not confirmed.</p></div>
+</div></div>
+</section>
 
 <section id="duo" class="tab"><div class="card"><h2>🤝 Duo Command Center</h2><div class="grid"><div>Rogue<br><span id="duoRogueLevel" class="stat">1</span></div><div>Shaman<br><span id="duoShamanLevel" class="stat">1</span></div><div>Shared anchor<br><span id="duoAnchorLevel" class="stat">1</span></div><div>Status<br><b id="duoStatus">Together</b></div></div><div id="duoNow" class="mission"></div></div><div class="grid" style="margin-top:14px"><div class="card"><h3>🗡️ Rogue</h3><p>Control the pull, interrupt priority casts, and avoid unnecessary downtime. Scout before committing when PvP is active.</p></div><div class="card"><h3>🌊 Shaman</h3><p>Keep the Rogue moving with efficient healing, totems and controlled damage. Maintain a separate healing and questing gear mindset.</p></div><div class="card"><h3>🏰 Dungeon rule</h3><p>Stack quests first. Run when the dungeon overlaps the current route, reward, XP or gear opportunity.</p></div></div></section>
 
@@ -610,4 +633,39 @@ document.getElementById('stop').onclick=()=>{if(state.timerStart){state.timerAcc
 document.getElementById('reset').onclick=()=>{state.timerStart=0;state.timerAccum=0;localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',0);clearInterval(window.ti);renderTimer()};
 const sections=['1–10 — foundation','10–20 — first dungeon/gear window','20–30 — sustained duo','30–40 — midgame weapon phase','40–50 — transition','50–60 — pre-60 push'];document.getElementById('checks').innerHTML=sections.map((s,i)=>'<div class="card" style="margin-bottom:12px"><h3>'+s+'</h3>'+['Route complete','Weapon checkpoint checked','Dungeon quests stacked','Professions checked','Consumables checked','PvP opportunity considered'].map((x,j)=>'<label class="check"><input type="checkbox" data-k="c'+i+j+'">'+x+'</label>').join('')+'</div>').join('');document.querySelectorAll('[data-k]').forEach(x=>{x.checked=localStorage.getItem(x.dataset.k)==='1';x.onchange=()=>localStorage.setItem(x.dataset.k,x.checked?'1':'0')});
 renderWeapons();renderMacros();renderGold();renderProf();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');renderRFC();initPersistentSelects();initBetaToggle();render();const savedTab=localStorage.getItem('activeTab');if(savedTab&&document.getElementById(savedTab))setTab(savedTab);if(state.timerStart)window.ti=setInterval(renderTimer,1000);
+
+const shamanGearRows=[
+[1,19,'Best available staff or 1H + shield','Good healing crossover','Good questing option','🟢 Forever weapon categories'],
+[20,21,'2H axe / mace checkpoint','Usually keep 1H + shield for Resto','Check 2H access and weapon skill','🟢 Forever 2H access'],
+[22,28,'Crescent Staff candidate','Caster/healing crossover','Good historical 2H-style leveling candidate','🔵 Classic reference — verify Forever'],
+[29,36,'Corpsemaker candidate','Mostly questing/DPS crossover','Strong historical 2H checkpoint','🔵 Classic reference — verify Forever'],
+[37,38,'Ravager candidate','DPS only','Major historical 2H check','🔵 Classic reference — verify Forever'],
+[39,44,'Mograine’s Might candidate','Compare stats before replacing healing weapon','Strong historical weapon checkpoint','🔵 Classic reference — verify Forever'],
+[45,47,'Resurgence Rod candidate','High-priority caster/healing check','Low priority if staying Enhancement','🔵 Classic reference — verify Forever'],
+[48,50,'Gatorbite Axe / Maraudon weapon check','Role-dependent','Strong historical 2H candidate','🔵 Classic reference — verify Forever'],
+[49,54,'Princess Theradras’ Scepter candidate','Caster/healing crossover','Situational','🔵 Classic reference — verify Forever'],
+[51,60,'BRD / late-game weapon audit','Healing stats + shield for dungeons','High-damage 2H upgrades + Windfury breakpoints','🔵 Classic candidates — verify Forever']
+];
+const shamanGearDungeons=[
+['RFC','Stack the six recorded RFC quests first. Only stop for Shaman gear if it is a real upgrade.'],
+['Wailing Caverns','Check Crescent Staff candidate; do not force repeated runs.'],
+['Razorfen Kraul','Watch Corpsemaker for Enhancement and compare caster/healing rewards for Resto.'],
+['Scarlet Monastery','Armory is the major 30s 2H checkpoint; Cathedral adds another high-30s weapon check.'],
+['Maraudon','Check both healing/caster and 2H options; compare by role.'],
+['BRD','Late-game healing, weapon and profession overlap. Audit the Shaman separately from the Rogue.']
+];
+function renderShamanGear(){
+ const n=state.s,role=document.getElementById('shamanGearRole')?.value||'resto';
+ document.getElementById('shamanGearLevel').textContent=n;
+ document.getElementById('shamanGearNow').innerHTML=role==='resto'
+ ? '<b>RIGHT NOW — Resto</b><p>Prioritize +Healing and Intellect. Use 1H + shield for dungeon healing; keep a caster/questing weapon as a secondary option.</p>'
+ : role==='enh'
+ ? '<b>RIGHT NOW — Enhancement</b><p>Prioritize weapon damage. Check the current 2H checkpoint before spending gold; Forever has Two-Handed Mastery.</p>'
+ : '<b>RIGHT NOW — Elemental</b><p>Prioritize spell damage and Intellect. Keep healing/caster crossover pieces while the Shaman remains the duo healer.</p>';
+ document.getElementById('shamanGearRows').innerHTML=shamanGearRows.filter(x=>n>=x[0]-2&&n<=x[1]+4).map(x=>'<tr><td><b>'+x[0]+'–'+x[1]+'</b></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td></tr>').join('');
+ document.getElementById('shamanDungeonGear').innerHTML=shamanGearDungeons.map(x=>'<div><b>'+x[0]+'</b><p class="tiny">'+x[1]+'</p></div>').join('');
+}
+document.getElementById('shamanGearRole').onchange=renderShamanGear;
+
+renderShamanGear();
 </script></body></html>
