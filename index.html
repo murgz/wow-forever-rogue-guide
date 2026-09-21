@@ -108,7 +108,7 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div style="overflow:auto"><table><thead><tr><th>Level</th><th>Priority</th><th>Weapon options</th><th>Where it comes from</th><th>Why it matters</th><th>Status</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div>
 <div class="card"><h3>🛡️ Gear Checkpoint — Current → Next → Next Next</h3><p class="tiny">This is now level-driven. It tells you what kind of upgrade matters at your current stage instead of showing irrelevant level-60 Classic BiS names. Exact Forever item/drop data is still beta-dependent.</p><div id="rogueGearCheckpoint" class="grid"></div></div>
 <div class="card"><h3>🛡️ Gear Slot Audit</h3><p class="tiny">Use this as the slot checklist. Weapons remain separate because they are the most important upgrade; the other slots are only worth actively chasing when a meaningful route, dungeon, PvP or set-bonus upgrade appears.</p>
-<div style="overflow:auto"><table><thead><tr><th>Slot</th><th>Current / watch now</th><th>Next meaningful option</th><th>Future / BiS watch</th><th>Where to look</th></tr></thead><tbody id="rogueGearRows"></tbody></table></div></div>
+<div style="overflow:auto"><table><thead><tr><th>Slot</th><th>Current / watch now</th><th>Next meaningful option</th><th>Where to look</th></tr></thead><tbody id="rogueGearRows"></tbody></table></div></div>
 <div class="card"><h3>🎯 What matters for Combat / PvP</h3><div class="grid">
 <div><b>Weapons</b><p>Highest priority. Compare actual weapon damage, speed and useful stats; train the new weapon skill immediately.</p></div>
 <div><b>Shoulders</b><p>Do not skip them just because weapon upgrades are more important. Track major leather agility/stamina pieces and set-piece upgrades.</p></div>
@@ -572,9 +572,9 @@ function renderWeapons(){
  ['Waist','Agility/stamina belt','Shadowcraft Belt','Scholomance / Classic reference'],
  ['Legs','High-stat leather legs','Shadowcraft Pants','Stratholme / Classic reference'],
  ['Feet','Agility/stamina boots','Shadowcraft Boots','Scholomance / Classic reference'],
- ['Ring 1 / Ring 2','Use the best meaningful Agility / Stamina / Hit / Crit / Expertise ring you actually obtain','Check the next dungeon/quest ring','Endgame: compare proc/stat rings','Quest • dungeon • PvP • world drop'],
- ['Trinket 1 / Trinket 2','Use any real combat/PvP trinket upgrade','Watch dungeon/quest utility or damage trinkets','Endgame: proc/stat trinkets','Quest • dungeon • PvP • world drop'],
- ['Ranged','Keep a usable bow / gun / crossbow / thrown weapon','Replace when the route offers a clear upgrade','Endgame ranged utility is secondary','Quest • vendor • dungeon — verify Forever']
+ ['Ring 1 / Ring 2','Use the best meaningful Agility / Stamina / Hit / Crit / Expertise ring you actually obtain','Check the next dungeon/quest ring; later compare proc/stat rings','Quest • dungeon • PvP • world drop'],
+ ['Trinket 1 / Trinket 2','Use any real combat/PvP trinket upgrade','Watch dungeon/quest utility or damage trinkets; later compare proc/stat trinkets','Quest • dungeon • PvP • world drop'],
+ ['Ranged','Keep a usable bow / gun / crossbow / thrown weapon','Replace when the route offers a clear upgrade; endgame utility is secondary','Quest • vendor • dungeon — verify Forever']
  ];
  document.getElementById('rogueGearRows').innerHTML=gear.map(x=>'<tr><td><b>'+x[0]+'</b></td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td></tr>').join('');
 }
