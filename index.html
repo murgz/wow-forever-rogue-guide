@@ -5,7 +5,7 @@
 :root{--bg:#0b0f14;--panel:#151c24;--panel2:#1b2530;--line:#2c3947;--text:#edf2f7;--muted:#9aa8b6;--gold:#d9aa45;--blue:#68a7df;--green:#70cf91;--red:#e36b6b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Arial,sans-serif}header{padding:26px 5%;background:linear-gradient(135deg,#18212b,#0b0f14);border-bottom:1px solid var(--line)}h1{margin:0 0 5px;font-size:29px}h2{margin-top:0}h3{margin-top:0}.muted,.tiny{color:var(--muted)}.tiny{font-size:12px}nav{position:sticky;top:0;z-index:5;background:#10161d;border-bottom:1px solid var(--line);padding:9px 5%;display:flex;gap:7px;overflow:auto}button{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:7px;cursor:pointer}nav a.tab-nav{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:7px;text-decoration:none;white-space:nowrap}nav a.tab-nav.active,nav a.tab-nav:hover{border-color:var(--gold)}button.active,button:hover{border-color:var(--gold)}main{max-width:1280px;margin:24px auto;padding:0 18px}.tab{display:none}.tab.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.two{display:grid;grid-template-columns:2fr 1fr;gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}.stat{font-size:30px;color:var(--gold);font-weight:700}.progress{height:10px;background:#28323d;border-radius:10px;overflow:hidden}.bar{height:100%;background:var(--gold);width:0}table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--gold);background:#19222c}.search,.engine-input,.engine-select{width:100%;padding:10px;background:#090d12;border:1px solid var(--line);border-radius:7px;color:var(--text)}.check{display:flex;gap:9px;margin:8px 0}.note,.mission{border-left:3px solid var(--gold);padding:11px 14px;background:#171f27;margin:13px 0}.mission{border-color:var(--blue);background:#121b24}.badge{display:inline-block;background:#263341;border-radius:99px;padding:3px 8px;font-size:11px;margin:2px}.good{color:var(--green)}.confidence{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}.engine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.timer{font-size:34px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}.now{outline:2px solid var(--gold);outline-offset:-2px}@media(max-width:800px){.two{grid-template-columns:1fr}table{font-size:13px}}
 a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><body>
-<header><h1>🗡️ WoW Forever — Rogue + Shaman 1–60</h1><div class="muted">Veteran checkpoint companion • Undead Rogue + Troll Shaman • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div></header>
+<header><h1>🗡️ WoW Forever — Rogue + Shaman 1–60</h1><div class="muted">Veteran checkpoint companion • Undead Rogue + Troll Shaman • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div><label style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 12px;background:#2d2d2d;border:1px solid var(--line);border-radius:7px;cursor:pointer"><input type="checkbox" id="beta-toggle" checked> Show Unverified Beta Data</label></header>
 <nav id="nav">
 <button type="button" class="tab-button active" data-tab="dash" onclick="setTab('dash');return false">⚔️ Command Center</button><button type="button" class="tab-button" data-tab="route" onclick="setTab('route');return false">🧭 Checkpoints</button><button type="button" class="tab-button" data-tab="rogue" onclick="setTab('rogue');return false">🗡️ Rogue</button><button type="button" class="tab-button" data-tab="shaman" onclick="setTab('shaman');return false">🌊 Shaman</button><button type="button" class="tab-button" data-tab="duo" onclick="setTab('duo');return false">🤝 Duo</button><button type="button" class="tab-button" data-tab="macros" onclick="setTab('macros');return false">⌨️ Macros</button><button type="button" class="tab-button" data-tab="weapons" onclick="setTab('weapons');return false">🗡️ Weapons</button><button type="button" class="tab-button" data-tab="dungeons" onclick="setTab('dungeons');return false">🏰 Dungeons</button><button type="button" class="tab-button" data-tab="prof" onclick="setTab('prof');return false">⛏️ Professions</button><button type="button" class="tab-button" data-tab="pvp" onclick="setTab('pvp');return false">⚔️ World PvP</button><button type="button" class="tab-button" data-tab="gold" onclick="setTab('gold');return false">💰 Gold Farms</button><button type="button" class="tab-button" data-tab="check" onclick="setTab('check');return false">☑ Checklist</button>
 </nav><main>
@@ -79,14 +79,14 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div class="note">🟢 Forever verified = confirmed in current Forever data • 🟡 Forever beta = seen during testing • 🔵 Classic / ShadowPanther = candidate reference • 🔴 Needs verification</div>
 <div style="overflow:auto"><table><thead><tr><th>Level</th><th>Rogue MH</th><th>Rogue OH</th><th>Source / reason</th><th>Priority</th><th>Confidence</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div></section>
 
-<section id="dungeons" class="tab"><div class="card"><h2>🏰 Dungeon Quest Stacking</h2><p class="muted">Run dungeons because the quest stack, XP, reward or route timing makes sense—not because the guide says you have to.</p><div style="overflow:auto"><table><thead><tr><th>Window</th><th>Dungeon</th><th>Why check it</th><th>Duo action</th><th>Confidence</th></tr></thead><tbody>
-<tr><td>13–18</td><td>Ragefire Chasm</td><td><b>First Horde dungeon check.</b> Forever beta data shows 6 quests, with several chains/rewards tied to the run. Do not enter empty.</td><td><b>Stack the RFC quests first.</b> Check Thunder Bluff, Orgrimmar and Undercity chains; loot the Lost Satchel inside for its follow-up.</td><td>🟢 Beta quest data</td></tr>
-<tr><td>13–18</td><td>Hall of Thanes</td><td>New Forever Alliance dungeon; check quests/rewards as testing opens content.</td><td>Stack quests before queue/group.</td><td>🟢 Beta range</td></tr>
-<tr><td>15–20</td><td>Ruins of Lordaeron</td><td>New Forever dungeon; check quest density and rewards.</td><td>Run when both are in range and quests line up.</td><td>🟢 Blizzard range</td></tr>
-<tr><td>20–30</td><td>WC / BFD / Excavation Site</td><td>Use only when quest density or gear makes the run efficient.</td><td>Quest-stack first.</td><td>🟡 Verify rewards</td></tr>
-<tr><td>30–40</td><td>Scarlet Monastery / Drowned City</td><td>Strong midgame dungeon window.</td><td>Plan a dedicated stack if nearby.</td><td>🟡 Verify Forever data</td></tr>
-<tr><td>40–50</td><td>ZF / Maraudon</td><td>Good for quest/gear overlap.</td><td>Do not force if travel is bad.</td><td>🟡 Verify Forever data</td></tr>
-<tr><td>50–60</td><td>BRD / LBRS / Scholo / Strat / Blackmaw / Shaper’s Terrace</td><td>Quest density and late gear become increasingly important.</td><td>Build deliberate quest stacks.</td><td>🟡 Verify Forever data</td></tr>
+<section id="dungeons" class="tab"><div class="card"><h2>🏰 Dungeon Quest Stacking</h2><p class="muted">Stack the quests before you commit. Check them off as the duo picks them up; the tracker survives refreshes.</p><div class="quest-stacker" style="margin-top:14px;padding:15px;background:#1a1a1a;border-radius:8px;border:1px solid #333"><h3 style="margin-top:0">🌋 Ragefire Chasm Stack</h3><p class="tiny">Forever beta data currently records <b>6 RFC quests</b>. The exact quest levels differ from the old Classic presentation, so use the tracker below as the current beta checklist. citeturn0search1turn0search2</p><div id="rfcQuestList"></div><div style="margin-top:15px"><span class="tiny">Dungeon Readiness: </span><progress id="rfc-progress" value="0" max="6" style="width:100%;height:8px"></progress><div id="rfcProgressText" class="tiny" style="margin-top:5px"></div></div></div><div style="overflow:auto;margin-top:14px"><table><thead><tr><th>Window</th><th>Dungeon</th><th>Why check it</th><th>Duo action</th><th>Confidence</th></tr></thead><tbody>
+<tr class="beta-content"><td>13–18</td><td>Ragefire Chasm</td><td><b>First Horde dungeon check.</b> Forever beta data shows 6 quests, including the Lost Satchel chain, Testing an Enemy’s Strength and boss/objective quests. citeturn0search1turn0search2</td><td><b>Stack RFC first.</b> Check Thunder Bluff, Orgrimmar and Undercity chains; loot the Lost Satchel inside for its follow-up.</td><td>🟢 Beta quest data</td></tr>
+<tr class="beta-content"><td>13–18</td><td>Hall of Thanes</td><td>New Forever Alliance dungeon; check quests/rewards as testing opens content.</td><td>Stack quests before queue/group.</td><td>🟢 Beta range</td></tr>
+<tr class="beta-content"><td>15–20</td><td>Ruins of Lordaeron</td><td>New Forever dungeon; check quest density and rewards.</td><td>Run when both are in range and quests line up.</td><td>🟢 Beta range</td></tr>
+<tr class="beta-content"><td>20–30</td><td>WC / BFD / Excavation Site</td><td>Use only when quest density or gear makes the run efficient.</td><td>Quest-stack first.</td><td>🟡 Verify rewards</td></tr>
+<tr class="beta-content"><td>30–40</td><td>Scarlet Monastery / Drowned City</td><td>Strong midgame dungeon window.</td><td>Plan a dedicated stack if nearby.</td><td>🟡 Verify Forever data</td></tr>
+<tr class="beta-content"><td>40–50</td><td>ZF / Maraudon</td><td>Good for quest/gear overlap.</td><td>Do not force if travel is bad.</td><td>🟡 Verify Forever data</td></tr>
+<tr class="beta-content"><td>50–60</td><td>BRD / LBRS / Scholo / Strat / Blackmaw / Shaper’s Terrace</td><td>Quest density and late gear become increasingly important.</td><td>Build deliberate quest stacks.</td><td>🟡 Verify Forever data</td></tr>
 </tbody></table></div></div></section>
 
 <section id="gold" class="tab">
@@ -467,9 +467,50 @@ function renderGold(){
   document.getElementById('goldRadar').innerHTML=radar||'<span class="muted">No matching farm in the current level window.</span>';
   const rare=active.filter(x=>x[4]==='rare'||x[7].toLowerCase().includes('recipe')||x[7].toLowerCase().includes('boe')||x[7].toLowerCase().includes('jackpot')).slice(0,5);
   document.getElementById('goldRareWatch').innerHTML=rare.length?rare.map(x=>'<div style="margin:8px 0"><b>'+x[2]+'</b> — '+x[7]+'<br><span class="tiny">'+x[1]+' • '+x[8]+'</span></div>').join(''):'<span class="muted">No specific jackpot is verified for this level yet. Keep an eye on rare BoEs, recipes and Forever-only drops.</span>';
-  document.getElementById('goldRows').innerHTML=filtered.map(x=>'<tr><td><b>'+x[0]+'–'+x[1]+'</b></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[5]+'</td><td>'+x[6]+'</td><td>'+x[7]+'</td><td>'+x[8]+'</td><td>'+x[9]+'</td></tr>').join('')||'<tr><td colspan="8">No farms match the current filter.</td></tr>';
+  document.getElementById('goldRows').innerHTML=filtered.map(x=>'<tr class="'+(x[9].includes('Beta')||x[9].includes('Candidate')||x[9].includes('check')?'beta-content':'')+'"><td><b>'+x[0]+'–'+x[1]+'</b></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[5]+'</td><td>'+x[6]+'</td><td>'+x[7]+'</td><td>'+x[8]+'</td><td>'+x[9]+'</td></tr>').join('')||'<tr><td colspan="8">No farms match the current filter.</td></tr>';
 }
 
+const rfcQuests=[
+['Searching for the Lost Satchel','Thunder Bluff • find Maur Grimtotem inside RFC'],
+['Returning the Lost Satchel','Thunder Bluff • follow-up from the satchel found inside'],
+['Testing an Enemy\'s Strength','Thunder Bluff • kill 8 Ragefire Troggs + 8 Ragefire Shamans'],
+['Hidden Enemies','Orgrimmar • kill Bazzalan + Jergosh the Invoker'],
+['Slaying the Beast','Orgrimmar • kill Taragaman the Hungerer'],
+['The Power to Destroy...','Undercity • collect the two quest tomes']
+];
+function renderRFC(){
+  const wrap=document.getElementById('rfcQuestList'); if(!wrap)return;
+  wrap.innerHTML=rfcQuests.map((q,i)=>'<label style="display:block;margin-bottom:8px;cursor:pointer"><input type="checkbox" class="rfc-quest" data-rfc="'+i+'"> <b>'+q[0]+'</b> <span class="tiny">— '+q[1]+'</span></label>').join('');
+  document.querySelectorAll('.rfc-quest').forEach(cb=>{
+    cb.checked=localStorage.getItem('rfcQuest'+cb.dataset.rfc)==='1';
+    cb.addEventListener('change',()=>{localStorage.setItem('rfcQuest'+cb.dataset.rfc,cb.checked?'1':'0');updateRFCProgress()});
+  });
+  updateRFCProgress();
+}
+function updateRFCProgress(){
+  const boxes=[...document.querySelectorAll('.rfc-quest')],done=boxes.filter(x=>x.checked).length;
+  const p=document.getElementById('rfc-progress'); if(p)p.value=done;
+  const t=document.getElementById('rfcProgressText'); if(t)t.textContent=done+' / '+boxes.length+' quests stacked';
+}
+function initPersistentSelects(){
+  document.querySelectorAll('select').forEach(input=>{
+    const key=input.id||input.name;
+    if(!key)return;
+    const saved=localStorage.getItem('select:'+key);
+    if(saved!==null && [...input.options].some(o=>o.value===saved)) input.value=saved;
+    input.addEventListener('change',e=>localStorage.setItem('select:'+key,e.target.value));
+  });
+}
+function initBetaToggle(){
+  const toggle=document.getElementById('beta-toggle'); if(!toggle)return;
+  const saved=localStorage.getItem('beta-toggle');
+  toggle.checked=saved===null?true:saved==='1';
+  const apply=()=>{
+    localStorage.setItem('beta-toggle',toggle.checked?'1':'0');
+    document.querySelectorAll('.beta-content').forEach(el=>el.hidden=!toggle.checked);
+  };
+  toggle.addEventListener('change',apply); apply();
+}
 function save(){localStorage.setItem('level',state.r);localStorage.setItem('shamanLevel',state.s)}
 function renderTimer(){let s=state.timerAccum+(state.timerStart?Math.floor((Date.now()-state.timerStart)/1000):0);document.getElementById('timer').textContent=[Math.floor(s/3600),Math.floor(s/60)%60,s%60].map(x=>String(x).padStart(2,'0')).join(':')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){e.preventDefault();setTab(b.dataset.go)}});
@@ -478,5 +519,5 @@ document.getElementById('start').onclick=()=>{if(!state.timerStart)state.timerSt
 document.getElementById('stop').onclick=()=>{if(state.timerStart){state.timerAccum+=Math.floor((Date.now()-state.timerStart)/1000);state.timerStart=0}localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',state.timerAccum);clearInterval(window.ti);renderTimer()};
 document.getElementById('reset').onclick=()=>{state.timerStart=0;state.timerAccum=0;localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',0);clearInterval(window.ti);renderTimer()};
 const sections=['1–10 — foundation','10–20 — first dungeon/gear window','20–30 — sustained duo','30–40 — midgame weapon phase','40–50 — transition','50–60 — pre-60 push'];document.getElementById('checks').innerHTML=sections.map((s,i)=>'<div class="card" style="margin-bottom:12px"><h3>'+s+'</h3>'+['Route complete','Weapon checkpoint checked','Dungeon quests stacked','Professions checked','Consumables checked','PvP opportunity considered'].map((x,j)=>'<label class="check"><input type="checkbox" data-k="c'+i+j+'">'+x+'</label>').join('')+'</div>').join('');document.querySelectorAll('[data-k]').forEach(x=>{x.checked=localStorage.getItem(x.dataset.k)==='1';x.onchange=()=>localStorage.setItem(x.dataset.k,x.checked?'1':'0')});
-renderWeapons();renderMacros();renderGold();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
+renderWeapons();renderMacros();renderGold();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');renderRFC();initPersistentSelects();initBetaToggle();render();if(state.timerStart)window.ti=setInterval(renderTimer,1000);
 </script></body></html>
