@@ -7,7 +7,7 @@
 a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><body>
 <header><h1>🗡️ WoW Forever — Rogue + Shaman 1–60</h1><div class="muted">Veteran checkpoint companion • Undead Rogue + Troll Shaman • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div><label style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 12px;background:#2d2d2d;border:1px solid var(--line);border-radius:7px;cursor:pointer"><input type="checkbox" id="beta-toggle" checked> Show Unverified Beta Data</label></header>
 <nav id="nav">
-<button type="button" class="tab-button active" data-tab="dash" onclick="setTab('dash');return false">⚔️ Command Center</button><button type="button" class="tab-button" data-tab="route" onclick="setTab('route');return false">🧭 Checkpoints</button><button type="button" class="tab-button" data-tab="rogue" onclick="setTab('rogue');return false">🗡️ Rogue</button><button type="button" class="tab-button" data-tab="shaman" onclick="setTab('shaman');return false">🌊 Shaman</button><button type="button" class="tab-button" data-tab="shamanGear" onclick="setTab('shamanGear');return false">🛡️ Shaman Gear</button><button type="button" class="tab-button" data-tab="duo" onclick="setTab('duo');return false">🤝 Duo</button><button type="button" class="tab-button" data-tab="macros" onclick="setTab('macros');return false">⌨️ Macros</button><button type="button" class="tab-button" data-tab="weapons" onclick="setTab('weapons');return false">🗡️ Weapons</button><button type="button" class="tab-button" data-tab="dungeons" onclick="setTab('dungeons');return false">🏰 Dungeons</button><button type="button" class="tab-button" data-tab="prof" onclick="setTab('prof');return false">⛏️ Professions</button><button type="button" class="tab-button" data-tab="pvp" onclick="setTab('pvp');return false">⚔️ World PvP</button><button type="button" class="tab-button" data-tab="gold" onclick="setTab('gold');return false">💰 Gold Farms</button><button type="button" class="tab-button" data-tab="check" onclick="setTab('check');return false">☑ Checklist</button>
+<button type="button" class="tab-button active" data-tab="dash" onclick="setTab('dash');return false">⚔️ Command Center</button><button type="button" class="tab-button" data-tab="route" onclick="setTab('route');return false">🧭 Checkpoints</button><button type="button" class="tab-button" data-tab="rogue" onclick="setTab('rogue');return false">🗡️ Rogue</button><button type="button" class="tab-button" data-tab="rogueGear" onclick="setTab('rogueGear');return false">🛡️ Rogue Gear</button><button type="button" class="tab-button" data-tab="shaman" onclick="setTab('shaman');return false">🌊 Shaman</button><button type="button" class="tab-button" data-tab="shamanGear" onclick="setTab('shamanGear');return false">🛡️ Shaman Gear</button><button type="button" class="tab-button" data-tab="duo" onclick="setTab('duo');return false">🤝 Duo</button><button type="button" class="tab-button" data-tab="macros" onclick="setTab('macros');return false">⌨️ Macros</button><button type="button" class="tab-button" data-tab="dungeons" onclick="setTab('dungeons');return false">🏰 Dungeons</button><button type="button" class="tab-button" data-tab="prof" onclick="setTab('prof');return false">⛏️ Professions</button><button type="button" class="tab-button" data-tab="pvp" onclick="setTab('pvp');return false">⚔️ World PvP</button><button type="button" class="tab-button" data-tab="gold" onclick="setTab('gold');return false">💰 Gold Farms</button><button type="button" class="tab-button" data-tab="check" onclick="setTab('check');return false">☑ Checklist</button>
 </nav><main>
 
 <section id="dash" class="tab active">
@@ -100,7 +100,27 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div class="card" style="margin-top:14px"><h2>🗡️ Rogue Macros</h2><div class="grid" id="rogueMacroGrid"></div></div>
 <div class="card" style="margin-top:14px"><h2>🌊 Shaman Macros</h2><div class="grid" id="shamanMacroGrid"></div></div>
 </section>
-<section id="weapons" class="tab"><div class="card"><h2>🗡️ Rogue Weapon Checkpoints</h2><p class="muted">Same checkpoint style as Shaman Gear: show only what matters <b>right now</b>, then the <b>next</b> and <b>next-next</b> weapon windows. No giant item list.</p><div class="grid"><div><span class="muted">Rogue level</span><br><span id="weaponRogueLevel" class="stat">1</span></div><div><span class="muted">Build</span><br><b>Combat / PvP</b></div><div><span class="muted">Current focus</span><br><b>Main-hand damage + useful off-hand</b></div><div><span class="muted">Weapon types</span><br><b>Daggers • Fists • Swords • Axes • Maces</b></div></div><div id="weaponNow" class="mission"></div></div><div class="card"><h3>🗡️ Current → Next → Next Next</h3><p class="tiny">“Current” means the latest checkpoint at or below your Rogue level. Future rows are the next two checkpoints worth watching. These are candidate references until the exact Forever loot table is verified.</p><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Priority</th><th>Weapon options</th><th>Where it comes from</th><th>Why it matters</th><th>Status</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div><div class="card"><h3>⚠️ Weapon Rules</h3><div class="grid"><div><b>Do not wait on the perfect drop</b><p>Use a real upgrade when it appears. The checkpoint is the reminder to check, not a requirement to farm.</p></div><div><b>Main hand first</b><p>For Combat, compare main-hand damage first, then make the off-hand useful. Keep a dagger available if your build uses Backstab/Mutilate.</p></div><div><b>Forever changed the weapon pool</b><p>Rogues can use One-Handed Axes in Forever, and weapon-family effects are consolidated into Hack and Slash rather than the old separate specialization talents.</p></div><div><b>Source confidence matters</b><p>Forever is re-itemized, so Classic item names and sources are shown as candidates rather than guaranteed Forever drops.</p></div></div></div></section>
+<section id="rogueGear" class="tab"><div class="card"><h2>🛡️ Rogue Gear</h2>
+<p class="muted">Full Rogue gearing dashboard. <b>Weapons are the highest-priority checkpoint</b>, but this also tracks every armor/accessory slot so we do not miss a strong quest, dungeon, PvP or future BiS option.</p>
+<div class="grid"><div><span class="muted">Rogue level</span><br><span id="weaponRogueLevel" class="stat">1</span></div><div><span class="muted">Build</span><br><b>Combat / PvP</b></div><div><span class="muted">Weapon priority</span><br><b>MH → OH → ranged</b></div><div><span class="muted">Gear audit</span><br><b>All 13 equipment slots</b></div></div>
+<div id="weaponNow" class="mission"></div></div>
+<div class="card"><h3>🗡️ Weapons — Current → Next → Next Next</h3><p class="tiny">Weapons stay separate from the rest of the gear audit because a meaningful weapon upgrade can outweigh several small armor upgrades. Current = latest checkpoint at or below your level; then the next two checkpoints.</p>
+<div style="overflow:auto"><table><thead><tr><th>Level</th><th>Priority</th><th>Weapon options</th><th>Where it comes from</th><th>Why it matters</th><th>Status</th></tr></thead><tbody id="weaponRows"></tbody></table></div></div>
+<div class="card"><h3>🛡️ Gear Slot Audit</h3><p class="tiny">For non-weapon gear, show only meaningful checkpoints rather than every leveling green. Classic names below are candidate references because Forever has substantially re-itemized gear.</p>
+<div style="overflow:auto"><table><thead><tr><th>Slot</th><th>Current / watch now</th><th>Next meaningful option</th><th>Future / BiS watch</th><th>Where to look</th></tr></thead><tbody id="rogueGearRows"></tbody></table></div></div>
+<div class="card"><h3>🎯 What matters for Combat / PvP</h3><div class="grid">
+<div><b>Weapons</b><p>Highest priority. Compare actual weapon damage, speed and useful stats; train the new weapon skill immediately.</p></div>
+<div><b>Shoulders</b><p>Do not skip them just because weapon upgrades are more important. Track major leather agility/stamina pieces and set-piece upgrades.</p></div>
+<div><b>Head / Chest / Legs</b><p>Large armor/stat-budget slots. A strong quest or dungeon piece can be worth taking even when it is not a famous Classic item.</p></div>
+<div><b>Neck / Rings / Trinkets</b><p>Easy to overlook because they are not armor slots. Track meaningful Agility/AP/crit/hit/Expertise or proc upgrades as Forever itemization becomes verified.</p></div>
+<div><b>Cloak / Wrist / Belt / Boots</b><p>Usually smaller individual upgrades, but still worth checking when the route hands one to you.</p></div>
+<div><b>Ranged</b><p>Keep a current bow/gun/crossbow/thrown option. It is utility and pull/control gear, not a replacement for your melee weapon priority.</p></div>
+</div></div>
+<div class="card"><h3>⚠️ Forever Gear Rules</h3><div class="grid">
+<div><b>Do not blindly chase Classic BiS</b><p>Forever has redone boss loot tables, added new quest rewards and added new world-drop/rare-creature items.</p></div>
+<div><b>Keep the checkpoint philosophy</b><p>If the current item is good enough, do not spend an hour farming a marginal upgrade. Watch the next meaningful checkpoint instead.</p></div>
+<div><b>BiS is a future layer</b><p>Once Forever's level-60 loot tables stabilize, this tab can promote verified endgame pieces into explicit BiS checkpoints instead of relying on Classic lists.</p></div>
+</div></div></section>
 
 <section id="dungeons" class="tab"><div class="card"><h2>🏰 Dungeon Quest Stacking</h2><p class="muted">Stack the quests before you commit. Check them off as the duo picks them up; the tracker survives refreshes.</p><div class="quest-stacker" style="margin-top:14px;padding:15px;background:#1a1a1a;border-radius:8px;border:1px solid #333"><h3 style="margin-top:0">🌋 Ragefire Chasm Stack</h3><p class="tiny">Forever beta data currently records <b>6 RFC quests</b>. The exact quest levels differ from the old Classic presentation, so use the tracker below as the current beta checklist.</p><div id="rfcQuestList"></div><div style="margin-top:15px"><span class="tiny">Dungeon Readiness: </span><progress id="rfc-progress" value="0" max="6" style="width:100%;height:8px"></progress><div id="rfcProgressText" class="tiny" style="margin-top:5px"></div></div></div><div style="overflow:auto;margin-top:14px"><table><thead><tr><th>Window</th><th>Dungeon</th><th>Why check it</th><th>Duo action</th><th>Confidence</th></tr></thead><tbody>
 <tr class="beta-content"><td>13–18</td><td>Ragefire Chasm</td><td><b>First Horde dungeon check.</b> Forever beta data shows 6 quests, including the Lost Satchel chain, Testing an Enemy’s Strength and boss/objective quests.</td><td><b>Stack RFC first.</b> Check Thunder Bluff, Orgrimmar and Undercity chains; loot the Lost Satchel inside for its follow-up.</td><td>🟢 Beta quest data</td></tr>
@@ -512,18 +532,29 @@ function renderWeapons(){
  document.getElementById('weaponRogueLevel').textContent=n;
  const cur=currentLevels[0];
  document.getElementById('weaponNow').innerHTML=cur
-  ? '<b>RIGHT NOW — Level '+n+'</b><p>Check the <b>'+byLevel[cur].map(x=>x[1]+' / '+x[2]).join(' • ')+'</b> checkpoint if you do not already have a comparable weapon. Your next planned checks are <b>'+futureLevels.map(x=>'level '+x).join(' and ')+'</b>.</p>'
-  : '<b>RIGHT NOW — Level '+n+'</b><p>Your first Rogue weapon checkpoint is level '+levels[0]+'. Do not worry about the full list; just watch the next three checkpoints.</p>';
+  ? '<b>RIGHT NOW — Level '+n+'</b><p>Weapon checkpoint: <b>'+byLevel[cur].map(x=>x[1]+' / '+x[2]).join(' • ')+'</b>. If your current weapons are already comparable, keep leveling and watch the next two checkpoints: <b>'+futureLevels.map(x=>'level '+x).join(' and ')+'</b>.</p>'
+  : '<b>RIGHT NOW — Level '+n+'</b><p>Your first Rogue weapon checkpoint is level '+levels[0]+'. Watch the next three meaningful checkpoints.</p>';
  document.getElementById('weaponRows').innerHTML=selected.map((lvl,i)=>{
-   const items=byLevel[lvl];
-   const mh=items.map(x=>x[1]).join(' / ');
+   const items=byLevel[lvl], mh=items.map(x=>x[1]).join(' / ');
    const oh=[...new Set(items.map(x=>x[2]).filter(x=>x&&x!=='—'))].join(' / ')||'—';
-   const sources=[...new Set(items.map(x=>x[3]))].join('<br>');
-   const reasons=[...new Set(items.map(x=>x[4]))].join('<br>');
-   const status=labels[i]||'FUTURE';
-   const cls=status==='CURRENT'?'good':'';
-   return '<tr class="'+(status==='CURRENT'?'now':'')+'"><td><b>'+lvl+'</b></td><td><b class="'+cls+'">'+status+'</b></td><td><b>MH:</b> '+mh+'<br><b>OH:</b> '+oh+'</td><td>'+sources+'</td><td>'+reasons+'</td><td>🔵 Classic / candidate — verify Forever loot</td></tr>';
+   return '<tr class="'+(i===0?'now':'')+'"><td><b>'+lvl+'</b></td><td><b class="'+(i===0?'good':'')+'">'+(labels[i]||'FUTURE')+'</b></td><td><b>MH:</b> '+mh+'<br><b>OH:</b> '+oh+'</td><td>'+[...new Set(items.map(x=>x[3]))].join('<br>')+'</td><td>'+[...new Set(items.map(x=>x[4]))].join('<br>')+'</td><td>🔵 Classic / candidate — verify Forever loot</td></tr>';
  }).join('');
+ const gear=[
+ ['Head','Current quest/dungeon leather helmet','Shadowcraft Cap','Scholomance / Classic reference'],
+ ['Neck','Best quest/rep neck available','Mark of Fordring','Quest / Classic reference'],
+ ['Shoulders','Best Agility/Stamina leather shoulders','Shadowcraft Spaulders','Stratholme / Classic reference'],
+ ['Back','Agility cloak upgrade','Cape of the Black Baron','Scholomance / Classic reference'],
+ ['Chest','Strong leather chest from route','Shadowcraft Tunic','Upper Blackrock Spire / Classic reference'],
+ ['Wrists','Agility leather bracers','Shadowcraft Bracers','Scholomance / Classic reference'],
+ ['Hands','Agility/attack-stat gloves','Shadowcraft Gloves','Blackrock Spire / Classic reference'],
+ ['Waist','Agility/stamina belt','Shadowcraft Belt','Scholomance / Classic reference'],
+ ['Legs','High-stat leather legs','Shadowcraft Pants','Stratholme / Classic reference'],
+ ['Feet','Agility/stamina boots','Shadowcraft Boots','Scholomance / Classic reference'],
+ ['Ring 1 / Ring 2','Quest/dungeon stat rings','Band of Accuria / Quick Strike Ring','Molten Core / Classic reference'],
+ ['Trinket 1 / Trinket 2','Quest/dungeon proc or combat trinkets','Hand of Justice / Blackhand’s Breadth','BRD / quest / Classic reference'],
+ ['Ranged','Current bow/gun/crossbow/thrown upgrade','Best route-appropriate ranged weapon','Quest/vendor/dungeon — verify Forever']
+ ];
+ document.getElementById('rogueGearRows').innerHTML=gear.map(x=>'<tr><td><b>'+x[0]+'</b></td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td></tr>').join('');
 }
 
 const professionRoute=[
