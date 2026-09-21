@@ -79,7 +79,7 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div class="card"><h3>🪓 Enhancement</h3><p><b>Weapon damage first.</b> Current Forever data lists Two-Handed Axes and Two-Handed Maces as usable weapon categories; the old Two-Handed Axes and Maces talent is removed.</p></div>
 <div class="card"><h3>⚡ Elemental</h3><p><b>Spell damage → Intellect → mana.</b> Healing/caster crossover is useful while Resto remains the duo role.</p></div>
 </div>
-<div class="card"><h3>🛡️ Shield Checkpoints</h3><p class="tiny">The uploaded source includes a separate shield progression. These are Classic/Hardcore candidates and still need Forever loot verification.</p><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Shield</th><th>Status</th></tr></thead><tbody id="shamanShieldRows"></tbody></table></div></div><div class="card"><h3>🗡️ Weapon Checkpoints</h3><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Weapon / checkpoint</th><th>Resto</th><th>Enhancement</th><th>Status</th></tr></thead><tbody id="shamanGearRows"></tbody></table></div></div>
+<div class="card"><h3>🛡️ Shield Checkpoints</h3><p class="tiny">The uploaded source includes a separate shield progression. These are Classic/Hardcore candidates and still need Forever loot verification.</p><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Shield</th><th>Status</th></tr></thead><tbody id="shamanShieldRows"></tbody></table></div></div><div class="card"><h3>🗡️ Weapon Checkpoints</h3><div style="overflow:auto"><table><thead><tr><th>Level</th><th>Weapon / checkpoint</th><th>Where it comes from</th><th>Resto</th><th>Enhancement</th><th>Status</th></tr></thead><tbody id="shamanGearRows"></tbody></table></div></div>
 <div class="card"><h3>🏰 Dungeon Gear Checks</h3><div id="shamanDungeonGear" class="grid"></div></div>
 <div class="card"><h3>⚠️ Gear Rules</h3><div class="grid">
 <div><b>Don't chase marginal upgrades</b><p>Use the next dungeon/zone checkpoint instead of repeatedly farming a low-level item.</p></div>
@@ -637,20 +637,20 @@ const sections=['1–10 — foundation','10–20 — first dungeon/gear window',
 renderWeapons();renderMacros();renderGold();renderProf();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');renderRFC();initPersistentSelects();initBetaToggle();render();const savedTab=localStorage.getItem('activeTab');if(savedTab&&document.getElementById(savedTab))setTab(savedTab);if(state.timerStart)window.ti=setInterval(renderTimer,1000);
 
 const shamanGearRows=[
-[1,8,'Walking Stick / early staff candidates','Use best Int/Spirit caster weapon available; shield is valid from 1','Use best weapon damage available','🔵 Uploaded Classic/Hardcore reference'],
-[9,12,'Jagged Dagger / Compact Fighting Knife / Pointed Axe','Compare caster stats; 1H + shield is the dungeon-safe setup','Use the best weapon damage and upgrade weapon skill','🔵 Uploaded Classic/Hardcore reference'],
-[13,15,'Cauldron Stirrer / Hammer of Orgrimmar / Staff of Orgrimmar','Check RFC rewards before replacing a healing setup','RFC is the first major weapon checkpoint','🔵 Uploaded Classic/Hardcore reference'],
-[18,21,'Harpy Skinner / Wind Rider Staff / Zhovur Axe','Keep 1H + shield available for Resto','Check 2H options if questing as Enhancement','🔵 Uploaded Classic/Hardcore reference'],
-[20,24,'Crescent Staff','Caster/healing crossover candidate','Useful 2H leveling candidate','🔵 Uploaded Classic/Hardcore reference'],
-[22,28,'Demolition Hammer / Callous Axe / Blurred Axe','Compare stats before replacing a healing weapon','Prioritize weapon damage; 2H is available in current Forever tables','🔵 Classic reference + 🟢 Forever weapon category'],
-[29,34,'Corpsemaker / Midnight Axe / Bleeding Crescent','Role-dependent; keep shield setup for healing','Major historical 2H checkpoints','🔵 Uploaded Classic/Hardcore reference'],
-[34,38,'Skullbreaker / Windstorm Hammer / Skullsplitter','Caster/healing stats can outweigh raw weapon DPS for Resto','Compare 2H axe/mace upgrades against current weapon','🔵 Uploaded Classic/Hardcore reference'],
-[38,41,'Black Water Hammer / Silent Hunter / Silver Spade / Cragwood Maul','Check healing/caster stats and shield','Strong midgame 2H checkpoint','🔵 Uploaded Classic/Hardcore reference'],
-[41,46,'Tok’kar’s Murloc Chopper / Nimboya’s Mystical Staff / Staff of Lore','Choose the better healing/caster package','Check 2H weapon damage and speed','🔵 Uploaded Classic/Hardcore reference'],
-[46,50,'Force of the Hippogryph / Will of the Mountain Giant','High-priority caster/healing comparison','High-value 2H checkpoint','🔵 Uploaded Classic/Hardcore reference'],
-[48,54,'Gatorbite Axe / Princess Theradras’ Scepter / Beastslayer','Dungeon healing set remains the priority for the duo','Strong late-level 2H candidates','🔵 Classic reference — verify Forever loot'],
-[50,60,'Axe of Ebon Drake / Blitzcleaver / Beastsmasher / Belgrom’s Hammer','Audit +Healing/Intellect, shield and mana gear together','Upgrade 2H whenever the weapon is a real damage gain','🔵 Uploaded Classic/Hardcore reference'],
-[55,60,'Hunt Tracker Blade / late-game dungeon weapons','Maintain a dedicated healing weapon + shield set','Audit BRD/LBRS/Scholo and world-drop upgrades','🔵 Classic reference — verify Forever loot']
+[1,8,'Walking Stick / early staff candidates','Vendor — low-level weapon vendors','Use best Int/Spirit caster weapon available; shield is valid from 1','Use the best weapon damage available','🔵 Classic/Hardcore source'],
+[9,12,'Jagged Dagger / Compact Fighting Knife / Pointed Axe','Weapon vendors / quest rewards in the uploaded Classic-Hardcore list','Compare caster stats; 1H + shield is the dungeon-safe setup','Use the best weapon damage and upgrade weapon skill','🔵 Classic/Hardcore source'],
+[13,15,'Cauldron Stirrer / Hammer of Orgrimmar / Staff of Orgrimmar','Cauldron Stirrer — Barrens quest; Hammer/Staff — RFC Hidden Enemies quest','Check RFC rewards before replacing a healing setup','RFC is the first major weapon checkpoint','🔵 Classic/Hardcore source'],
+[18,21,'Harpy Skinner / Wind Rider Staff / Zhovur Axe','Harpy Skinner — quest/loot candidate; Wind Rider Staff — Barrens “Cry of the Thunderhawk”; Zhovur Axe — Barrens “Serena Bloodfeather”','Keep 1H + shield available for Resto','Check 2H options if questing as Enhancement','🔵 Classic/Hardcore source'],
+[20,24,'Crescent Staff','Wailing Caverns — “Leaders of the Fang” quest reward','Caster/healing crossover candidate','Useful 2H leveling candidate','🔵 Classic/Hardcore source'],
+[22,28,'Demolition Hammer / Callous Axe / Blurred Axe','Demolition Hammer — Barrens “Weapons of Choice”; Callous/Blurred Axe — quest/vendor candidates','Compare stats before replacing a healing weapon','Prioritize weapon damage; 2H is available in current Forever tables','🔵 Classic/Hardcore source'],
+[29,34,'Corpsemaker / Midnight Axe / Bleeding Crescent','Corpsemaker — RFK, Overlord Ramtusk; Midnight Axe — vendor; Bleeding Crescent — quest reward candidate','Role-dependent; keep shield setup for healing','Major historical 2H checkpoints','🔵 Classic/Hardcore source'],
+[34,38,'Skullbreaker / Windstorm Hammer / Skullsplitter','Skullbreaker/Windstorm Hammer — dungeon/quest candidates; Skullsplitter — Arathi “Call to Arms” quest reward','Caster/healing stats can outweigh raw weapon DPS for Resto','Compare 2H axe/mace upgrades against current weapon','🔵 Classic/Hardcore source'],
+[38,41,'Black Water Hammer / Silent Hunter / Silver Spade / Cragwood Maul','Quest/dungeon/vendor rewards in the Classic-Hardcore progression','Check healing/caster stats and shield','Strong midgame 2H checkpoint','🔵 Classic/Hardcore source'],
+[41,46,'Tok’kar’s Murloc Chopper / Nimboya’s Mystical Staff / Staff of Lore','Tok’kar’s — Swamp of Sorrows “Threat from the Sea”; Nimboya’s/Staff of Lore — quest rewards','Choose the better healing/caster package','Check 2H weapon damage and speed','🔵 Classic/Hardcore source'],
+[46,50,'Force of the Hippogryph / Will of the Mountain Giant','Quest/dungeon rewards in the Classic-Hardcore progression','High-priority caster/healing comparison','High-value 2H checkpoint','🔵 Classic/Hardcore source'],
+[48,54,'Gatorbite Axe / Princess Theradras’ Scepter / Beastslayer','Maraudon / late-game quest and dungeon rewards','Dungeon healing set remains the priority for the duo','Strong late-level 2H candidates','🔵 Classic reference — verify Forever loot'],
+[50,60,'Axe of Ebon Drake / Blitzcleaver / Beastsmasher / Belgrom’s Hammer','Late-game quest/dungeon/rare-drop candidates from the Classic-Hardcore source','Audit +Healing/Intellect, shield and mana gear together','Upgrade 2H whenever the weapon is a real damage gain','🔵 Classic/Hardcore source'],
+[55,60,'Hunt Tracker Blade / late-game dungeon weapons','Late-game quest/dungeon rewards; exact Forever source must be checked','Maintain a dedicated healing weapon + shield set','Audit BRD/LBRS/Scholo and world-drop upgrades','🔵 Classic reference — verify Forever loot']
 ];
 
 const shamanShieldRows=[
@@ -680,7 +680,7 @@ function renderShamanGear(){
  : role==='enh'
  ? '<b>RIGHT NOW — Enhancement</b><p>Prioritize weapon damage. Current Forever data lists 2H axes and 2H maces as usable weapon categories, while the old Two-Handed Axes and Maces talent has been removed.</p>'
  : '<b>RIGHT NOW — Elemental</b><p>Prioritize spell damage and Intellect. Keep healing/caster crossover pieces while the Shaman remains the duo healer.</p>';
- document.getElementById('shamanGearRows').innerHTML=shamanGearRows.filter(x=>n>=x[0]-2&&n<=x[1]+4).map(x=>'<tr><td><b>'+x[0]+'–'+x[1]+'</b></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td></tr>').join('');
+ document.getElementById('shamanGearRows').innerHTML=shamanGearRows.filter(x=>n>=x[0]-2&&n<=x[1]+4).map(x=>'<tr><td><b>'+x[0]+'–'+x[1]+'</b></td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+x[5]+'</td><td>'+x[6]+'</td></tr>').join('');
  document.getElementById('shamanDungeonGear').innerHTML=shamanGearDungeons.map(x=>'<div><b>'+x[0]+'</b><p class="tiny">'+x[1]+'</p></div>').join('');
  const shield=document.getElementById('shamanShieldRows');
  if(shield) shield.innerHTML=shamanShieldRows.filter(x=>n>=x[0]-2&&n<=x[0]+4).map(x=>'<tr><td><b>'+x[0]+'</b></td><td>'+x[1]+'</td><td>🔵 Uploaded Classic/Hardcore reference</td></tr>').join('');
