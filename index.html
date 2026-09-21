@@ -4,7 +4,8 @@
 <style>
 :root{--bg:#0b0f14;--panel:#151c24;--panel2:#1b2530;--line:#2c3947;--text:#edf2f7;--muted:#9aa8b6;--gold:#d9aa45;--blue:#68a7df;--green:#70cf91;--red:#e36b6b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Arial,sans-serif}header{padding:26px 5%;background:linear-gradient(135deg,#18212b,#0b0f14);border-bottom:1px solid var(--line)}h1{margin:0 0 5px;font-size:29px}h2{margin-top:0}h3{margin-top:0}.muted,.tiny{color:var(--muted)}.tiny{font-size:12px}nav{position:sticky;top:0;z-index:5;background:#10161d;border-bottom:1px solid var(--line);padding:9px 5%;display:flex;gap:7px;overflow:auto}button{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:7px;cursor:pointer}nav a.tab-nav{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:7px;text-decoration:none;white-space:nowrap}nav a.tab-nav.active,nav a.tab-nav:hover{border-color:var(--gold)}button.active,button:hover{border-color:var(--gold)}main{max-width:1280px;margin:24px auto;padding:0 18px}.tab{display:none}.tab.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.two{display:grid;grid-template-columns:2fr 1fr;gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}.stat{font-size:30px;color:var(--gold);font-weight:700}.progress{height:10px;background:#28323d;border-radius:10px;overflow:hidden}.bar{height:100%;background:var(--gold);width:0}table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--gold);background:#19222c}.search,.engine-input,.engine-select{width:100%;padding:10px;background:#090d12;border:1px solid var(--line);border-radius:7px;color:var(--text)}.check{display:flex;gap:9px;margin:8px 0}.note,.mission{border-left:3px solid var(--gold);padding:11px 14px;background:#171f27;margin:13px 0}.mission{border-color:var(--blue);background:#121b24}.badge{display:inline-block;background:#263341;border-radius:99px;padding:3px 8px;font-size:11px;margin:2px}.good{color:var(--green)}.confidence{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}.engine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.timer{font-size:34px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}.now{outline:2px solid var(--gold);outline-offset:-2px}@media(max-width:800px){.two{grid-template-columns:1fr}table{font-size:13px}}
-a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><body>
+a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} 
+.talent-toolbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:12px 0}.talent-toolbar button{font-weight:700}.talent-points{font-size:18px;color:var(--gold);font-weight:700}.talent-trees{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.talent-tree{background:#10161d;border:1px solid var(--line);border-radius:10px;padding:12px}.talent-tree h4{margin:0 0 9px;color:var(--gold)}.talent-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:7px 0}.talent-node{min-height:72px;padding:7px;border:1px solid var(--line);border-radius:8px;background:#17202a;color:var(--text);text-align:left;font-size:12px;cursor:pointer}.talent-node:hover{border-color:var(--gold)}.talent-node.locked{opacity:.42;cursor:not-allowed}.talent-node.selected{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}.talent-node .tn{display:block;font-weight:700}.talent-node .tr{display:block;color:var(--gold);margin-top:3px}.talent-node .req{display:block;color:var(--muted);font-size:10px;margin-top:3px}.talent-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin-top:12px}.talent-summary .card{padding:11px}.talent-next{border-left:3px solid var(--blue);padding:10px 12px;background:#121b24;margin-top:12px}.talent-source{font-size:11px;color:var(--muted);margin-top:9px}@media(max-width:900px){.talent-trees{grid-template-columns:1fr}.talent-row{grid-template-columns:repeat(2,minmax(0,1fr))}}</style></head><body>
 <header><h1>🗡️ WoW Forever — Rogue + Shaman 1–60</h1><div class="muted">Veteran checkpoint companion • Undead Rogue + Troll Shaman • Combat / Resto • World PvP • Mining + Skinning → Engineering • Herbalism + Alchemy</div><label style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 12px;background:#2d2d2d;border:1px solid var(--line);border-radius:7px;cursor:pointer"><input type="checkbox" id="beta-toggle" checked> Show Unverified Beta Data</label></header>
 <nav id="nav">
 <button type="button" class="tab-button active" data-tab="dash" onclick="setTab('dash');return false">⚔️ Command Center</button><button type="button" class="tab-button" data-tab="route" onclick="setTab('route');return false">🧭 Checkpoints</button><button type="button" class="tab-button" data-tab="rogue" onclick="setTab('rogue');return false">🗡️ Rogue</button><button type="button" class="tab-button" data-tab="rogueGear" onclick="setTab('rogueGear');return false">🛡️ Rogue Gear</button><button type="button" class="tab-button" data-tab="shaman" onclick="setTab('shaman');return false">🌊 Shaman</button><button type="button" class="tab-button" data-tab="shamanGear" onclick="setTab('shamanGear');return false">🛡️ Shaman Gear</button><button type="button" class="tab-button" data-tab="duo" onclick="setTab('duo');return false">🤝 Duo</button><button type="button" class="tab-button" data-tab="macros" onclick="setTab('macros');return false">⌨️ Macros</button><button type="button" class="tab-button" data-tab="dungeons" onclick="setTab('dungeons');return false">🏰 Dungeons</button><button type="button" class="tab-button" data-tab="prof" onclick="setTab('prof');return false">⛏️ Professions</button><button type="button" class="tab-button" data-tab="pvp" onclick="setTab('pvp');return false">⚔️ World PvP</button><button type="button" class="tab-button" data-tab="gold" onclick="setTab('gold');return false">💰 Gold Farms</button><button type="button" class="tab-button" data-tab="legacy" onclick="setTab('legacy');return false">🏛️ Legacy</button><button type="button" class="tab-button" data-tab="check" onclick="setTab('check');return false">☑ Checklist</button>
@@ -45,6 +46,13 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div class="grid" style="margin-top:14px">
 <div class="card"><h3>🗡️ Weapon check</h3><p>At every major upgrade, check <b>Weapons</b>. Forever Rogues can use daggers, fist weapons, swords, axes, maces, bows, crossbows, guns and thrown weapons; Dual Wield is available at 10.</p></div>
 <div class="card"><h3>🧪 Rogue maintenance</h3><p>Keep poisons, First Aid and Lockpicking moving. Pickpocket humanoids while questing. Train weapon skills on the route instead of letting a new weapon sit unused.</p></div>
+</div><div class="card" id="rogueTalentPlanner" style="margin-top:14px">
+<h3>🌳 Forever Rogue Talent Planner</h3>
+<p class="muted">Full adjustable Forever tree. Points unlock at level 10. Click ranks to spend/remove points; <b>Recommended</b> loads the leveling + PvP-leaning Combat/Subtlety path we are using for this character.</p>
+<div class="talent-toolbar"><span class="talent-points" id="rogueTalentPoints"></span><button type="button" id="rogueTalentRecommended">⭐ Recommended</button><button type="button" id="rogueTalentReset">↺ Reset</button><span class="tiny">51 points at 60 • 1 point per level from 10–60</span></div>
+<div id="rogueTalentNext" class="talent-next"></div><div id="rogueTalentTrees" class="talent-trees"></div>
+<div class="talent-summary" id="rogueTalentSummary"></div>
+<div class="talent-source">Tree structure and talent names/ranks: Wowhead WoW: Forever calculator; current preview data is beta and can change. Effect text is intentionally not guessed where the current source is uncertain.</div>
 </div></section>
 
 <section id="shaman" class="tab">
@@ -63,7 +71,14 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff} </style></head><b
 <div class="card"><h3>🩹 Resto priority</h3><p>Keep Healing Wave current, pick up Lesser Healing Wave at 20, Healing Stream Totem at 20, then Chain Heal at 40. Keep utility totems current even when the rank itself is not a healing upgrade.</p></div>
 <div class="card"><h3>🤝 Duo priority</h3><p>Heal the Rogue without chasing overheal. Use Earth Shock for interrupts, Earthbind for control, and the appropriate totem package for the pull.</p></div>
 </div>
-</section>
+<div class="card" id="shamanTalentPlanner" style="margin-top:14px">
+<h3>🌳 Forever Shaman Talent Planner</h3>
+<p class="muted">Full adjustable Forever tree. Resto is the default duo path, with an Enhancement foundation for efficient leveling and a little PvP utility. Click ranks to customize it.</p>
+<div class="talent-toolbar"><span class="talent-points" id="shamanTalentPoints"></span><button type="button" id="shamanTalentRecommended">⭐ Recommended</button><button type="button" id="shamanTalentReset">↺ Reset</button><span class="tiny">51 points at 60 • 1 point per level from 10–60</span></div>
+<div id="shamanTalentNext" class="talent-next"></div><div id="shamanTalentTrees" class="talent-trees"></div>
+<div class="talent-summary" id="shamanTalentSummary"></div>
+<div class="talent-source">Tree structure and talent names/ranks: current Forever talent preview data. Some rank effects remain unconfirmed, so the planner does not invent them.</div>
+</div></section>
 
 <section id="shamanGear" class="tab">
 <div class="card"><h2>🛡️ Shaman Gear & Weapon Route</h2>
@@ -832,4 +847,168 @@ function renderShamanGear(){
 document.getElementById('shamanGearRole').onchange=renderShamanGear;
 
 renderShamanGear();
+
+// ===== Forever Talent Planners =====
+const foreverRogueTrees={
+"Assassination":[
+["Improved Gouge",3,1],["Remorseless Attacks",2,1],["Malice",5,1],
+["Ruthlessness",3,2],["Murder",2,2],["Improved Slice and Dice",3,2],
+["Relentless Strikes",1,3],["Improved Expose Armor",2,3],["Lethality",5,3,"Malice",1],
+["Vile Poisons",5,4],["Cold Blood",1,4],["Improved Poisons",5,4],
+["Vigor",2,5],["Mutilate",1,5],["Improved Kidney Shot",2,5],
+["Seal Fate",5,6],["Venom",1,7,"Mutilate",1]
+],
+"Combat":[
+["Improved Eviscerate",3,1],["Improved Sinister Strike",2,1],["Lightning Reflexes",5,1],
+["Puncturing Wounds",3,2],["Deflection",3,2],["Precision",3,2],
+["Endurance",2,3],["Riposte",1,3,"Deflection",1],["Improved Sprint",2,3],
+["Improved Kick",2,4],["Restless Blades",1,4],["Dual Wield Specialization",5,4,"Precision",1],
+["Blade Flurry",1,5],["Hack and Slash",5,5],
+["Weapon Expertise",2,6,"Blade Flurry",1],["Aggression",3,6,"Hack and Slash",1],
+["Adrenaline Rush",1,7]
+],
+"Subtlety":[
+["Camouflage",5,1],["Master of Deception",3,1],["Opportunity",2,1],
+["Setup",3,2],["Elusiveness",2,2],["Dirty Tricks",2,2],["Improved Ambush",3,2],
+["Initiative",3,3],["Ghostly Strike",1,3],["Improved Distract",2,3],
+["Heightened Senses",2,4],["Premeditation",1,4],["Serrated Blades",3,4],
+["Dirty Deeds",2,5],["Preparation",1,5],["Hemorrhage",1,5,"Serrated Blades",1],
+["Quietus",5,6,"Dirty Deeds",1],["Cutthroat",5,6],
+["Thousand Cuts",1,7,"Preparation",1]
+]};
+const foreverShamanTrees={
+"Elemental Combat":[
+["Convection",5,1],["Concussion",5,1],["Elemental Warding",3,2],["Reverberation",5,2],["Call of Flame",3,2],["Elemental Devastation",3,2],
+["Elemental Focus",1,3],["Elemental Fury",5,3],["Improved Fire Nova",2,4],["Eye of the Storm",3,4],["Call of Thunder",1,4,"Elemental Fury",1],
+["Elemental Reach",2,5],["Lightning Overload",3,5],["Earthbound",1,5],["Elemental Alacrity",3,6,"Call of Thunder",1],["Lava Burst",1,7,"Lightning Overload",1]
+],
+"Enhancement":[
+["Earth's Grasp",2,1],["Thundering Strikes",5,1],["Ancestral Knowledge",5,1],
+["Guardian Totems",2,2],["Mental Dexterity",3,2],["Improved Ghost Wolf",2,2],["Improved Lightning Shield",3,2],
+["Elemental Weapons",3,3],["Shamanistic Focus",1,3],["Anticipation",3,3],
+["Toughness",5,4],["Flurry",5,4,"Mental Dexterity",1],["Stormstrike",1,4],
+["Spirit Weapons",1,5],["Mental Quickness",2,5],["Improved Stormstrike",2,5,"Stormstrike",1],
+["Maelstrom Weapon",5,6],["Rage of the Farseer",1,7,"Mental Quickness",1]
+],
+"Restoration":[
+["Improved Healing Wave",5,1],["Tidal Mastery",5,1],
+["Mindfulness",3,2],["Natural Grace",3,2],["Tidal Focus",5,2],["Improved Reincarnation",2,2],
+["Ancestral Healing",3,3],["Healing Focus",3,3],["Water Shield",1,3],
+["Totemic Focus",5,4],["Restorative Totems",5,4],["Mana Tide Totem",1,4],
+["Healing Way",3,5],["Nature's Swiftness",1,5],["Purification",5,6],["Riptide",1,7,"Healing Way",1]
+]};
+
+const rogueTalentRec=[
+["Combat","Improved Sinister Strike",2],["Combat","Lightning Reflexes",5],["Combat","Improved Eviscerate",3],
+["Combat","Precision",3],["Combat","Deflection",3],["Combat","Puncturing Wounds",3],
+["Combat","Endurance",2],["Combat","Riposte",1],["Combat","Improved Sprint",2],
+["Combat","Improved Kick",2],["Combat","Restless Blades",1],["Combat","Dual Wield Specialization",1],
+["Combat","Blade Flurry",1],["Combat","Hack and Slash",1],["Combat","Weapon Expertise",1],["Combat","Adrenaline Rush",1],
+["Subtlety","Camouflage",5],["Subtlety","Master of Deception",3],["Subtlety","Opportunity",2],
+["Subtlety","Elusiveness",2],["Subtlety","Dirty Tricks",2],["Subtlety","Improved Ambush",1],
+["Subtlety","Initiative",3],["Subtlety","Ghostly Strike",1],["Subtlety","Improved Distract",1]
+];
+const shamanTalentRec=[
+["Restoration","Improved Healing Wave",5],["Restoration","Tidal Mastery",5],
+["Restoration","Mindfulness",3],["Restoration","Natural Grace",3],["Restoration","Tidal Focus",5],["Restoration","Improved Reincarnation",2],
+["Restoration","Ancestral Healing",3],["Restoration","Water Shield",1],["Restoration","Totemic Focus",2],
+["Restoration","Healing Way",1],["Restoration","Riptide",1],
+["Enhancement","Thundering Strikes",5],["Enhancement","Ancestral Knowledge",5],
+["Enhancement","Guardian Totems",2],["Enhancement","Mental Dexterity",3],["Enhancement","Improved Ghost Wolf",2],
+["Enhancement","Elemental Weapons",3]
+];
+
+const talentState={rogue:{},shaman:{}};
+function talentKey(cls,tree,name){return cls+"|"+tree+"|"+name}
+function loadTalentState(cls){try{const x=JSON.parse(localStorage.getItem("talents:"+cls)||"{}");return x&&typeof x==="object"?x:{}}catch(e){return {}}}
+function saveTalentState(cls){localStorage.setItem("talents:"+cls,JSON.stringify(talentState[cls]))}
+function talentPointsAvailable(level){return Math.max(0,Math.min(51,level-9))}
+function treeList(cls){return cls==="rogue"?foreverRogueTrees:foreverShamanTrees}
+function allTalents(cls){const out=[];Object.entries(treeList(cls)).forEach(([tree,items])=>items.forEach((x,i)=>out.push({tree,name:x[0],max:x[1],row:x[2],reqName:x[3],reqRank:x[4]||0,index:i})));return out}
+function talentSpent(cls,tree, beforeRow){return allTalents(cls).filter(x=>x.tree===tree&&x.row<beforeRow).reduce((s,x)=>s+(talentState[cls][talentKey(cls,x.tree,x.name)]||0),0)}
+function talentTotal(cls){return allTalents(cls).reduce((s,x)=>s+(talentState[cls][talentKey(cls,x.tree,x.name)]||0),0)}
+function talentRank(cls,t){return talentState[cls][talentKey(cls,t.tree,t.name)]||0}
+function talentCanAdd(cls,t,level){
+ const available=talentPointsAvailable(level); if(talentTotal(cls)>=available||talentRank(cls,t)>=t.max)return false;
+ if(t.row>1 && talentSpent(cls,t.tree,t.row)<(t.row-1)*5)return false;
+ if(t.reqName){
+   const r=talentState[cls][talentKey(cls,t.tree,t.reqName)]||0;
+   if(r<t.reqRank)return false;
+ }
+ return true;
+}
+function talentCanRemove(cls,t){
+ const r=talentRank(cls,t); if(!r)return false;
+ for(const q of allTalents(cls)){
+   if(q.tree===t.tree && q.reqName===t.name && talentRank(cls,q)>0 && r-1<q.reqRank)return false;
+   if(q.tree===t.tree && q.row>t.row && talentRank(cls,q)>0 && talentSpent(cls,t.tree,q.row)-1<(q.row-1)*5)return false;
+ }
+ return true;
+}
+function normalizeTalents(cls,level){
+ while(talentTotal(cls)>talentPointsAvailable(level)){
+   const ts=allTalents(cls).slice().reverse();
+   const q=ts.find(t=>talentRank(cls,t)>0 && talentCanRemove(cls,t));
+   if(!q)break;
+   talentState[cls][talentKey(cls,q.tree,q.name)]--;
+ }
+}
+function setRecommended(cls,level){
+ talentState[cls]={}; const rec=cls==="rogue"?rogueTalentRec:shamanTalentRec;
+ for(const [tree,name,count] of rec){
+   const t=allTalents(cls).find(x=>x.tree===tree&&x.name===name); if(!t)continue;
+   for(let i=0;i<count && talentTotal(cls)<talentPointsAvailable(level);i++){
+     if(talentCanAdd(cls,t,level)) talentState[cls][talentKey(cls,t.tree,t.name)]=(talentState[cls][talentKey(cls,t.tree,t.name)]||0)+1;
+   }
+ }
+ saveTalentState(cls); renderTalentPlanner(cls);
+}
+function renderTalentPlanner(cls){
+ const level=cls==="rogue"?state.r:state.s, trees=treeList(cls), wrap=document.getElementById(cls==="rogue"?"rogueTalentTrees":"shamanTalentTrees");
+ if(!wrap)return; normalizeTalents(cls,level);
+ const spent=talentTotal(cls), avail=talentPointsAvailable(level), pointsEl=document.getElementById(cls==="rogue"?"rogueTalentPoints":"shamanTalentPoints");
+ pointsEl.textContent=level<10?level+" • "+(10-level)+" levels to first talent point":spent+" / "+avail+" points spent • "+(avail-spent)+" left";
+ wrap.innerHTML="";
+ Object.entries(trees).forEach(([tree,items])=>{
+   const card=document.createElement("div"); card.className="talent-tree";
+   const total=items.reduce((s,x)=>s+(talentState[cls][talentKey(cls,tree,x[0])]||0),0);
+   card.innerHTML="<h4>"+tree+" <span class='tiny'>"+total+" / "+items.reduce((s,x)=>s+x[1],0)+"</span></h4>";
+   for(let row=1;row<=7;row++){
+     const rowItems=items.filter(x=>x[2]===row); if(!rowItems.length)continue;
+     const rowEl=document.createElement("div"); rowEl.className="talent-row";
+     rowItems.forEach(x=>{
+       const t={tree,name:x[0],max:x[1],row:x[2],reqName:x[3],reqRank:x[4]||0};
+       const rank=talentRank(cls,t), canAdd=talentCanAdd(cls,t,level), canRemove=talentCanRemove(cls,t);
+       const b=document.createElement("button"); b.type="button"; b.className="talent-node "+(rank?"selected ":"")+(!canAdd&&!canRemove?"locked":"");
+       b.innerHTML="<span class='tn'>"+t.name+"</span><span class='tr'>"+rank+" / "+t.max+"</span>"+(t.reqName?"<span class='req'>Requires "+t.reqName+" "+t.reqRank+"</span>":"");
+       b.title=(canAdd?"Click to add a rank. ":"")+(canRemove?"Shift-click to remove a rank.":"")+" Row "+t.row+".";
+       b.onclick=e=>{
+         if(e.shiftKey){
+           if(canRemove){talentState[cls][talentKey(cls,t.tree,t.name)]--;saveTalentState(cls);renderTalentPlanner(cls);}
+         }else if(canAdd){
+           talentState[cls][talentKey(cls,t.tree,t.name)]=(talentState[cls][talentKey(cls,t.tree,t.name)]||0)+1;saveTalentState(cls);renderTalentPlanner(cls);
+         }
+       };
+       rowEl.appendChild(b);
+     });
+     card.appendChild(rowEl);
+   }
+   wrap.appendChild(card);
+ });
+ const summary=document.getElementById(cls==="rogue"?"rogueTalentSummary":"shamanTalentSummary");
+ summary.innerHTML=Object.entries(trees).map(([tree,items])=>{const n=items.reduce((s,x)=>s+(talentState[cls][talentKey(cls,tree,x[0])]||0),0);return "<div class='card'><b>"+tree+"</b><div class='stat' style='font-size:24px'>"+n+"</div></div>"}).join("");
+ const next=document.getElementById(cls==="rogue"?"rogueTalentNext":"shamanTalentNext");
+ const rec=cls==="rogue"?rogueTalentRec:shamanTalentRec;
+ const nextRec=rec.find(([tree,name])=>{const t=allTalents(cls).find(x=>x.tree===tree&&x.name===name);return t&&talentRank(cls,t)<t.max});
+ next.innerHTML=nextRec?"<b>Recommended next:</b> "+nextRec[1]+" <span class='tiny'>("+nextRec[0]+")</span>":"<b>Recommended path complete for this level.</b>";
+}
+function initTalentPlanners(){
+ talentState.rogue=loadTalentState("rogue"); talentState.shaman=loadTalentState("shaman");
+ document.getElementById("rogueTalentReset")?.addEventListener("click",()=>{talentState.rogue={};saveTalentState("rogue");renderTalentPlanner("rogue")});
+ document.getElementById("shamanTalentReset")?.addEventListener("click",()=>{talentState.shaman={};saveTalentState("shaman");renderTalentPlanner("shaman")});
+ document.getElementById("rogueTalentRecommended")?.addEventListener("click",()=>setRecommended("rogue",state.r));
+ document.getElementById("shamanTalentRecommended")?.addEventListener("click",()=>setRecommended("shaman",state.s));
+ renderTalentPlanner("rogue");renderTalentPlanner("shaman");
+}
+initTalentPlanners();
 </script></body></html>
