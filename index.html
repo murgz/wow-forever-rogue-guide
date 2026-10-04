@@ -1069,11 +1069,27 @@ function renderDungeonButtons(){
 }
 function renderDungeonDetail(id){
  const d=dungeonDB.find(x=>x.id===id); if(!d)return;
- const lvl=Number(document.getElementById('dungeonLevel').value)||1, s=dungeonStatus(d,lvl);
- document.getElementById('dungeonDetail').innerHTML='<div class="grid"><div><span class="tiny">DUNGEON</span><h2 style="margin:0">'+d.name+'</h2><span class="badge">'+d.range+'</span> <span class="badge">'+d.type+'</span> <span class="badge">'+s[1]+'</span></div><div><span class="tiny">LOCATION</span><h3>'+d.zone+'</h3><p class="tiny">'+d.note+'</p></div></div>'+
- '<div class="grid" style="margin-top:14px"><div class="card"><h3>📍 Where to go</h3><p>'+d.zone+'</p></div><div class="card"><h3>🎯 Recommended level</h3><p><b>'+d.range+'</b></p><p class="tiny">Your level: '+lvl+' • '+s[1]+'</p></div><div class="card"><h3>🏛️ Legacy</h3><p>'+d.legacy+'</p></div><div class="card"><h3>🔑 Access / keys</h3><p>'+d.keys+'</p></div></div>'+
- '<div class="two" style="margin-top:14px"><div class="card"><h3>📜 QUEST PREP — DO THIS BEFORE ENTERING</h3><div>'+d.quests.map((q,i)=>'<label class="check"><input type="checkbox" data-dq="'+id+'-'+i"> <span>'+q+'</span></label>').join('')+'</div></div><div class="card"><h3>⚔️ Important drops</h3><ul>'+d.drops.map(x=>'<li style="margin:7px 0">'+x+'</li>').join('')+'</ul><p class="tiny">We show <b>important targets</b>, not every grey/BoP drop. Loot tables will be expanded as Forever item data is verified.</p></div></div>'+
- '<div class="mission" style="margin-top:14px"><b>🚦 Run decision:</b> '+(s[0]==='now'?'You are in the recommended window. Finish the quest stack and run it once.':s[0]==='prep'?'You are close. Start prerequisites and collect the quests now so the dungeon is ready when you hit the window.':s[0]==='past'?'You are above the normal leveling window. Only run if the quest/Legacy/gear value is still worth the travel.':'Save it for later; keep questing and prepare the prerequisite chains.')+'</div>';
+ const lvl=Number(document.getElementById('dungeonLevel').value)||1;
+ const s=dungeonStatus(d,lvl);
+ const questHtml=d.quests.map((q,i)=>`<label class="check"><input type="checkbox" data-dq="${id}-${i}"> <span>${q}</span></label>`).join('');
+ const dropHtml=d.drops.map(x=>`<li style="margin:7px 0">${x}</li>`).join('');
+ const decision=s[0]==='now'?'You are in the recommended window. Finish the quest stack and run it once.':s[0]==='prep'?'You are close. Start prerequisites and collect the quests now so the dungeon is ready when you hit the window.':s[0]==='past'?'You are above the normal leveling window. Only run if the quest, Legacy or gear value is still worth the travel.':'Save it for later; keep questing and prepare the prerequisite chains.';
+ document.getElementById('dungeonDetail').innerHTML=`
+ <div class="grid">
+   <div><span class="tiny">DUNGEON</span><h2 style="margin:0">${d.name}</h2><span class="badge">${d.range}</span> <span class="badge">${d.type}</span> <span class="badge">${s[1]}</span></div>
+   <div><span class="tiny">LOCATION</span><h3>${d.zone}</h3><p class="tiny">${d.note}</p></div>
+ </div>
+ <div class="grid" style="margin-top:14px">
+   <div class="card"><h3>📍 Where to go</h3><p>${d.zone}</p></div>
+   <div class="card"><h3>🎯 Recommended level</h3><p><b>${d.range}</b></p><p class="tiny">Your level: ${lvl} • ${s[1]}</p></div>
+   <div class="card"><h3>🏛️ Legacy</h3><p>${d.legacy}</p></div>
+   <div class="card"><h3>🔑 Access / keys</h3><p>${d.keys}</p></div>
+ </div>
+ <div class="two" style="margin-top:14px">
+   <div class="card"><h3>📜 QUEST PREP — DO THIS BEFORE ENTERING</h3><div>${questHtml}</div></div>
+   <div class="card"><h3>⚔️ Important drops</h3><ul>${dropHtml}</ul><p class="tiny">We show <b>important targets</b>, not every grey/BoP drop. Loot tables will be expanded as Forever item data is verified.</p></div>
+ </div>
+ <div class="mission" style="margin-top:14px"><b>🚦 Run decision:</b> ${decision}</div>`;
 }
 (function initDungeonPlanner(){
  const lvl=document.getElementById('dungeonLevel'), q=document.getElementById('dungeonSearch');
