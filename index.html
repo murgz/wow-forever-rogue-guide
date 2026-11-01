@@ -189,7 +189,7 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff}
 <div><label class="tiny" for="dungeonFaction">Faction</label><select id="dungeonFaction" class="engine-select"><option value="Horde">Horde</option><option value="Alliance">Alliance</option></select></div>
 <div><label class="tiny" for="dungeonSearch">Find dungeon</label><input id="dungeonSearch" class="engine-input" type="search" placeholder="RFC, Wailing, SFK..."></div>
 </div>
-<div class="note"><b>How this works:</b> choose a dungeon below. Green = you're in the recommended window. Yellow = you can prep it now. Gray = save it for later. Recommended windows are based on the current Forever dungeon overview; individual quest pickup levels can be lower than the efficient run level.</div>
+<div class="note"><b>How this works:</b> choose a dungeon below. Green = recommended run window; yellow = prep now; gray = later. Quest badges show whether a quest is shareable. <b>Shareable</b> means one party member can share it with eligible players; <b>Not shareable</b> means each player must obtain it themselves (often from an item/drop); <b>Prerequisite</b> means complete the chain first; <b>Escort</b> means the whole party must participate. Unverified Forever-beta quests are marked <b>Unconfirmed</b> rather than guessed.</div>
 <div id="dungeonButtons" class="grid" style="margin-top:14px"></div>
 </div>
 
@@ -1227,6 +1227,54 @@ const dungeonDB=[
 {id:'rfk',name:'Razorfen Kraul',short:'RFK',range:'30–40',zone:'The Barrens — Razorfen Kraul',type:'Classic',legacy:'—',prep:'Horde package is strong: Blueleaf Tubers starts in Ratchet and needs the quest items next to Mebok; A Vengeful Fate starts in Thunder Bluff; Going, Going, Guano! starts in Undercity. Several quests start inside.',quests:['Blueleaf Tubers — Mebok Mizzyrix, Ratchet; grab quest items beside him','A Vengeful Fate — Thunder Bluff','Going, Going, Guano! — Undercity','An Unholy Alliance — drop from Charlga Razorflank','The Crone of the Kraul — requires Lonebrow’s Journal','Mortality Wanes — inside','Willix the Importer — inside escort'],keys:'No key.',drops:['Quest reward choices can be meaningful leveling upgrades; check current Forever itemization before routing specifically for RFK.'],note:'Current Forever quest data lists 7 quests and specifically warns not to forget the quest items next to Mebok.'}
 ];
 
+const questShareMeta={
+"Slaying the Beast":{status:"yes",note:"One player can share with eligible party members."},
+"The Power to Destroy...":{status:"yes",note:"One player can share with eligible party members."},
+"Testing an Enemy’s Strength":{status:"yes",note:"One player can share with eligible party members."},
+"Searching for the Lost Satchel":{status:"drop",note:"Quest starts from a dungeon drop; each player needs the drop."},
+"Hidden Enemies":{status:"pre",note:"Complete the prerequisite chain first; sharing may work only for players who completed the prerequisites."},
+"Returning the Lost Satchel":{status:"unknown",note:"Forever-specific sharing status not confirmed."},
+"Serpentbloom":{status:"yes",note:"One player can share with eligible party members."},
+"Smart Drinks":{status:"pre",note:"Complete Raptor Horns first; prerequisite eligibility still applies when sharing."},
+"Trouble at the Docks":{status:"yes",note:"One player can share with eligible party members."},
+"Deviate Hides":{status:"yes",note:"One player can share with eligible party members."},
+"Deviate Eradication":{status:"yes",note:"One player can share with eligible party members."},
+"The Glowing Shard":{status:"drop",note:"Requires the Mutanus drop; each player needs to loot the item."},
+"Leaders of the Fang":{status:"pre",note:"Long prerequisite chain; finish it before the group run."},
+"The Book of Ur":{status:"yes",note:"One player can share with eligible party members."},
+"Deathstalkers in Shadowfang":{status:"yes",note:"One player can share with eligible party members."},
+"Arugal Must Die":{status:"yes",note:"One player can share with eligible party members."},
+"The Orb of Soran’ruk":{status:"class",note:"Warlock-only; only eligible Warlocks can take/share it."},
+"The Essence of Aku’Mai":{status:"yes",note:"One player can share with eligible party members."},
+"Blackfathom Villainy":{status:"yes",note:"One player can share with eligible party members; check the in-dungeon pickup."},
+"Amongst the Ruins":{status:"yes",note:"One player can share with eligible party members."},
+"Baron Aquanis":{status:"drop",note:"Requires the Strange Water Globe/drop; each player needs their own."},
+"Allegiance to the Old Gods":{status:"drop",note:"Starts from a low-drop-rate item; each player needs their own drop."},
+"Changing Tastes":{status:"unknown",note:"Forever beta sharing status not confirmed."},
+"Elder Knowledge":{status:"yes",note:"Current beta guide lists this as shareable."},
+"Earthen Echo":{status:"pre",note:"Follow-up from Elder Knowledge and requires the Titan Relic; each player must satisfy the chain/item requirement."},
+"Open the Maw":{status:"unknown",note:"Prerequisite and sharing status are still uncertain in beta."},
+"Rig Wars":{status:"yes",note:"One player can share with eligible party members."},
+"Chief Engineer Scooty":{status:"pre",note:"Requires Rig Wars first; finish the prerequisite before sharing."},
+"Gnomer-gooooone!":{status:"yes",note:"One player can share with eligible party members."},
+"Save Techbot’s Brain!":{status:"yes",note:"One player can share with eligible party members."},
+"The Only Cure is More Green Glow":{status:"pre",note:"Complete Gnogaine first."},
+"The Sparklematic 5200!":{status:"unknown",note:"Interactable-object quest; sharing behavior not confirmed."},
+"A Fine Mess":{status:"escort",note:"The entire party must complete the escort for credit."},
+"Blueleaf Tubers":{status:"yes",note:"Quest can be shared; each player should collect the quest items beside Mebok."},
+"A Vengeful Fate":{status:"yes",note:"One player can share with eligible party members."},
+"Going, Going, Guano!":{status:"yes",note:"One player can share with eligible party members."},
+"An Unholy Alliance":{status:"drop",note:"Starts from Charlga’s Small Scroll; each player needs the drop."},
+"The Crone of the Kraul":{status:"pre",note:"Complete Lonebrow’s Journal first."},
+"Mortality Wanes":{status:"yes",note:"One player can share with eligible party members; pickup is inside the instance."},
+"Willix the Importer":{status:"escort",note:"The whole party should complete the escort for credit."}
+};
+function questShareBadge(q){
+ const name=q.split(" — ")[0].trim(),m=questShareMeta[name]||{status:"unknown",note:"Not yet verified against current WoW: Forever quest data."};
+ const labels={yes:"✓ SHAREABLE",no:"✕ NOT SHAREABLE",pre:"⚠ PREREQUISITE",drop:"✕ PERSONAL DROP",escort:"👥 FULL-PARTY ESCORT",class:"CLASS-RESTRICTED",unknown:"? UNCONFIRMED"};
+ const colors={yes:"#245b3d",no:"#6b2929",pre:"#66521f",drop:"#6b2929",escort:"#244d66",class:"#51406b",unknown:"#39434e"};
+ return '<span class="badge" style="background:'+colors[m.status]+';margin-left:6px">'+labels[m.status]+'</span><div class="tiny" style="margin-left:26px">'+m.note+'</div>';
+}
 function dungeonStatus(d,lvl){
  const n=Number(lvl)||1, m=d.range.match(/(\d+)\D+(\d+)/), lo=m?Number(m[1]):1, hi=m?Number(m[2]):60;
  if(n>=lo&&n<=hi)return ['now','⭐ RUN NOW'];
@@ -1244,7 +1292,7 @@ function renderDungeonDetail(id){
  const d=dungeonDB.find(x=>x.id===id); if(!d)return;
  const lvl=Number(document.getElementById('dungeonLevel').value)||1;
  const s=dungeonStatus(d,lvl);
- const questHtml=d.quests.map((q,i)=>`<label class="check"><input type="checkbox" data-dq="${id}-${i}"> <span>${q}</span></label>`).join('');
+ const questHtml=d.quests.map((q,i)=>`<div class="check" style="align-items:flex-start"><input type="checkbox" data-dq="${id}-${i}"> <div><span>${q}</span>${questShareBadge(q)}</div></div>`).join('');
  const dropHtml=d.drops.map(x=>`<li style="margin:7px 0">${x}</li>`).join('');
  const decision=s[0]==='now'?'You are in the recommended window. Finish the quest stack and run it once.':s[0]==='prep'?'You are close. Start prerequisites and collect the quests now so the dungeon is ready when you hit the window.':s[0]==='past'?'You are above the normal leveling window. Only run if the quest, Legacy or gear value is still worth the travel.':'Save it for later; keep questing and prepare the prerequisite chains.';
  document.getElementById('dungeonDetail').innerHTML=`
