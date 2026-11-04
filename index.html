@@ -616,11 +616,11 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff}
 <div class="callout"><b>Reservation limit:</b> 3 names. Reservations close <b>November 3, 2026</b>. Prioritize names most likely to be claimed; the remaining names can be created at launch.</div>
 <h3>Primary character names</h3>
 <div style="overflow:auto"><table><thead><tr><th>Character</th><th>Planned name</th><th>Reservation priority</th><th>Status</th></tr></thead><tbody>
-<tr><td>Orc Hunter</td><td><b>Murna Whitedeath</b></td><td>1 — Reserve</td><td><span class="badge">Pending</span></td></tr>
-<tr><td>Tauren Druid</td><td><b>Murna Boomtrain</b></td><td>Launch — lower risk</td><td><span class="badge">Pending</span></td></tr>
-<tr><td>Undead Paladin</td><td><b>Murna Deathsmith</b></td><td>Launch — lower risk</td><td><span class="badge">Pending</span></td></tr>
-<tr><td>Undead Priest</td><td><b>Murna Daddy</b></td><td>2 — Reserve</td><td><span class="badge">Pending</span></td></tr>
-<tr><td>Orc Mage (bank)</td><td><b>Murna Money</b></td><td>3 — Reserve</td><td><span class="badge">Pending</span></td></tr>
+<tr><td>Orc Hunter</td><td><b>Murna Whitedeath</b> <button type="button" onclick="copyCharacterName('Murna Whitedeath',this)">Copy</button></td><td>1 — Reserve</td><td><label><input type="checkbox" data-name-status="Murna Whitedeath"> Reserved</label></td></tr>
+<tr><td>Tauren Druid</td><td><b>Murna Boomtrain</b> <button type="button" onclick="copyCharacterName('Murna Boomtrain',this)">Copy</button></td><td>Launch — lower risk</td><td><label><input type="checkbox" data-name-status="Murna Boomtrain"> Created</label></td></tr>
+<tr><td>Undead Paladin</td><td><b>Murna Deathsmith</b> <button type="button" onclick="copyCharacterName('Murna Deathsmith',this)">Copy</button></td><td>Launch — lower risk</td><td><label><input type="checkbox" data-name-status="Murna Deathsmith"> Created</label></td></tr>
+<tr><td>Undead Priest</td><td><b>Murna Daddy</b> <button type="button" onclick="copyCharacterName('Murna Daddy',this)">Copy</button></td><td>2 — Reserve</td><td><label><input type="checkbox" data-name-status="Murna Daddy"> Reserved</label></td></tr>
+<tr><td>Orc Mage (bank)</td><td><b>Murna Money</b> <button type="button" onclick="copyCharacterName('Murna Money',this)">Copy</button></td><td>3 — Reserve</td><td><label><input type="checkbox" data-name-status="Murna Money"> Reserved</label></td></tr>
 </tbody></table></div>
 <h3>Backup names if a primary is taken</h3>
 <div class="name-backups"><span>Murna Oneshot</span><span>Murna Cowcatcher</span><span>Murna Holyanvil</span><span>Murna Holydaddy</span><span>Murna Goldvault</span></div>
@@ -632,7 +632,7 @@ a{color:#9fd8ff}a:visited{color:#b8e3ff}a:hover{color:#d8f1ff}
 <li>At launch, create <b>Murna Boomtrain</b> and <b>Murna Deathsmith</b>, unless either is taken.</li>
 <li>If a reserved name is unavailable, use the backup list and update this page.</li>
 </ul>
-<p class="tiny">Reservation recommendations are a suggested priority, not a guarantee that any name is available. Confirm each name in the game's reservation system before relying on it.</p>
+<p class="tiny">Reservation status checkboxes save in this browser. Copy buttons copy the exact name. Availability is not verified by this page; confirm in the game reservation system.</p>
 </div>
 </section>
 </main>
@@ -1064,7 +1064,7 @@ document.getElementById('start').onclick=()=>{if(!state.timerStart)state.timerSt
 document.getElementById('stop').onclick=()=>{if(state.timerStart){state.timerAccum+=Math.floor((Date.now()-state.timerStart)/1000);state.timerStart=0}localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',state.timerAccum);clearInterval(window.ti);renderTimer()};
 document.getElementById('reset').onclick=()=>{state.timerStart=0;state.timerAccum=0;localStorage.setItem('timerStart',0);localStorage.setItem('timerAccum',0);clearInterval(window.ti);renderTimer()};
 const sections=['1–10 — foundation','10–20 — first dungeon/gear window','20–30 — sustained duo','30–40 — midgame weapon phase','40–50 — transition','50–60 — pre-60 push'];document.getElementById('checks').innerHTML=sections.map((s,i)=>'<div class="card" style="margin-bottom:12px"><h3>'+s+'</h3>'+['Route complete','Weapon checkpoint checked','Dungeon quests stacked','Professions checked','Consumables checked','PvP opportunity considered'].map((x,j)=>'<label class="check"><input type="checkbox" data-k="c'+i+j+'">'+x+'</label>').join('')+'</div>').join('');document.querySelectorAll('[data-k]').forEach(x=>{x.checked=localStorage.getItem(x.dataset.k)==='1';x.onchange=()=>localStorage.setItem(x.dataset.k,x.checked?'1':'0')});
-renderWeapons();renderMacros();renderGold();renderProf();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');renderRFC();initPersistentSelects();initBetaToggle();render();const savedTab=localStorage.getItem('activeTab');if(savedTab&&document.getElementById(savedTab))setTab(savedTab);if(state.timerStart)window.ti=setInterval(renderTimer,1000);
+renderWeapons();renderMacros();renderGold();renderProf();renderSkillCard('rogueCurrentSkills','rogueNextSkills','rogueSkillAdvice',rogueSkillMilestones,state.r,'Rogue');renderSkillCard('shamanCurrentSkills','shamanNextSkills','shamanSkillAdvice',shamanSkillMilestones,state.s,'Shaman');renderRFC();initPersistentSelects();initBetaToggle();render();initCharacterNameChecks();const savedTab=localStorage.getItem('activeTab');if(savedTab&&document.getElementById(savedTab))setTab(savedTab);if(state.timerStart)window.ti=setInterval(renderTimer,1000);
 
 const shamanGearRows=[
 [1,8,'Walking Stick / early staff candidates','Vendor — low-level weapon vendors','Use best Int/Spirit caster weapon available; shield is valid from 1','Use the best weapon damage available','🔵 Classic/Hardcore source'],
@@ -1464,6 +1464,8 @@ function renderPetPlanner(){
 function renderPetAbilityChecks(){document.querySelectorAll('.pet-ability-checks').forEach(el=>{const skill=el.dataset.skill;el.innerHTML=el.dataset.ranks.split(',').map(item=>{const [rank,level]=item.split('@'),key='petAbility_'+skill+'_'+rank,checked=localStorage.getItem(key)==='1';return '<label class="check" style="display:inline-flex;align-items:center;min-width:78px;margin:3px 5px 3px 0"><input type="checkbox" '+(checked?'checked':'')+' onchange="setPetAbilityCheck(\''+skill+'\','+rank+',this.checked)"> <span>R'+rank+' (L'+level+')</span></label>';}).join('');});}
 function setPetAbilityCheck(skill,rank,checked){localStorage.setItem('petAbility_'+skill+'_'+rank,checked?'1':'0');}
 function resetAllPetAbilityChecks(){Object.keys(localStorage).filter(k=>k.startsWith('petAbility_')).forEach(k=>localStorage.removeItem(k));renderPetAbilityChecks();}
+function copyCharacterName(name,b){const done=()=>{if(b){const old=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=old,1000);}};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(name).then(done).catch(()=>{const t=document.createElement('textarea');t.value=name;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();done();});else{const t=document.createElement('textarea');t.value=name;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();done();}}
+function initCharacterNameChecks(){document.querySelectorAll('[data-name-status]').forEach(e=>{const k='nameStatus:'+e.dataset.nameStatus;e.checked=localStorage.getItem(k)==='1';e.addEventListener('change',()=>localStorage.setItem(k,e.checked?'1':'0'));});}
 function copyHunterMacro(id,b){const e=document.getElementById(id);if(!e)return;const done=()=>{if(b){const old=b.textContent;b.textContent='✓ Copied';setTimeout(()=>b.textContent=old,1000);}};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(e.value).then(done).catch(()=>{e.select();document.execCommand('copy');done();});else{e.select();document.execCommand('copy');done();}}
 (function initHunterTools(){const e=document.getElementById('hunterRouteLevel');if(!e)return;const old=Number(localStorage.getItem('hunterRouteLevel')||localStorage.getItem('classLevel_hunter')||localStorage.getItem('hunterGearLevel')||1);e.value=String(Math.max(1,Math.min(60,old)));renderHunterRoute();const p=localStorage.getItem('petPlannerLevel'),pe=document.getElementById('petPlannerLevel');if(p)pe.value=p;else pe.value=String(Math.max(1,Number(e.value)||1));renderPetPlanner();renderPetAbilityChecks();})();
 
